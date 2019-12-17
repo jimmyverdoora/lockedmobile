@@ -49,9 +49,12 @@ body {
 }
 
 .loadable {
+    display: none;
+}
+
+.imagecontainer {
     height: 20%;
     text-align: center;
-    display: none;
 }
 
 .textimage {

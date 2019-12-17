@@ -22,16 +22,11 @@ var app = {
         document.addEventListener('deviceready', app.onDeviceReady.bind(app), false);
     },
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
     onDeviceReady: function() {
         app.activateButton('play');
         app.activateButton('settings');
     },
 
-    // Update DOM on a Received Event
     activateButton: function(id) {
         var element = document.getElementById(id);
        
@@ -40,15 +35,12 @@ var app = {
 };
 
 var pagemanager = {
-
     currentPage: "homepage",
-
     changePage: function(id) {
         document.getElementById(pagemanager.currentPage).setAttribute('style', 'display:none;');
         document.getElementById(id).setAttribute('style', 'display:block;');
         currentPage = id;
     }
-    
 }
 
 function openPage(id) {
@@ -56,7 +48,3 @@ function openPage(id) {
 }
 
 app.initialize();
-
-document.getElementById("settings").addEventListener('touchend', function() {
-    openPage("settingspage");
-}, false);

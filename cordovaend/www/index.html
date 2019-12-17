@@ -24,26 +24,55 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script src="js/jquery.js"></script>
     </head>
     <body>
 
         <div class="app" id="homepage">
-            <div class="title" id="title">
+            <div class="title" id="homepagetitle">
                 <h1>LOCKED</h1>
             </div>
-            <div class="loadable" id="play">
-                <img class="textimage" src="img/play.png">
+            <div class="loadable imagecontainer" id="play">
+                <img class="textimage" src="img/play.png" id="playimg">
             </div>
-            <div class="loadable" id="settings">
-                <img class="textimage" src="img/settings.png">
+            <div class="loadable imagecontainer" id="settings">
+                <img class="textimage" src="img/settings.png" id="settingsimg">
             </div>
         </div>
         
         <div class="app" id="settingspage" style="display: none;">
-            <p>bella raga</p>
+            <p>TODO</p>
         </div>
+
+        <div class="app" id="playpage" style="display: none;">
+
+            <div class="title" id="playpagetitle">
+                <h1>HOST O JOIN</h1>
+            </div>
+            <div class="imagecontainer" id="host">
+                <img class="textimage" src="img/host.png" id="hostimg">
+            </div>
+            <div class="imagecontainer" id="join">
+                <img class="textimage" src="img/join.png" id="joinimg">
+            </div>
+        </div>
+
+        <div class="app" id="hostjoinpage" style="display: none;">
+            <div class="title" id="hostjoinpagetitle">
+            </div>
+            <div class="imagecontainer" id="host">
+                <img class="textimage" src="img/host.png" id="hostimg">
+            </div>
+            <div class="imagecontainer" id="join">
+                <img class="textimage" src="img/join.png" id="joinimg">
+            </div>
+        </div>
+
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/touch.js"></script>
+        <script type="text/javascript" src="js/homepage.js"></script>
+        <script type="text/javascript" src="js/playpage.js"></script>
     </body>
 </html>
