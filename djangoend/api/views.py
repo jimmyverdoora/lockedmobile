@@ -30,6 +30,7 @@ def moveApi(request, gameId, moveId):
             move = Move.objects.filter(game=game, number=moveId)[0]
             return JsonResponse({"outcome": "OK",
                                  "move": move.value,
+                                 "forbiddenMove": game.currentForbidden,
                                  "win": game.state})
         except Exception as e:
             logging.error("Exception occurred", exc_info=True)
@@ -39,11 +40,10 @@ def moveApi(request, gameId, moveId):
             game = Game.objects.prefetch_related('moves', 'pieces').filter(
                 guid=str(gameId))[0]
             move = request.POST.get("move", "")
-            outcome, forbiddenMove = makeMove(game, game.moves.all(),
+            outcome = makeMove(game, game.moves.all(),
                                 game.pieces.all(), moveId, move)
             win = checkWin(game)
             return JsonResponse({"outcome": outcome,
-                                 "forbiddenMove": forbiddenMove,
                                  "win": win})
         except Exception as e:
             logging.error("Exception occurred", exc_info=True)

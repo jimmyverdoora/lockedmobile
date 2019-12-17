@@ -6,6 +6,7 @@ class Game(models.Model):
     guid = models.CharField(max_length=36, unique=True)
     # 0 running, -1 first player won, 1 second player won
     state = models.IntegerField()
+    currentForbidden = models.CharField(max_length=2, default=None, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now=True)
 

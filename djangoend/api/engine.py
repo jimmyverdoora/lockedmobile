@@ -6,21 +6,21 @@ OPPOSITES = {"U": "D", "D": "U", "L": "R", "R": "L"}
 
 def makeMove(game, moves, pieces, moveId, move):
     if not move or len(moves) != moveId - 1 or len(move) != 2:
-        return "KO", ""
+        return "KO"
     movables = ("1", "2", "3") if moveId % 2 == 1 else ("4", "5", "6")
     if move[0] not in movables or move[1] not in ("U", "D", "L", "R"):
-        return "KO", ""
+        return "KO"
     possible, piecesToMove = isMovePossible(move, pieces, movables)
     if possible:
-        print("POSSIBLE")
         success, forbiddenMove = completeMove(move[1], piecesToMove)
         if success:
-            print("SUCCESS")
             Move.objects.create(value=move,
                                 number=moveId,
                                 game=game)
-            return "OK", forbiddenMove
-    return "KO", ""
+            game.currentForbidden = forbiddenMove
+            game.save()
+            return "OK"
+    return "KO"
 
 
 def checkWin(game):
@@ -39,7 +39,7 @@ def checkWin(game):
 
 def completeMove(direction, pieces):
     try:
-        forbiddenMove = ""
+        forbiddenMove = None
         if len(pieces) == 2:
             forbiddenMove = str(pieces[1].number) + OPPOSITES[direction]
         for piece in pieces:
