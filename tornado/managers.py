@@ -15,6 +15,7 @@ class LobbyManager(object):
 
     def  __init__(self):
         self.numbers = dict()
+        self.firstPlayerHost = dict()
         self.conds = dict()
 
     def createNew(self):
@@ -28,6 +29,7 @@ class LobbyManager(object):
     def clear(self, n):
         try:
             del self.numbers[n]
+            del self.firstPlayerHost[n]
             del self.conds[n]
         except Exception:
             pass

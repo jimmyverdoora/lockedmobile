@@ -1,25 +1,7 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -28,7 +10,7 @@
     </head>
     <body>
 
-        <div class="app" id="homepage">
+        <div class="app" id="homepage" style="display:none">
             <div class="title" id="homepagetitle">
                 <h1>LOCKED</h1>
             </div>
@@ -44,8 +26,8 @@
             <p>TODO</p>
         </div>
 
-        <div class="app" id="hostjoinpage" style="display: none;">
-            <div class="title" id="hostjoinpagetitle">
+        <div class="app" id="playpage" style="display: none;">
+            <div class="title" id="playpagetitle">
                 <h1>HOST O JOIN</h1>
             </div>
             <div class="imagecontainer" id="host">
@@ -56,10 +38,49 @@
             </div>
         </div>
 
+        <div class="app" id="hostjoinpage" style="display: none;">
+            <div class="hostjoinheader" id="hostheader" style="display: none;">
+                <img class='textimage' src='img/loading.png'>
+            </div>
+            <div class="hostjoinheader" id="joinheader" style="display: none;">
+                <input type="number" id="num1" onkeyup="focusTo('num2');">
+                <input type="number" id="num2" onkeyup="focusTo('num3');">
+                <input type="number" id="num3" onkeyup="focusTo('num4');">
+                <input type="number" id="num4" onkeyup="focusTo('num5');">
+                <input type="number" id="num5" onkeyup="focusTo('num6');">
+                <input type="number" id="num6" onkeyup="submitNumbers();">
+            </div>
+            <div class="hostjoinadscontainer" id="hostjoinads">
+                <p>ADS</p>
+            </div>
+        </div>
+
+        <div class="app" id="gamepage" style="display: block;">
+            <div class="gameheader" id="gameactiveheader" style="display: none;">
+                <h1>ITS YOUR TURN PLAY!!!</h1>
+            </div>    
+            <div class="gameheader" id="gamewaitingheader" style="display: block;">
+                <h1 onclick="initBoard()">ITS NOT YOUR TURN BITCHA WAIT</h1>
+            </div>
+            <div class="boardcontainer">
+                <img class="piece" id="p1" src="img/red.png" height="auto">
+                <img class="piece" id="p2" src="img/red.png" height="auto">
+                <img class="piece" id="p3" src="img/red.png" height="auto">
+                <img class="piece" id="p4" src="img/blue.png" height="auto">
+                <img class="piece" id="p5" src="img/blue.png" height="auto">
+                <img class="piece" id="p6" src="img/blue.png" height="auto">
+            </div>
+        </div>
 
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/states.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/touch.js"></script>
         <script type="text/javascript" src="js/homepage.js"></script>
+        <script type="text/javascript" src="js/playpage.js"></script>
+        <script type="text/javascript" src="js/hostjoinpage.js"></script>
+        <script type="text/javascript" src="js/gamepage.js"></script>
+
     </body>
 </html>

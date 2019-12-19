@@ -6,6 +6,7 @@ import logging
 
 # Create your views here.
 
+# TODO: when making competitive games, each player will have a secret key which is checked before making a move
 def createApi(request, gameId):
     try:
         game = Game.objects.create(guid=str(gameId),

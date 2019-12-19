@@ -40,7 +40,7 @@ body {
 /* Portrait layout (default) */
 .app {
     height: 100%;
-    background:url(../img/bg.jpg);
+    background: url(../img/bg.jpg);
     background-size: cover;    
 }
 
@@ -57,8 +57,25 @@ body {
     text-align: center;
 }
 
+.hostjoinheader {
+    height: 30%;
+}
+
 .textimage {
     width: 70%;
+}
+
+/* GAME SCREEN SECTION */
+.gameheader {
+    height: 25%;
+}
+
+.boardcontainer {
+    height: 75%;
+    background-image: url(../img/board.png);
+    background-position: center bottom;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
 }
 
 @keyframes fade {
