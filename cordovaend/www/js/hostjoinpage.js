@@ -39,7 +39,11 @@ function apiAskForJoin(n) {
         }
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
+            side = -1;
             activatePlayer();
+        } else {
+            side = 1;
+            askForNextMove();
         }
         initBoard();
         openPage("gamepage");
@@ -61,7 +65,11 @@ function apiJoinNumber(n) {
         }
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
+            side = -1;
             activatePlayer();
+        } else {
+            side = 1;
+            askForNextMove();
         }
         initBoard();
         openPage("gamepage");
