@@ -78,6 +78,10 @@ body {
     background-repeat: no-repeat;
 }
 
+.piece {
+    position: absolute;
+}
+
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }

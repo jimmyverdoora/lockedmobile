@@ -40,9 +40,13 @@ function apiAskForJoin(n) {
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
+            selfPieces = ["p1", "p2", "p3"];
+            opponentPieces = ["p4", "p5", "p6"];
             activatePlayer();
         } else {
             side = 1;
+            opponentPieces = ["p1", "p2", "p3"];
+            selfPieces = ["p4", "p5", "p6"];
             askForNextMove();
         }
         initBoard();
@@ -66,9 +70,13 @@ function apiJoinNumber(n) {
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
+            selfPieces = ["p1", "p2", "p3"];
+            opponentPieces = ["p4", "p5", "p6"];
             activatePlayer();
         } else {
             side = 1;
+            opponentPieces = ["p1", "p2", "p3"];
+            selfPieces = ["p4", "p5", "p6"];
             askForNextMove();
         }
         initBoard();
