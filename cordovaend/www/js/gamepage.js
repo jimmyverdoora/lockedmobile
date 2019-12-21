@@ -36,9 +36,9 @@ function initBoard() {
     moveToPos("p4", 3, 4);
     moveToPos("p5", 4, 6);
     moveToPos("p6", 5, 4);
-    var j = Math.round((side + 1) * 3 / 2);
+    let j = Math.round((side + 1) * 1.5);
     for (i = 1; i < 4; i++) {
-        var ij = i + j;
+        let ij = i + j;
         document.getElementById("p" + ij).setAttribute('ontouchstart', 'startTouch("p' + ij + '")');
         document.getElementById("p" + ij).setAttribute('ontouchmove', 'moveTouch(event, "p' + ij + '")');
         document.getElementById("p" + ij).setAttribute('ontouchend', 'endTouch()');
@@ -46,12 +46,12 @@ function initBoard() {
     };
 };
 
-function moveToPos(id, x, y) {
-    board[id].x = x;
-    board[id].y = y;
-    yPixels = Math.round((y - 1) * screenW * 0.14 + screenW * 0.02);
+function moveToPos(id, xp, yp) {
+    board[id].x = xp;
+    board[id].y = yp;
+    yPixels = Math.round((yp - 1) * screenW * 0.14 + screenW * 0.02);
     document.getElementById(id).style.top = (boardTop + yPixels).toString() + "px";
-    xPixels = Math.round((x - 1) * screenW * 0.14 + screenW * 0.02);
+    xPixels = Math.round((xp - 1) * screenW * 0.14 + screenW * 0.02);
     document.getElementById(id).style.left = xPixels.toString() + "px";
 };
 

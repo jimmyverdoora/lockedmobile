@@ -9,7 +9,6 @@ function startTouch(id) {
     oY = Math.round(pos.top + screenW * 0.06);
     selected = id;
     var possibleMoves = moves[id];
-    console.log(possibleMoves);
     possibleMoves.forEach(element => {
         document.getElementById("a" + element).style.top = aY + "px";
         document.getElementById("a" + element).style.left = aX + "px";
@@ -21,6 +20,7 @@ function moveTouch(event, id) {
     if (!canMove) {
         return;
     };
+    console.log(currentMove);
     var cX = event.changedTouches[0].pageX;
     var cY = event.changedTouches[0].pageY;
     if (Math.abs(cX - oX) < screenW * 0.06 || Math.abs(cY - oY) < screenW * 0.06) {

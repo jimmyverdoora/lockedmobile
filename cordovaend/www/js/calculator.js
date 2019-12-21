@@ -1,6 +1,6 @@
 function createPossibleMoves() {
     selfPieces.forEach(element => {
-        var avoid = "";
+        let avoid = "";
         if (forbiddenMove && element == forbiddenMove.piece) {
             avoid = forbiddenMove.move;
         };
@@ -20,7 +20,7 @@ function createPossibleMoves() {
 };
 
 function isUpPossible(id) {
-    newY = board[id].y - 1;
+    let newY = board[id].y - 1;
     if (newY < 1) {
         return false;
     };
@@ -51,7 +51,7 @@ function isUpPossible(id) {
 };
 
 function isDownPossible(id) {
-    newY = board[id].y + 1;
+    let newY = board[id].y + 1;
     if (newY > 8) {
         return false;
     };
@@ -82,7 +82,7 @@ function isDownPossible(id) {
 };
 
 function isLeftPossible(id) {
-    newX = board[id].x - 1;
+    let newX = board[id].x - 1;
     if (newX < 1) {
         return false;
     };
@@ -113,7 +113,7 @@ function isLeftPossible(id) {
 };
 
 function isRightPossible(id) {
-    newX = board[id].x + 1;
+    let newX = board[id].x + 1;
     if (newX > 8) {
         return false;
     };

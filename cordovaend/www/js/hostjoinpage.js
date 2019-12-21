@@ -42,14 +42,15 @@ function apiAskForJoin(n) {
             side = -1;
             selfPieces = ["p1", "p2", "p3"];
             opponentPieces = ["p4", "p5", "p6"];
+            initBoard();
             activatePlayer();
         } else {
             side = 1;
             opponentPieces = ["p1", "p2", "p3"];
             selfPieces = ["p4", "p5", "p6"];
+            initBoard();
             askForNextMove();
         }
-        initBoard();
         openPage("gamepage");
         resetHostPage();
     }
@@ -68,18 +69,20 @@ function apiJoinNumber(n) {
             return;
         }
         gameId = JSON.parse(this.responseText).gameId;
+        initBoard();
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
             selfPieces = ["p1", "p2", "p3"];
             opponentPieces = ["p4", "p5", "p6"];
+            initBoard();
             activatePlayer();
         } else {
             side = 1;
             opponentPieces = ["p1", "p2", "p3"];
             selfPieces = ["p4", "p5", "p6"];
+            initBoard();
             askForNextMove();
         }
-        initBoard();
         openPage("gamepage");
         resetJoinPage();
     }
