@@ -23,12 +23,12 @@ var selected = null;
 
 // center of the selected piece
 var oX = 0;
-var oy = 0;
+var oY = 0;
 
 // selected move
 var currentMove = null;
 
-var fobiddenMove = null;
+var forbiddenMove = null;
 
 // --- moves for each piece ---
 var moves = {

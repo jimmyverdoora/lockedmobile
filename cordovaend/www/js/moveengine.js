@@ -6,13 +6,14 @@ function startTouch(id) {
     var aX = Math.round(pos.left - screenW * 0.14);
     var aY = Math.round(pos.top - screenW * 0.14);
     oX = Math.round(pos.left + screenW * 0.06);
-    oy = Math.round(pos.top + screenW * 0.06);
+    oY = Math.round(pos.top + screenW * 0.06);
     selected = id;
     var possibleMoves = moves[id];
+    console.log(possibleMoves);
     possibleMoves.forEach(element => {
-        document.getElementById("a" + element).setAttribute('top', aX + 'px;');
-        document.getElementById("a" + element).setAttribute('left', aY + 'px;');
-        document.getElementById("a" + element).setAttribute('style', 'display: block;');
+        document.getElementById("a" + element).style.top = aY + "px";
+        document.getElementById("a" + element).style.left = aX + "px";
+        document.getElementById("a" + element).style.display = "block";
     });
 };
 
@@ -64,8 +65,10 @@ function endTouch() {
 };
 
 function cancelTouch() {
-    poss.forEach(element => {
+    var possibleMoves = moves[selected];
+    possibleMoves.forEach(element => {
         document.getElementById("a" + element).setAttribute('style', 'display: none;');
         document.getElementById("a" + element + "b").setAttribute('style', 'display: none;');
     });
+    selected = null;
 };

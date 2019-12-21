@@ -82,6 +82,10 @@ body {
     position: absolute;
 }
 
+.arrow {
+    position: absolute;
+}
+
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
