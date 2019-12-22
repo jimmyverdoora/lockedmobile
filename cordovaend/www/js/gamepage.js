@@ -61,18 +61,18 @@ function createWinScreen(player) {
     if (player == side) {
         target = "YOU WIN BRO!";
     };
-    document.getElementById("gamewaitingheader").innerHTML = target;
+    document.getElementById("gamewaitingheader").innerHTML = '<h1>' + target + '</h1><h1 ontouchstart="playAgain()">PLAY AGAIN</h1>';
 };
 
 function performMoveLocally(piece, move) {
-    opponentPieces.forEach(element => {
-        if (move == "t" && board[piece].x == board[element].x && board[piece].y == board[element].y - 1) {
+    allPieces.forEach(element => {
+        if (move == "t" && board[piece].x == board[element].x && board[piece].y == board[element].y + 1) {
             moveToPos(element, board[element].x, board[element].y - 1);
-        } else if (move == "b" && board[piece].x == board[element].x && board[piece].y == board[element].y + 1) {
+        } else if (move == "b" && board[piece].x == board[element].x && board[piece].y == board[element].y - 1) {
             moveToPos(element, board[element].x, board[element].y + 1);
-        } else if (move == "l" && board[piece].x == board[element].x - 1 && board[piece].y == board[element].y) {
+        } else if (move == "l" && board[piece].x == board[element].x + 1 && board[piece].y == board[element].y) {
             moveToPos(element, board[element].x - 1, board[element].y);
-        } else if (move == "r" && board[piece].x == board[element].x + 1 && board[piece].y == board[element].y) {
+        } else if (move == "r" && board[piece].x == board[element].x - 1 && board[piece].y == board[element].y) {
             moveToPos(element, board[element].x + 1, board[element].y);
         };
     });
@@ -85,4 +85,23 @@ function performMoveLocally(piece, move) {
     } else if (move == "r") {
         moveToPos(piece, board[piece].x + 1, board[piece].y);
     };
+};
+
+function playAgain() {
+    gameId = null;
+    moveId = 1;
+    side = 0;
+
+    board = {
+        "p1": {x: 0, y: 0},
+        "p2": {x: 0, y: 0},
+        "p3": {x: 0, y: 0},
+        "p4": {x: 0, y: 0},
+        "p5": {x: 0, y: 0},
+        "p6": {x: 0, y: 0},
+    };
+
+    selfPieces = [];
+    opponentPieces = [];
+    openPage("homepage");
 };

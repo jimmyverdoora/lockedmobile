@@ -2,16 +2,18 @@ function startTouch(id) {
     if (!canMove) {
         return;
     };
-    var pos = $("#" + id).position();
-    var aX = Math.round(pos.left - screenW * 0.14);
-    var aY = Math.round(pos.top - screenW * 0.14);
+    let pos = $("#" + id).position();
+    let aX = Math.round(pos.left - screenW * 0.14);
+    let aY = Math.round(pos.top - screenW * 0.14);
     oX = Math.round(pos.left + screenW * 0.06);
     oY = Math.round(pos.top + screenW * 0.06);
     selected = id;
-    var possibleMoves = moves[id];
+    let possibleMoves = moves[id];
     possibleMoves.forEach(element => {
         document.getElementById("a" + element).style.top = aY + "px";
         document.getElementById("a" + element).style.left = aX + "px";
+        document.getElementById("a" + element + "b").style.top = aY + "px";
+        document.getElementById("a" + element + "b").style.left = aX + "px";
         document.getElementById("a" + element).style.display = "block";
     });
 };
@@ -20,17 +22,16 @@ function moveTouch(event, id) {
     if (!canMove) {
         return;
     };
-    console.log(currentMove);
-    var cX = event.changedTouches[0].pageX;
-    var cY = event.changedTouches[0].pageY;
-    if (Math.abs(cX - oX) < screenW * 0.06 || Math.abs(cY - oY) < screenW * 0.06) {
+    let cX = event.changedTouches[0].pageX;
+    let cY = event.changedTouches[0].pageY;
+    if (Math.abs(cX - oX) < screenW * 0.06 && Math.abs(cY - oY) < screenW * 0.06) {
         if (currentMove) {
-            document.getElementById("a" + currentMove + "b").setAttribute('style', 'display: none;');
+            document.getElementById("a" + currentMove + "b").style.display = 'none';
             currentMove = null;
         }
         return;
     }
-    var possibleMoves = moves[id];
+    let possibleMoves = moves[id];
     if (Math.abs(cX - oX) < Math.abs(cY - oY)) {
         if (cY > oY) {
             switchMove("b", possibleMoves);
@@ -47,28 +48,35 @@ function moveTouch(event, id) {
 };
 
 function switchMove(newMove, poss) {
-    if (currentMove == newMove || !poss.include(newMove)) {
+    if (currentMove == newMove || !poss.includes(newMove)) {
         return;
     };
     if (currentMove) {
-        document.getElementById("a" + currentMove + "b").setAttribute('style', 'display: none;');
+        document.getElementById("a" + currentMove + "b").style.display = 'none';
     };
     currentMove = newMove;
-    document.getElementById("a" + currentMove + "b").setAttribute('style', 'display: block;')
+    document.getElementById("a" + currentMove + "b").style.display = 'none';
 };
 
 function endTouch() {
     if (currentMove) {
         deliverMove();
+        forbiddenMove = null;
     };
     cancelTouch();
 };
 
 function cancelTouch() {
-    var possibleMoves = moves[selected];
-    possibleMoves.forEach(element => {
-        document.getElementById("a" + element).setAttribute('style', 'display: none;');
-        document.getElementById("a" + element + "b").setAttribute('style', 'display: none;');
-    });
+    document.getElementById("at").style.display = 'none';
+    document.getElementById("atb").style.display = 'none';
+    document.getElementById("ab").style.display = 'none';
+    document.getElementById("abb").style.display = 'none';
+    document.getElementById("al").style.display = 'none';
+    document.getElementById("alb").style.display = 'none';
+    document.getElementById("ar").style.display = 'none';
+    document.getElementById("arb").style.display = 'none';
     selected = null;
+    currentMove = null;
+    oX = 0;
+    oY = 0;
 };

@@ -9,6 +9,7 @@ import tornado.web
 import os.path
 
 from managers import GameManager, LobbyManager
+from settings import *
 from tornado.options import define, options, parse_command_line
 
 define("port", default=8888, help="run on the given port", type=int)
@@ -109,17 +110,31 @@ class GameHandler(tornado.web.RequestHandler):
 
 
 def main():
-    parse_command_line()
-    app = tornado.web.Application(
-        [
-            (r"/host", HostHandler),
-            (r"/join", JoinHandler),
-            (r"/game", GameHandler),
-        ],
-        debug=options.debug,
-    )
-    app.listen(options.port)
-    tornado.ioloop.IOLoop.current().start()
+    if DEBUG:
+        parse_command_line()
+        app = tornado.web.Application(
+            [
+                (r"/host", HostHandler),
+                (r"/join", JoinHandler),
+                (r"/game", GameHandler),
+            ],
+            debug=options.debug,
+        )
+        app.listen(options.port)
+        tornado.ioloop.IOLoop.current().start()
+    else:
+        app = tornado.web.Application(
+            [
+                (r"/host", HostHandler),
+                (r"/join", JoinHandler),
+                (r"/game", GameHandler),
+            ],
+            debug=False,
+        )
+        server = tornado.httpserver.HTTPServer(app)
+        server.bind(DEPLOY_PORT)
+        server.start(0)  # forks one process per cpu
+        IOLoop.current().start()
 
 
 if __name__ == "__main__":

@@ -4,6 +4,8 @@ function createPossibleMoves() {
         if (forbiddenMove && element == forbiddenMove.piece) {
             avoid = forbiddenMove.move;
         };
+        console.log(avoid)
+        console.log(forbiddenMove)
         if (avoid != "t" && isUpPossible(element)) {
             moves[element].push("t");
         }
@@ -34,12 +36,7 @@ function isUpPossible(id) {
             if (newY == 1) {
                 return false;
             };
-            selfPieces.forEach(piece2 => {
-                if (board[piece2].y == newY - 1 && board[piece2].x == board[id].x) {
-                    return false;
-                };
-            });
-            opponentPieces.forEach(piece2 => {
+            allPieces.forEach(piece2 => {
                 if (board[piece2].y == newY - 1 && board[piece2].x == board[id].x) {
                     return false;
                 };
@@ -65,12 +62,7 @@ function isDownPossible(id) {
             if (newY == 8) {
                 return false;
             };
-            selfPieces.forEach(piece2 => {
-                if (board[piece2].y == newY + 1 && board[piece2].x == board[id].x) {
-                    return false;
-                };
-            });
-            opponentPieces.forEach(piece2 => {
+            allPieces.forEach(piece2 => {
                 if (board[piece2].y == newY + 1 && board[piece2].x == board[id].x) {
                     return false;
                 };
@@ -96,12 +88,7 @@ function isLeftPossible(id) {
             if (newX == 1) {
                 return false;
             };
-            selfPieces.forEach(piece2 => {
-                if (board[piece2].x == newX - 1 && board[piece2].y == board[id].y) {
-                    return false;
-                };
-            });
-            opponentPieces.forEach(piece2 => {
+            allPieces.forEach(piece2 => {
                 if (board[piece2].x == newX - 1 && board[piece2].y == board[id].y) {
                     return false;
                 };
@@ -124,15 +111,10 @@ function isRightPossible(id) {
     });
     opponentPieces.forEach(piece => {
         if (board[piece].x == newX && board[piece].y == board[id].y) { 
-            if (newY == 8) {
+            if (newX == 8) {
                 return false;
             };
-            selfPieces.forEach(piece2 => {
-                if (board[piece2].x == newX + 1 && board[piece2].y == board[id].y) {
-                    return false;
-                };
-            });
-            opponentPieces.forEach(piece2 => {
+            allPieces.forEach(piece2 => {
                 if (board[piece2].x == newX + 1 && board[piece2].y == board[id].y) {
                     return false;
                 };

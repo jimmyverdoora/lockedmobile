@@ -1,0 +1,2 @@
+DEBUG = True
+DEPLOY_PORT = 8080

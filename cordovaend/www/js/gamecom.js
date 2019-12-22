@@ -4,7 +4,7 @@ var MOVE_DICT_R = {"U": "t", "D": "b", "L": "l", "R": "r"};
 function deliverMove() {
     deactivatePlayer();
     performMoveLocally(selected, currentMove);
-    var xsub = new XMLHttpRequest();
+    let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
@@ -21,28 +21,26 @@ function deliverMove() {
     };
     xsub.open("POST", apiurl + "/game");
     xsub.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    var pieceNum = selected.subString(1, 2);
+    let pieceNum = selected.substring(1, 2);
     xsub.send("requestType=PUT&gameId=" + gameId + "&moveId=" + moveId + "&move=" + pieceNum + MOVE_DICT[currentMove]);
-    selected = null;
-    currentMove = null;
 };
 
 function askForNextMove() {
-    var xsub = new XMLHttpRequest();
+    let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
             document.getElementById("gamewaitingheader").innerHTML = "ERROR"; // TODO
             return;
         };
-        var parsedJson = JSON.parse(this.responseText);
+        let parsedJson = JSON.parse(this.responseText);
+        performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
         if (parsedJson.win != 0) {
             createWinScreen(parsedJson.win);
             return;
         };
-        performMoveLocally("p" + parsedJson.move.subString(0, 1), MOVE_DICT_R[parsedJson.move.subString(1, 2)]);
         if (parsedJson.forbiddenMove) {
-            forbiddenMove = {piece : "p" + parsedJson.forbiddenMove.subString(0, 1), move: MOVE_DICT_R[parsedJson.forbiddenMove.subString(1, 2)]};
+            forbiddenMove = {piece : "p" + parsedJson.forbiddenMove.substring(0, 1), move: MOVE_DICT_R[parsedJson.forbiddenMove.substring(1, 2)]};
         };
         activatePlayer();
         moveId += 1;

@@ -26,7 +26,7 @@ SECRET_KEY = '5*e!9c*6gcc)6wgdw%xn&zw3@h^r^14kntf#s*6#9s67fs+acg'
 DEBUG = True
 
 # TODO only local tornado is allowed
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition

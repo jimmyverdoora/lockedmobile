@@ -1,0 +1,6 @@
+- istruzioni
+- grafica
+- log server
+
+v2:
+- competitive mode
