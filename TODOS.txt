@@ -1,6 +1,18 @@
 - istruzioni
 - grafica
-- log server
+- log server (loggare anche ogni post con IP)
+- bug possibilita di muovere in lock
+- bug non allineate in firefox
+- fix frecce z-axis
+- mettere timeout con mossa automatica
+- query di cancellazione game su db
+- sistema di svuotamento numeri della lobby
+- ads
+- animazioni movimento pezzi
+- animazione locked
+- forzatura schermo a portrait
 
 v2:
+- comprare la pro version
+- teleport
 - competitive mode

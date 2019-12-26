@@ -10,10 +10,8 @@ import os.path
 
 from managers import GameManager, LobbyManager
 from settings import *
-from tornado.options import define, options, parse_command_line
+from tornado.options import parse_command_line
 
-define("port", default=8888, help="run on the given port", type=int)
-define("debug", default=True, help="run in debug mode")
 
 globalLobbyManager = LobbyManager()
 globalGameManager = GameManager()
@@ -118,9 +116,9 @@ def main():
                 (r"/join", JoinHandler),
                 (r"/game", GameHandler),
             ],
-            debug=options.debug,
+            debug=True,
         )
-        app.listen(options.port)
+        app.listen(DEPLOY_PORT)
         tornado.ioloop.IOLoop.current().start()
     else:
         app = tornado.web.Application(
