@@ -16,7 +16,7 @@ function apiCreateNumber() {
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
-            document.getElementById("hostheader").innerHTML = "ERROR"; // TODO
+            document.getElementById("hostheader").innerHTML = "ERROR: status: " + this.status + "Text:\n" + this.responseText; // TODO
             return;
         }
         var num = JSON.parse(this.responseText).number;
@@ -34,7 +34,7 @@ function apiAskForJoin(n) {
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
-            document.getElementById("hostheader").innerHTML = "ERROR"; // TODO
+            document.getElementById("hostheader").innerHTML = "ERROR: status: " + this.status + "Text:\n" + this.responseText; // TODO
             return;
         }
         gameId = JSON.parse(this.responseText).gameId;
@@ -65,7 +65,7 @@ function apiJoinNumber(n) {
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
-            document.getElementById("joinheader").innerHTML = "ERROR"; // TODO
+            document.getElementById("joinheader").innerHTML = "ERROR: status: " + this.status + "Text:\n" + this.responseText; // TODO
             return;
         }
         gameId = JSON.parse(this.responseText).gameId;
