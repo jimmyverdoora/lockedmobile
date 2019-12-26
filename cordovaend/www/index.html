@@ -10,14 +10,22 @@
     </head>
     <body>
 
-        <div class="app" id="homepage" style="display:block">
+        <div class="app" id="loadingpage" style="display: block;">
+            <div class="gameheader">
+                <h1>LOADING</h1>
+            </div>    
+            <div class="boardcontainer" id="loadingcontainer">
+            </div>
+        </div>
+
+        <div class="app" id="homepage" style="display:none">
             <div class="title" id="homepagetitle">
                 <h1>LOCKED</h1>
             </div>
-            <div class="loadable imagecontainer" id="play">
+            <div class="imagecontainer" id="play">
                 <img class="textimage" src="img/play.png" id="playimg">
             </div>
-            <div class="loadable imagecontainer" id="settings">
+            <div class="imagecontainer" id="settings">
                 <img class="textimage" src="img/settings.png" id="settingsimg">
             </div>
         </div>
@@ -62,7 +70,7 @@
             <div class="gameheader" id="gamewaitingheader" style="display: block;">
                 <h1>ITS NOT YOUR TURN BITCHA WAIT</h1>
             </div>
-            <div class="boardcontainer">
+            <div class="boardcontainer" id="boardcontainer">
                 <img class="piece" id="p1" src="img/red.png" height="auto">
                 <img class="piece" id="p2" src="img/red.png" height="auto">
                 <img class="piece" id="p3" src="img/red.png" height="auto">
@@ -95,4 +103,5 @@
         <script type="text/javascript" src="js/gamecom.js"></script>
 
     </body>
+
 </html>

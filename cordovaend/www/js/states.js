@@ -3,7 +3,7 @@ var moveId = 1;
 var canMove = false;
 var side = 0;
 var screenW = window.screen.availWidth;
-var boardTop = Math.round(window.screen.availHeight - screenW * 1.14);
+var boardTop = 0;
 var allPieces = ["p1", "p2", "p3", "p4", "p5", "p6"];
 
 var board = {

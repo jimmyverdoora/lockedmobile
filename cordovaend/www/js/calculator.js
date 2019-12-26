@@ -4,8 +4,6 @@ function createPossibleMoves() {
         if (forbiddenMove && element == forbiddenMove.piece) {
             avoid = forbiddenMove.move;
         };
-        console.log(avoid)
-        console.log(forbiddenMove)
         if (avoid != "t" && isUpPossible(element)) {
             moves[element].push("t");
         }
@@ -26,24 +24,24 @@ function isUpPossible(id) {
     if (newY < 1) {
         return false;
     };
-    selfPieces.forEach(piece => {
+    for (piece of selfPieces) {
         if (board[piece].y == newY && board[piece].x == board[id].x) {
             return false;
         };
-    });
-    opponentPieces.forEach(piece => {
+    };
+    for (piece of opponentPieces) {
         if (board[piece].y == newY && board[piece].x == board[id].x) { 
             if (newY == 1) {
                 return false;
             };
-            allPieces.forEach(piece2 => {
+            for (piece2 of allPieces) {
                 if (board[piece2].y == newY - 1 && board[piece2].x == board[id].x) {
                     return false;
                 };
-            });
+            };
             return true;
         };
-    });
+    };
     return true;
 };
 
@@ -52,24 +50,24 @@ function isDownPossible(id) {
     if (newY > 8) {
         return false;
     };
-    selfPieces.forEach(piece => {
+    for (piece of selfPieces) {
         if (board[piece].y == newY && board[piece].x == board[id].x) {
             return false;
         };
-    });
-    opponentPieces.forEach(piece => {
+    };
+    for (piece of opponentPieces) {
         if (board[piece].y == newY && board[piece].x == board[id].x) { 
             if (newY == 8) {
                 return false;
             };
-            allPieces.forEach(piece2 => {
+            for (piece2 of allPieces) {
                 if (board[piece2].y == newY + 1 && board[piece2].x == board[id].x) {
                     return false;
                 };
-            });
+            };
             return true;
         };
-    });
+    };
     return true;
 };
 
@@ -78,24 +76,24 @@ function isLeftPossible(id) {
     if (newX < 1) {
         return false;
     };
-    selfPieces.forEach(piece => {
+    for (piece of selfPieces) {
         if (board[piece].x == newX && board[piece].y == board[id].y) {
             return false;
         };
-    });
-    opponentPieces.forEach(piece => {
+    };
+    for (piece of opponentPieces) {
         if (board[piece].x == newX && board[piece].y == board[id].y) { 
             if (newX == 1) {
                 return false;
             };
-            allPieces.forEach(piece2 => {
+            for (piece2 of allPieces) {
                 if (board[piece2].x == newX - 1 && board[piece2].y == board[id].y) {
                     return false;
                 };
-            });
+            };
             return true;
         };
-    });
+    };
     return true;
 };
 
@@ -104,23 +102,23 @@ function isRightPossible(id) {
     if (newX > 8) {
         return false;
     };
-    selfPieces.forEach(piece => {
+    for (piece of selfPieces) {
         if (board[piece].x == newX && board[piece].y == board[id].y) {
             return false;
         };
-    });
-    opponentPieces.forEach(piece => {
+    };
+    for (piece of opponentPieces) {
         if (board[piece].x == newX && board[piece].y == board[id].y) { 
             if (newX == 8) {
                 return false;
             };
-            allPieces.forEach(piece2 => {
+            for (piece2 of allPieces) {
                 if (board[piece2].x == newX + 1 && board[piece2].y == board[id].y) {
                     return false;
                 };
-            });
+            };
             return true;
         };
-    });
+    };
     return true;
 };

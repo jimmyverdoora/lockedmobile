@@ -13,6 +13,7 @@
 
 v2:
 - httpS
+- manage disconnections
 - comprare la pro version
 - teleport
 - competitive mode

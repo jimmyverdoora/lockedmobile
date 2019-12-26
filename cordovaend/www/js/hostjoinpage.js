@@ -69,7 +69,6 @@ function apiJoinNumber(n) {
             return;
         }
         gameId = JSON.parse(this.responseText).gameId;
-        initBoard();
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
             selfPieces = ["p1", "p2", "p3"];

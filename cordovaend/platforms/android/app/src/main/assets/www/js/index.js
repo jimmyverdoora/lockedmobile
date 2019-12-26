@@ -5,19 +5,17 @@ var app = {
     },
 
     onDeviceReady: function() {
-        app.activateButton('play');
-        app.activateButton('settings');
+        loadBoardSize();
+        openPage("homepage");
     },
+};
 
-    activateButton: function(id) {
-        var element = document.getElementById(id);
-       
-        element.setAttribute('style', 'display:block;');
-    }
+function loadBoardSize() {
+    boardTop = Math.round($("#loadingcontainer").position().top + $("#loadingcontainer").height() - screenW * 1.14);
 };
 
 var pagemanager = {
-    currentPage: "homepage",
+    currentPage: "loadingpage",
     changePage: function(id) {
         document.getElementById(pagemanager.currentPage).setAttribute('style', 'display:none;');
         document.getElementById(id).setAttribute('style', 'display:block;');
