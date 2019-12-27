@@ -8,7 +8,7 @@ def makeMove(game, moves, pieces, moveId, move):
     if not move or len(moves) != moveId - 1 or len(move) != 2:
         return "KO"
     movables = ("1", "2", "3") if moveId % 2 == 1 else ("4", "5", "6")
-    if move[0] not in movables or move[1] not in ("U", "D", "L", "R"):
+    if move[0] not in movables or move[1] not in ("U", "D", "L", "R", "1", "2", "3", "4"):
         return "KO"
     possible, piecesToMove = isMovePossible(move, pieces, movables)
     if possible:

@@ -20,6 +20,9 @@ class Move(models.Model):
     number = models.IntegerField()
     game = models.ForeignKey('Game', on_delete=models.CASCADE,
         related_name='moves')
+    
+    class Meta:
+        ordering = ['number']
 
 
 class Piece(models.Model):
