@@ -55,7 +55,7 @@ function switchMove(newMove, poss) {
         document.getElementById("a" + currentMove + "b").style.display = 'none';
     };
     currentMove = newMove;
-    document.getElementById("a" + currentMove + "b").style.display = 'none';
+    document.getElementById("a" + currentMove + "b").style.display = 'block';
 };
 
 function endTouch() {

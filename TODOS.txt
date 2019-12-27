@@ -1,19 +1,17 @@
-- istruzioni
-- grafica
-- log server (loggare anche ogni post con IP)
-- bug possibilita di muovere in lock
-- fix frecce z-axis
-- mettere timeout con mossa automatica
-- query di cancellazione game su db
-- sistema di svuotamento numeri della lobby
-- ads
-- animazioni movimento pezzi
-- animazione locked
-- forzatura schermo a portrait
+09 - istruzioni
+01 - teleport
+06 - grafica
+02 - log server (loggare anche ogni post con IP)
+05 - mettere timeout con mossa automatica
+04 - query di cancellazione game su db
+03 - sistema di svuotamento numeri della lobby
+10 - ads
+07 - animazioni movimento pezzi
+08 - animazione locked
+
 
 v2:
 - httpS
 - manage disconnections
 - comprare la pro version
-- teleport
 - competitive mode

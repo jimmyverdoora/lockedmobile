@@ -15,6 +15,8 @@
   "dependencies": {
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-screen-orientation": "^3.0.2",
+    "es6-promise-plugin": "^4.2.2",
     "gradle": "^1.0.9"
   },
   "devDependencies": {
@@ -22,7 +24,8 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-screen-orientation": {}
     },
     "platforms": [
       "ios",
