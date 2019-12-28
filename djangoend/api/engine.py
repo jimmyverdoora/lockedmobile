@@ -2,25 +2,35 @@ import logging
 from api.models import Move
 
 OPPOSITES = {"U": "D", "D": "U", "L": "R", "R": "L"}
+T_SPOTS = {"1": (6, 2), "2": (2, 2), "3": (2, 7), "4": (6, 7)}
 
 
 def makeMove(game, moves, pieces, moveId, move):
-    if not move or len(moves) != moveId - 1 or len(move) != 2:
+    if not move or len(moves) != moveId - 1:
         return "KO"
+    teleport = ""
+    if len(move) == 3:
+        teleport = move[2]
+        move = move[:2]
     movables = ("1", "2", "3") if moveId % 2 == 1 else ("4", "5", "6")
-    if move[0] not in movables or move[1] not in ("U", "D", "L", "R", "1", "2", "3", "4"):
+    if move[0] not in movables or move[1] not in ("U", "D", "L", "R"):
         return "KO"
     possible, piecesToMove = isMovePossible(move, pieces, movables)
-    if possible:
-        success, forbiddenMove = completeMove(move[1], piecesToMove)
-        if success:
-            Move.objects.create(value=move,
-                                number=moveId,
-                                game=game)
-            game.currentForbidden = forbiddenMove
-            game.save()
-            return "OK"
-    return "KO"
+    if not possible:
+        return "KO"
+    success, forbiddenMove, toBeTeleported = completeMove(move[1], piecesToMove)
+    if not success:
+        return "KO"
+    if (toBeTeleported is not None and not teleport) or (toBeTeleported is None) and (teleport):
+        return "KO"
+    if teleport and not performTeleport(toBeTeleported, teleport, pieces):
+        return "KO"
+    Move.objects.create(value=move+teleport,
+                        number=moveId,
+                        game=game)
+    game.currentForbidden = forbiddenMove
+    game.save()
+    return "OK"
 
 
 def checkWin(game):
@@ -37,9 +47,30 @@ def checkWin(game):
     return 0
 
 
+def performTeleport(toBeTeleported, teleportSpot, pieces):
+    if teleportSpot not in T_SPOTS.keys():
+        return False
+    busySpots = []
+    for piece in pieces:
+        for k in T_SPOTS.keys():
+            if T_SPOTS[k][0] == piece.x and T_SPOTS[k][1] == piece.y:
+                busySpots.append(k)
+                break
+    if len(busySpots) == 4:
+        # Unlikely situation where every spot is busy
+        return True
+    if teleportSpot in busySpots:
+        return False
+    piece.x = T_SPOTS[teleportSpot][0]
+    piece.y = T_SPOTS[teleportSpot][1]
+    piece.save()
+    return True
+
+
 def completeMove(direction, pieces):
     try:
         forbiddenMove = None
+        toBeTeleported = None
         if len(pieces) == 2:
             forbiddenMove = str(pieces[1].number) + OPPOSITES[direction]
         for piece in pieces:
@@ -53,11 +84,16 @@ def completeMove(direction, pieces):
                 piece.x += 1
             else:
                 raise Exception("Wrong direction")
+            for tup in T_SPOTS.values():
+                if piece.x == tup[0] and piece.y == tup[1]:
+                    toBeTeleported = piece
+                    forbiddenMove = None
+                    break
             piece.save()
-        return True, forbiddenMove
+        return True, forbiddenMove, toBeTeleported
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
-        return False, None
+        return False, None, None
 
 
 def checkHoriz(pieces):

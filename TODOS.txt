@@ -1,5 +1,5 @@
 09 - istruzioni
-01 - teleport
+01 - teleport (fare un game per vedere se l ordering delle moves funziona)
 06 - grafica
 02 - log server (loggare anche ogni post con IP)
 05 - mettere timeout con mossa automatica

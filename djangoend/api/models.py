@@ -16,7 +16,7 @@ class Game(models.Model):
 
 class Move(models.Model):
 
-    value = models.CharField(max_length=2)
+    value = models.CharField(max_length=3)
     number = models.IntegerField()
     game = models.ForeignKey('Game', on_delete=models.CASCADE,
         related_name='moves')
