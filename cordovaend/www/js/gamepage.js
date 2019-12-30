@@ -22,6 +22,9 @@ function initBoard() {
     for (i = 1; i < 7; i++) {
         document.getElementById("p" + i).setAttribute('width', Math.round(screenW * 0.12));
     };
+    for (i = 1; i < 5; i++) {
+        document.getElementById("tp" + i).setAttribute('width', Math.round(screenW * 0.12));
+    };
     document.getElementById("at").setAttribute('width', Math.round(screenW * 0.4));
     document.getElementById("atb").setAttribute('width', Math.round(screenW * 0.4));
     document.getElementById("ab").setAttribute('width', Math.round(screenW * 0.4));
@@ -36,6 +39,10 @@ function initBoard() {
     moveToPos("p4", 3, 4);
     moveToPos("p5", 4, 6);
     moveToPos("p6", 5, 4);
+    changeLocation("tp1", 6, 2);
+    changeLocation("tp2", 2, 2);
+    changeLocation("tp3", 2, 7);
+    changeLocation("tp4", 6, 7);
     let j = Math.round((side + 1) * 1.5);
     for (i = 1; i < 4; i++) {
         let ij = i + j;
@@ -49,6 +56,18 @@ function initBoard() {
 function moveToPos(id, xp, yp) {
     board[id].x = xp;
     board[id].y = yp;
+    changeLocation(id, xp, yp);
+    if (!teleport && canMove) {
+        for (i = 1; i < 5; i++) {
+            if (xp == tSpots["" + i][0] && yp == tSpots["" + i][1]) {
+                teleport = i;
+                teleportedPiece = id;
+            };
+        };
+    };
+};
+
+function changeLocation(id, xp, yp) {
     yPixels = Math.round((yp - 1) * screenW * 0.14 + screenW * 0.02);
     document.getElementById(id).style.top = (boardTop + yPixels).toString() + "px";
     xPixels = Math.round((xp - 1) * screenW * 0.14 + screenW * 0.02);

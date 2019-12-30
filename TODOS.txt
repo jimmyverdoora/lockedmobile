@@ -1,5 +1,5 @@
 09 - istruzioni
-01 - teleport (fare un game per vedere se l ordering delle moves funziona)
+01 - teleport (DA TESTARE)
 06 - grafica
 02 - log server (loggare anche ogni post con IP)
 05 - mettere timeout con mossa automatica
@@ -8,6 +8,7 @@
 10 - ads
 07 - animazioni movimento pezzi
 08 - animazione locked
+11 - musica
 
 
 v2:

@@ -60,13 +60,22 @@ function switchMove(newMove, poss) {
 
 function endTouch() {
     if (currentMove) {
-        deliverMove();
+        clearArrows();
+        performMoveLocally(selected, currentMove);
+        deactivatePlayer();
+        if (teleport) {
+            performTeleport();
+        } else {
+            deliverMove();
+        };
+        teleport = "";
+        teleportedPiece = null;
         forbiddenMove = null;
     };
     cancelTouch();
 };
 
-function cancelTouch() {
+function clearArrows() {
     document.getElementById("at").style.display = 'none';
     document.getElementById("atb").style.display = 'none';
     document.getElementById("ab").style.display = 'none';
@@ -75,6 +84,10 @@ function cancelTouch() {
     document.getElementById("alb").style.display = 'none';
     document.getElementById("ar").style.display = 'none';
     document.getElementById("arb").style.display = 'none';
+};
+
+function cancelTouch() {
+    clearArrows();
     selected = null;
     currentMove = null;
     oX = 0;

@@ -5,6 +5,8 @@ var side = 0;
 var screenW = window.screen.availWidth;
 var boardTop = 0;
 var allPieces = ["p1", "p2", "p3", "p4", "p5", "p6"];
+var tSpots = {"1": [6, 2], "2": [2, 2], "3": [2, 7], "4": [6, 7]};
+
 
 var board = {
     "p1": {x: 0, y: 0},
@@ -25,6 +27,10 @@ var selected = null;
 // center of the selected piece
 var oX = 0;
 var oY = 0;
+
+// teleport states
+var teleport = "";
+var teleportedPiece = null;
 
 // selected move
 var currentMove = null;

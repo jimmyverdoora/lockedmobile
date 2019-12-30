@@ -2,8 +2,6 @@ var MOVE_DICT = {"t": "U", "b": "D", "l": "L", "r": "R"};
 var MOVE_DICT_R = {"U": "t", "D": "b", "L": "l", "R": "r"};
 
 function deliverMove() {
-    deactivatePlayer();
-    performMoveLocally(selected, currentMove);
     let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
@@ -22,7 +20,7 @@ function deliverMove() {
     xsub.open("POST", apiurl + "/game");
     xsub.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     let pieceNum = selected.substring(1, 2);
-    xsub.send("requestType=PUT&gameId=" + gameId + "&moveId=" + moveId + "&move=" + pieceNum + MOVE_DICT[currentMove]);
+    xsub.send("requestType=PUT&gameId=" + gameId + "&moveId=" + moveId + "&move=" + pieceNum + MOVE_DICT[currentMove] + teleport);
 };
 
 function askForNextMove() {
@@ -35,6 +33,9 @@ function askForNextMove() {
         };
         let parsedJson = JSON.parse(this.responseText);
         performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
+        if (parsedJson.move.lenght == 3) {
+            performReceivedTeleportMove(parsedJson.move);
+        };
         if (parsedJson.win != 0) {
             createWinScreen(parsedJson.win);
             return;
