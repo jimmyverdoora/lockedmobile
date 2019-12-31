@@ -31,6 +31,7 @@ var oY = 0;
 // teleport states
 var teleport = "";
 var teleportedPiece = null;
+var teleportActive = false;
 
 // selected move
 var currentMove = null;

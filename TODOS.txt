@@ -1,13 +1,14 @@
 09 - istruzioni
-01 - teleport (DA TESTARE)
+OK: 01 - teleport (DA TESTARE)
 06 - grafica
-02 - log server (loggare anche ogni post con IP)
+02 - log server (loggare anche ogni post con IP) (implementare i due metodi e inserire il logging negli except)
 05 - mettere timeout con mossa automatica
 04 - query di cancellazione game su db
 03 - sistema di svuotamento numeri della lobby
 10 - ads
 07 - animazioni movimento pezzi
 08 - animazione locked
+12 - credits
 11 - musica
 
 

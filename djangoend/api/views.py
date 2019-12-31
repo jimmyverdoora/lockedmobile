@@ -2,11 +2,12 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from api.models import Game, Move, Piece
 from api.engine import checkWin, makeMove
+from api.logger import logThis
 import logging
 
-# Create your views here.
 
 # TODO: when making competitive games, each player will have a secret key which is checked before making a move
+@logThis
 def createApi(request, gameId):
     try:
         game = Game.objects.create(guid=str(gameId),
@@ -24,6 +25,7 @@ def createApi(request, gameId):
 
 
 @csrf_exempt
+@logThis
 def moveApi(request, gameId, moveId):
     if request.method == 'GET':
         try:

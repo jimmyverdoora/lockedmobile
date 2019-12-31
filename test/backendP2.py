@@ -1,7 +1,7 @@
 import requests
 import sys
 
-BASEURL = 'http://localhost:8888'
+BASEURL = 'http://localhost:8080'
 
 number = int(sys.argv[1])
 r = requests.post(BASEURL + '/join', data={'number': number})

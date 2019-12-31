@@ -57,14 +57,6 @@ function moveToPos(id, xp, yp) {
     board[id].x = xp;
     board[id].y = yp;
     changeLocation(id, xp, yp);
-    if (!teleport && canMove) {
-        for (i = 1; i < 5; i++) {
-            if (xp == tSpots["" + i][0] && yp == tSpots["" + i][1]) {
-                teleport = i;
-                teleportedPiece = id;
-            };
-        };
-    };
 };
 
 function changeLocation(id, xp, yp) {
@@ -76,11 +68,13 @@ function changeLocation(id, xp, yp) {
 
 function createWinScreen(player) {
     // TODO
-    var target = "YOU LOST BRO";
+    let target = "YOU LOST BRO";
     if (player == side) {
         target = "YOU WIN BRO!";
     };
-    document.getElementById("gamewaitingheader").innerHTML = '<h1>' + target + '</h1><h1 ontouchstart="playAgain()">PLAY AGAIN</h1>';
+    document.getElementById("gamewaitingheader").style.display = 'none';
+    document.getElementById("gamewinheader").innerHTML = '<h1>' + target + '</h1><h1 ontouchstart="playAgain()">PLAY AGAIN</h1>';
+    document.getElementById("gamewinheader").style.display = 'block';
 };
 
 function performMoveLocally(piece, move) {
@@ -104,6 +98,7 @@ function performMoveLocally(piece, move) {
     } else if (move == "r") {
         moveToPos(piece, board[piece].x + 1, board[piece].y);
     };
+    checkTeleport(piece, move);
 };
 
 function playAgain() {
@@ -123,4 +118,6 @@ function playAgain() {
     selfPieces = [];
     opponentPieces = [];
     openPage("homepage");
+    document.getElementById("gamewinheader").style.display = 'none';
+    document.getElementById("gamewaitingheader").style.display = 'block';
 };

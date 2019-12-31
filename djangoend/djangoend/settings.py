@@ -28,6 +28,8 @@ DEBUG = True
 # TODO only local tornado is allowed
 ALLOWED_HOSTS = ['localhost']
 
+LOG_FILE = 'django.log'
+
 
 # Application definition
 

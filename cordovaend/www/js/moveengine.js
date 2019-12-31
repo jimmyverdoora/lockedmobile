@@ -1,5 +1,5 @@
 function startTouch(id) {
-    if (!canMove) {
+    if (!canMove || teleport) {
         return;
     };
     let pos = $("#" + id).position();
@@ -19,7 +19,7 @@ function startTouch(id) {
 };
 
 function moveTouch(event, id) {
-    if (!canMove) {
+    if (!canMove || teleport) {
         return;
     };
     let cX = event.changedTouches[0].pageX;
@@ -59,7 +59,7 @@ function switchMove(newMove, poss) {
 };
 
 function endTouch() {
-    if (currentMove) {
+    if (currentMove && !teleportActive) {
         clearArrows();
         performMoveLocally(selected, currentMove);
         deactivatePlayer();
@@ -72,7 +72,7 @@ function endTouch() {
         teleportedPiece = null;
         forbiddenMove = null;
     };
-    cancelTouch();
+    clearArrows();
 };
 
 function clearArrows() {
@@ -87,6 +87,9 @@ function clearArrows() {
 };
 
 function cancelTouch() {
+    if (teleport) {
+        return;
+    };
     clearArrows();
     selected = null;
     currentMove = null;

@@ -37,3 +37,6 @@ class Piece(models.Model):
     y = models.IntegerField()
     game = models.ForeignKey('Game', on_delete=models.CASCADE,
         related_name='pieces')
+
+    def __str__(self):
+        return str(self.number) + ") x: " + str(self.x) + ", y: " + str(self.y)

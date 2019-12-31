@@ -1,4 +1,5 @@
 function performTeleport() {
+    teleportActive = true;
     let busySpots = [];
     for (piece of allPieces) {
         for (i = 1; i < 5; i++) {
@@ -9,7 +10,7 @@ function performTeleport() {
         };
     };
     if (busySpots.length == 4) {
-        // case where the piece cannot go anywhere
+        deliverMove();
         return;
     };
     for (i = 1; i < 5; i++) {
@@ -17,14 +18,14 @@ function performTeleport() {
             continue;
         };
         document.getElementById("tp" + i).style.display = 'block';
-        document.getElementById("tp" + i).setAttribute('ontouchstart', 'teleportPiece(' + teleportedPiece + ', ' + i +')');
+        document.getElementById("tp" + i).setAttribute('ontouchstart', 'teleportPiece("' + teleportedPiece + '", ' + i +')');
     };
 };
 
 function teleportPiece(id, tpId) {
     for (i = 1; i < 5; i++) {
-        document.getElementById("tp" + tpId).removeAttribute('ontouchstart');
-        document.getElementById("tp" + tpId).style.display = 'none';
+        document.getElementById("tp" + i).removeAttribute('ontouchstart');
+        document.getElementById("tp" + i).style.display = 'none';
     };
     teleport = tpId;
     board[id].x = tSpots["" + tpId][0];
@@ -66,4 +67,40 @@ function teleportPieceLocally(id, tpId) {
     board[id].x = tSpots["" + tpId][0];
     board[id].y = tSpots["" + tpId][1];
     changeLocation(id, board[id].x, board[id].y);
+};
+
+function checkTeleport(piece, move) {
+    let xp = board[piece].x;
+    let yp = board[piece].y;
+    if (teleport || !canMove) {
+        return;
+    };
+    for (i = 1; i < 5; i++) {
+        if (xp == tSpots["" + i][0] && yp == tSpots["" + i][1]) {
+            teleport = i;
+            teleportedPiece = piece;
+            return;
+        };
+    };
+    let yAdd = 0;
+    let xAdd = 0;
+    if (move == "t") {
+        yAdd = -1;
+    } else if (move == "b") {
+        yAdd = 1;
+    } else if (move == "l") {
+        xAdd = -1;
+    } else if (move == "r") {
+        xAdd = 1;
+    };
+    for (oppPiece of opponentPieces) {
+        for (i = 1; i < 5; i++) {
+            if (board[oppPiece].x == tSpots["" + i][0] && board[oppPiece].y == tSpots["" + i][1] &&
+                    board[oppPiece].x == board[piece] + xAdd && board[oppPiece].y == board[piece].y + yAdd) {
+                teleport = i;
+                teleportedPiece = oppPiece;
+                return;
+            };
+        };
+    };
 };

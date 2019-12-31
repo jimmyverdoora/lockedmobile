@@ -99,8 +99,9 @@ function resetHostPage() {
 function resetJoinPage() {
     document.getElementById("joinheader").innerHTML = '<input type="number" id="num1"><input type="number" id="num2"><input type="number" id="num3"><input type="number" id="num4"><input type="number" id="num5"><input type="number" id="num6"></input>';
     for (i = 1; i < 6; i++) {
-        var n = i+1;
+        let n = i+1;
         document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
-        document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
-    }
+    };
+    document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
+    document.getElementById("joinheader").setAttribute('style', 'display:none;');
 };

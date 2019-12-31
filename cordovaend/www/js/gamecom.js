@@ -21,6 +21,13 @@ function deliverMove() {
     xsub.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     let pieceNum = selected.substring(1, 2);
     xsub.send("requestType=PUT&gameId=" + gameId + "&moveId=" + moveId + "&move=" + pieceNum + MOVE_DICT[currentMove] + teleport);
+    teleportActive = false;
+    teleport = "";
+    teleportedPiece = null;
+    selected = null;
+    currentMove = null;
+    oX = 0;
+    oY = 0;
 };
 
 function askForNextMove() {
@@ -33,7 +40,7 @@ function askForNextMove() {
         };
         let parsedJson = JSON.parse(this.responseText);
         performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
-        if (parsedJson.move.lenght == 3) {
+        if (parsedJson.move.length == 3) {
             performReceivedTeleportMove(parsedJson.move);
         };
         if (parsedJson.win != 0) {

@@ -1,6 +1,6 @@
 import requests
 
-BASEURL = 'http://localhost:8888'
+BASEURL = 'http://localhost:8080'
 
 r = requests.get(BASEURL + '/host')
 d = r.json()

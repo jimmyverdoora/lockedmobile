@@ -2,12 +2,12 @@ import asyncio
 import json
 import logging
 import random
-import time
 import tornado.ioloop
 import tornado.locks
 import tornado.web
 import os.path
 
+from logger import logThis
 from managers import GameManager, LobbyManager
 from settings import *
 from tornado.options import parse_command_line
@@ -16,15 +16,22 @@ from tornado.options import parse_command_line
 globalLobbyManager = LobbyManager()
 globalGameManager = GameManager()
 
+logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(levelname)s %(asctime)s %(message)s')
+
 
 class HostHandler(tornado.web.RequestHandler):
 
+    @logThis
     def get(self):
         # TODO check the ip address in production to avoid ddos
         # make dict that counts the host gets by the same ip which is clear
         # after a number of that IP gets deleted from numbers dict
-        n = globalLobbyManager.createNew()
-        self.write(json.dumps({'number': n, "outcome": "OK"}))
+        try:
+            n = globalLobbyManager.createNew()
+            self.write(json.dumps({'number': n, "outcome": "OK"}))
+        except Exception:
+            self.write(json.dumps({"outcome": "KO"}))
+
 
     async def post(self):
         try:
@@ -50,10 +57,10 @@ class HostHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
 
 
-
 class JoinHandler(tornado.web.RequestHandler):
 
     async def post(self):
+        self.logRequest()
         try:
             n = int(self.get_argument("number"))
             gameId = globalLobbyManager.numbers.get(n)
@@ -66,18 +73,26 @@ class JoinHandler(tornado.web.RequestHandler):
             globalLobbyManager.conds.get(n).notify_all()
             jsonResult["goFirst"] = goFirst
             self.write(json.dumps(jsonResult))
+            self.logResponse()
         except Exception:
             logging.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
 
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
+    
+    def logRequest(self):
+        pass
+
+    def logResponse(self):
+        pass
 
 
 class GameHandler(tornado.web.RequestHandler):
 
     async def post(self):
         gameId = str(self.get_argument("gameId", ""))
+        self.logRequest()
         try:
             requestType = str(self.get_argument("requestType"))
             moveId = int(self.get_argument("moveId"))
@@ -98,6 +113,7 @@ class GameHandler(tornado.web.RequestHandler):
                 if jsonResult["win"] != 0:
                     globalGameManager.clear(gameId)
                 self.write(json.dumps(jsonResult))
+            self.logResponse()
         except Exception:
             logging.error("Exception occurred", exc_info=True)
             globalGameManager.clear(gameId)
@@ -105,6 +121,12 @@ class GameHandler(tornado.web.RequestHandler):
     
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
+    
+    def logRequest(self):
+        pass
+
+    def logResponse(self):
+        pass
 
 
 def main():
