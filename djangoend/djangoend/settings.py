@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '5*e!9c*6gcc)6wgdw%xn&zw3@h^r^14kntf#s*6#9s67fs+acg'
 
+TORNADO_KEY = '*4p1lme^9dxj3(-+f+3vzo47e9(0i*=-57k=0^ho&49re!qyyh'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -29,6 +31,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost']
 
 LOG_FILE = 'django.log'
+
+GAME_MAX_INACTIVE_TIME_SECONDS = 300
 
 
 # Application definition

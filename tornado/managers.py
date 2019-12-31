@@ -28,26 +28,44 @@ class LobbyManager(object):
         self.conds[number] = tornado.locks.Condition()
         return number
 
-    def clear(self, n):
+    def clear(self, n, removeFromIps=True, hint=None):
         try:
             del self.numbers[n]
             del self.firstPlayerHost[n]
             del self.conds[n]
+            if removeFromIps:
+                if hint is not None:
+                    try:
+                        self.ips[hint].remove(n)
+                        if len(self.ips[hint]) == 0:
+                            del self.ips[hint]
+                        return
+                    except Exception:
+                        pass
+                targetIp = None
+                for ip, numbers in self.ips.items():
+                    if n in numbers:
+                        targetIp = ip
+                        break
+                if targetIp is not None:
+                    self.ips[targetIp].remove(n)
+                    if len(self.ips[targetIp]) == 0:
+                        del self.ips[targetIp]
         except Exception:
             pass
 
     def checkIpSafety(self, hostIp, n):
         self.ipLastUpdate[hostIp] = datetime.now()
         if hostIp not in self.ips.keys():
-            self.ips[hostIp] = [n]
+            self.ips[hostIp] = {n}
             return
         if len(self.ips[hostIp]) >= IP_LOBBIES_THRESHOLD:
             for i in self.ips[hostIp]:
-                self.clear(i)
-            self.ips[hostIp] = [n]
+                self.clear(i, removeFromIps=False)
+            self.ips[hostIp] = {n}
             logging.warning("IP " + hostIp + " reached the lobbies threshold!")
             return
-        self.ips[hostIp].append(n)
+        self.ips[hostIp].add(n)
     
     def clearInactiveIps(self):
         now = datetime.now()
@@ -57,7 +75,7 @@ class LobbyManager(object):
             if now < date + timedelta(seconds=MAX_LOBBY_DURATION_SECONDS):
                 continue
             for i in self.ips[ip]:
-                self.clear(i)
+                self.clear(i, removeFromIps=False)
                 totLobbies += 1
             del self.ips[ip]
             afkIp.append(ip)

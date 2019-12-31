@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -12,6 +13,9 @@ class Game(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=['guid'])]
+
+    def storicize(self):
+        StorGame.objects.create(guid=self.guid, state=self.state, createdAt=self.createdAt)
 
 
 class Move(models.Model):
@@ -40,3 +44,20 @@ class Piece(models.Model):
 
     def __str__(self):
         return str(self.number) + ") x: " + str(self.x) + ", y: " + str(self.y)
+
+class StorGame(models.Model):
+
+    guid = models.CharField(max_length=36, unique=True)
+    state = models.IntegerField()
+    createdAt = models.DateTimeField()
+    storicizedAt = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [models.Index(fields=['createdAt'])]
+
+
+class DailyReport(models.Model):
+    
+    date = models.DateField(auto_now_add=True)
+    totGames = models.IntegerField()
+    completedGames = models.IntegerField()

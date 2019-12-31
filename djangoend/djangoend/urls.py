@@ -19,6 +19,8 @@ from api.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('storicize', dailyStoricizationAndReport),
+    path('stats', statsApi),
     path('game/<uuid:gameId>/create', createApi),
     path('game/<uuid:gameId>/move/<int:moveId>', moveApi),
 ]

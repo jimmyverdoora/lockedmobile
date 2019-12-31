@@ -1,6 +1,9 @@
+from datetime import timedelta
 from django.http import JsonResponse
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
-from api.models import Game, Move, Piece
+from djangoend.settings import *
+from api.models import Game, Move, Piece, DailyReport
 from api.engine import checkWin, makeMove
 from api.logger import logThis
 import logging
@@ -53,3 +56,38 @@ def moveApi(request, gameId, moveId):
             return JsonResponse({"outcome": "KO"})
     else:
         return JsonResponse({"outcome": "KO"})
+
+
+@csrf_exempt
+def dailyStoricizationAndReport(request):
+    if request.method != 'POST':
+        return JsonResponse({"outcome": "KO", "reason": "WRONG METHOD"})
+    key = request.POST.get("key", "")
+    if key != TORNADO_KEY:
+        return JsonResponse({"outcome": "KO", "reason": "WRONG KEY"})
+    games = Game.objects.all()
+    totGames = len(games)
+    completedGames = len(games.filter(state=-1)) + len(games.filter(state=1))
+    DailyReport.objects.create(totGames=totGames, completedGames=completedGames)
+    for game in games:
+        if (game.state == -1 or game.state == 1 or
+                timezone.now() > game.modifiedAt + timedelta(seconds=GAME_MAX_INACTIVE_TIME_SECONDS)):
+            game.storicize()
+            game.delete()
+    return JsonResponse({"outcome": "OK", "total": totGames, "cleared": totGames - len(Game.objects.all())})
+
+
+@csrf_exempt
+def statsApi(request):
+    if request.method != 'POST':
+        return JsonResponse({"outcome": "KO", "reason": "WRONG METHOD"})
+    key = request.POST.get("key", "")
+    if key != TORNADO_KEY:
+        return JsonResponse({"outcome": "KO", "reason": "WRONG KEY"})
+    games = Game.objects.all()
+    totGames = len(games)
+    completedGames = len(games.filter(state=-1)) + len(games.filter(state=1))
+    inactiveLimit = timezone.now() - timedelta(seconds=GAME_MAX_INACTIVE_TIME_SECONDS)
+    inactiveGames = len(games.filter(state=0, modifiedAt__lt=inactiveLimit))
+    return JsonResponse({"outcome": "OK", "total": totGames, "completed": completedGames,
+            "active": totGames - completedGames - inactiveGames, "inactive": inactiveGames})

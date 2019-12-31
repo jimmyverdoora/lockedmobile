@@ -3,7 +3,7 @@ OK: 01 - teleport (DA TESTARE)
 06 - grafica
 OK: 02 - log server (loggare anche ogni post con IP) (implementare i due metodi e inserire il logging negli except)
 05 - mettere timeout con mossa automatica
-04 - query di cancellazione game su db
+OK: 04 - query di cancellazione game su db
 OK: 03 - sistema di svuotamento numeri della lobby
 10 - ads
 07 - animazioni movimento pezzi
@@ -13,6 +13,7 @@ OK: 03 - sistema di svuotamento numeri della lobby
 
 prod stuff:
 - mettere il clearIps schedulato
+- mettere il daily di django schedulato
 
 v2:
 - httpS

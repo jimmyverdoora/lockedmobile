@@ -42,11 +42,11 @@ class HostHandler(tornado.web.RequestHandler):
             try:
                 await waitFuture
             except Exception:
-                globalLobbyManager.clear(n)
+                globalLobbyManager.clear(n, hint=self.request.remote_ip)
                 self.write(json.dumps({"outcome": "KO"}))
                 return
             goFirst = globalLobbyManager.firstPlayerHost[n]
-            globalLobbyManager.clear(n)
+            globalLobbyManager.clear(n, hint=self.request.remote_ip)
             self.write(json.dumps({"gameId": gameId, "outcome": "OK", "goFirst": goFirst}))
         except Exception:
             logging.error("Exception occurred", exc_info=True)
@@ -127,6 +127,22 @@ class GameHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
 
 
+class StatsHandler(tornado.web.RequestHandler):
+    
+    def post(self):
+        try:
+            key = str(self.get_argument("key"))
+            if key != TORNADO_KEY:
+                self.write(json.dumps({"outcome": "KO", "reason": "WRONG KEY"}))
+                return
+            self.write(json.dumps({"outcome": "OK",
+                                   "lobbies": len(globalLobbyManager.numbers),
+                                   "ips": len(globalLobbyManager.ips),
+                                   "games": len(globalGameManager.conds)}))
+        except Exception as e:
+            self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
+
+
 def main():
     if DEBUG:
         parse_command_line()
@@ -135,6 +151,7 @@ def main():
                 (r"/host", HostHandler),
                 (r"/join", JoinHandler),
                 (r"/game", GameHandler),
+                (r"/stats", StatsHandler),
                 (r"/clearlobbies", ClearLobbyHandler),
             ],
             debug=True,
@@ -147,6 +164,7 @@ def main():
                 (r"/host", HostHandler),
                 (r"/join", JoinHandler),
                 (r"/game", GameHandler),
+                (r"/stats", StatsHandler),
                 (r"/clearlobbies", ClearLobbyHandler),
             ],
             debug=False,
