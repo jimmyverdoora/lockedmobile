@@ -33,6 +33,7 @@ class HostHandler(tornado.web.RequestHandler):
             self.write(json.dumps({"outcome": "KO"}))
 
 
+    @logThis
     async def post(self):
         try:
             n = int(self.get_argument("number"))
@@ -59,8 +60,8 @@ class HostHandler(tornado.web.RequestHandler):
 
 class JoinHandler(tornado.web.RequestHandler):
 
+    @logThis
     async def post(self):
-        self.logRequest()
         try:
             n = int(self.get_argument("number"))
             gameId = globalLobbyManager.numbers.get(n)
@@ -73,26 +74,19 @@ class JoinHandler(tornado.web.RequestHandler):
             globalLobbyManager.conds.get(n).notify_all()
             jsonResult["goFirst"] = goFirst
             self.write(json.dumps(jsonResult))
-            self.logResponse()
         except Exception:
             logging.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
 
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
-    
-    def logRequest(self):
-        pass
-
-    def logResponse(self):
-        pass
 
 
 class GameHandler(tornado.web.RequestHandler):
 
+    @logThis
     async def post(self):
         gameId = str(self.get_argument("gameId", ""))
-        self.logRequest()
         try:
             requestType = str(self.get_argument("requestType"))
             moveId = int(self.get_argument("moveId"))
@@ -113,7 +107,6 @@ class GameHandler(tornado.web.RequestHandler):
                 if jsonResult["win"] != 0:
                     globalGameManager.clear(gameId)
                 self.write(json.dumps(jsonResult))
-            self.logResponse()
         except Exception:
             logging.error("Exception occurred", exc_info=True)
             globalGameManager.clear(gameId)
@@ -121,12 +114,6 @@ class GameHandler(tornado.web.RequestHandler):
     
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
-    
-    def logRequest(self):
-        pass
-
-    def logResponse(self):
-        pass
 
 
 def main():

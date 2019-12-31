@@ -1,7 +1,6 @@
 from settings import LOG_FILE
 import functools
 import logging
-import time
 import uuid
 
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(levelname)s %(asctime)s %(message)s')
@@ -17,11 +16,9 @@ def logThis(function):
                 " | CONTENT: " + str(self.request.arguments))
         except Exception:
             logging.warn("Unable to log the request", exc_info=True)
-        start = time.time()
         result = function(self, *args, **kwargs)
-        t = str(round(time.time() - start))
         try:
-            logging.info("RESPONSE [" + guid + "] TIME: " + t + "ms | CONTENT: " + str(self._write_buffer))
+            logging.info("RESPONSE [" + guid + "] " + str(self._write_buffer))
         except Exception:
             logging.warn("Unable to log the response", exc_info=True)
         return result

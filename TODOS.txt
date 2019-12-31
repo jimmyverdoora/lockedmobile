@@ -1,7 +1,7 @@
 09 - istruzioni
 OK: 01 - teleport (DA TESTARE)
 06 - grafica
-02 - log server (loggare anche ogni post con IP) (implementare i due metodi e inserire il logging negli except)
+OK: 02 - log server (loggare anche ogni post con IP) (implementare i due metodi e inserire il logging negli except)
 05 - mettere timeout con mossa automatica
 04 - query di cancellazione game su db
 03 - sistema di svuotamento numeri della lobby
