@@ -4,6 +4,7 @@ import random
 import tornado.locks
 import uuid
 import time
+from datetime import datetime, timedelta
 from settings import *
 from tornado import gen
 from tornado.httpclient import AsyncHTTPClient
@@ -16,6 +17,7 @@ class LobbyManager(object):
         self.firstPlayerHost = dict()
         self.conds = dict()
         self.ips = dict()
+        self.ipLastUpdate = dict()
 
     def createNew(self, hostIp):
         number = random.randint(100000, 999999)
@@ -33,9 +35,9 @@ class LobbyManager(object):
             del self.conds[n]
         except Exception:
             pass
-    
+
     def checkIpSafety(self, hostIp, n):
-        print(self.numbers)
+        self.ipLastUpdate[hostIp] = datetime.now()
         if hostIp not in self.ips.keys():
             self.ips[hostIp] = [n]
             return
@@ -46,6 +48,24 @@ class LobbyManager(object):
             logging.warning("IP " + hostIp + " reached the lobbies threshold!")
             return
         self.ips[hostIp].append(n)
+    
+    def clearInactiveIps(self):
+        now = datetime.now()
+        afkIp = []
+        totLobbies = 0
+        for ip, date in self.ipLastUpdate.items():
+            if now < date + timedelta(seconds=MAX_LOBBY_DURATION_SECONDS):
+                continue
+            for i in self.ips[ip]:
+                self.clear(i)
+                totLobbies += 1
+            del self.ips[ip]
+            afkIp.append(ip)
+        for ip in afkIp:
+            del self.ipLastUpdate[ip]
+        logging.info("DELETED " + str(len(afkIp)) + " for a total of " + str(totLobbies) + " lobbies")
+        return totLobbies
+
 
 class GameManager(object):
 

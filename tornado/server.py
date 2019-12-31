@@ -27,6 +27,7 @@ class HostHandler(tornado.web.RequestHandler):
             n = globalLobbyManager.createNew(self.request.remote_ip)
             self.write(json.dumps({'number': n, "outcome": "OK"}))
         except Exception:
+            logging.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
 
     @logThis
@@ -48,6 +49,7 @@ class HostHandler(tornado.web.RequestHandler):
             globalLobbyManager.clear(n)
             self.write(json.dumps({"gameId": gameId, "outcome": "OK", "goFirst": goFirst}))
         except Exception:
+            logging.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
     
     def set_default_headers(self):
@@ -77,6 +79,19 @@ class JoinHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
 
+
+class ClearLobbyHandler(tornado.web.RequestHandler):
+    
+    def post(self):
+        try:
+            key = str(self.get_argument("key"))
+            if key != TORNADO_KEY:
+                self.write(json.dumps({"outcome": "KO", "reason": "WRONG KEY"}))
+                return
+            n = globalLobbyManager.clearInactiveIps()
+            self.write(json.dumps({'cleared': n, "outcome": "OK"}))
+        except Exception as e:
+            self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
 
 class GameHandler(tornado.web.RequestHandler):
 
@@ -120,6 +135,7 @@ def main():
                 (r"/host", HostHandler),
                 (r"/join", JoinHandler),
                 (r"/game", GameHandler),
+                (r"/clearlobbies", ClearLobbyHandler),
             ],
             debug=True,
         )
@@ -131,6 +147,7 @@ def main():
                 (r"/host", HostHandler),
                 (r"/join", JoinHandler),
                 (r"/game", GameHandler),
+                (r"/clearlobbies", ClearLobbyHandler),
             ],
             debug=False,
         )
