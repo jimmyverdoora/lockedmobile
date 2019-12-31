@@ -23,15 +23,11 @@ class HostHandler(tornado.web.RequestHandler):
 
     @logThis
     def get(self):
-        # TODO check the ip address in production to avoid ddos
-        # make dict that counts the host gets by the same ip which is clear
-        # after a number of that IP gets deleted from numbers dict
         try:
-            n = globalLobbyManager.createNew()
+            n = globalLobbyManager.createNew(self.request.remote_ip)
             self.write(json.dumps({'number': n, "outcome": "OK"}))
         except Exception:
             self.write(json.dumps({"outcome": "KO"}))
-
 
     @logThis
     async def post(self):

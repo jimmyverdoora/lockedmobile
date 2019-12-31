@@ -1,14 +1,12 @@
 import json
+import logging
 import random
 import tornado.locks
 import uuid
 import time
+from settings import *
 from tornado import gen
 from tornado.httpclient import AsyncHTTPClient
-
-HEADERS = {"content-type": "application/x-www-form-urlencoded",
-           "charset": "UTF-8"}
-DJANGO_API_URL = "http://localhost:8000"
 
 
 class LobbyManager(object):
@@ -17,11 +15,13 @@ class LobbyManager(object):
         self.numbers = dict()
         self.firstPlayerHost = dict()
         self.conds = dict()
+        self.ips = dict()
 
-    def createNew(self):
+    def createNew(self, hostIp):
         number = random.randint(100000, 999999)
         while number in self.numbers.keys():
             number = random.randint(100000, 999999)
+        self.checkIpSafety(hostIp, number)
         self.numbers[number] = str(uuid.uuid4())
         self.conds[number] = tornado.locks.Condition()
         return number
@@ -33,7 +33,19 @@ class LobbyManager(object):
             del self.conds[n]
         except Exception:
             pass
-
+    
+    def checkIpSafety(self, hostIp, n):
+        print(self.numbers)
+        if hostIp not in self.ips.keys():
+            self.ips[hostIp] = [n]
+            return
+        if len(self.ips[hostIp]) >= IP_LOBBIES_THRESHOLD:
+            for i in self.ips[hostIp]:
+                self.clear(i)
+            self.ips[hostIp] = [n]
+            logging.warning("IP " + hostIp + " reached the lobbies threshold!")
+            return
+        self.ips[hostIp].append(n)
 
 class GameManager(object):
 
@@ -50,6 +62,7 @@ class GameManager(object):
         return json.loads(response.body)
 
     def clear(self, gameId):
+        logging.info("CLEARING GAME: " + str(gameId) + ", ACTIVE GAMES: " + str(len(self.conds)))
         try:
             del self.conds[gameId]
         except Exception:
