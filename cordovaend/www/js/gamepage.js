@@ -160,7 +160,7 @@ function chooseRandomMoveWithoutTeleport() {
             if (move == "t") {
                 for (i = 1; i < 5; i++) {
                     if (board[piece].x == tSpots["" + i][0] && 
-                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].y == tSpots["" + i][1] - 2)) {
                         add = false;
                         break;
                     };
@@ -168,23 +168,23 @@ function chooseRandomMoveWithoutTeleport() {
             } else if (move == "b") {
                 for (i = 1; i < 5; i++) {
                     if (board[piece].x == tSpots["" + i][0] && 
-                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                            (board[piece].y == tSpots["" + i][1] + 1 || board[piece].y == tSpots["" + i][1] + 2)) {
                         add = false;
                         break;
                     };
                 };
             } else if (move == "l") {
                 for (i = 1; i < 5; i++) {
-                    if (board[piece].x == tSpots["" + i][0] && 
-                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                    if (board[piece].y == tSpots["" + i][1] && 
+                            (board[piece].x == tSpots["" + i][0] - 1 || board[piece].x == tSpots["" + i][0] - 2)) {
                         add = false;
                         break;
                     };
                 };
             } else if (move == "r") {
                 for (i = 1; i < 5; i++) {
-                    if (board[piece].x == tSpots["" + i][0] && 
-                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                    if (board[piece].x == tSpots["" + i][1] && 
+                            (board[piece].y == tSpots["" + i][0] + 1 || board[piece].x == tSpots["" + i][0] + 2)) {
                         add = false;
                         break;
                     };
