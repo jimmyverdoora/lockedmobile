@@ -41,7 +41,7 @@ function askForNextMove() {
         let parsedJson = JSON.parse(this.responseText);
         performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
         if (parsedJson.move.length == 3) {
-            performReceivedTeleportMove(parsedJson.move);
+            receivedTeleportMove = parsedJson.move;
         };
         if (parsedJson.win != 0) {
             createWinScreen(parsedJson.win);

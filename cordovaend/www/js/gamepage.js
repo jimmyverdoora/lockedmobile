@@ -58,7 +58,32 @@ function initBoard() {
 function moveToPos(id, xp, yp) {
     board[id].x = xp;
     board[id].y = yp;
-    changeLocation(id, xp, yp);
+    var curX = parseInt(document.getElementById(id).style.left);
+    var curY = parseInt(document.getElementById(id).style.top);
+    if (!curX || !curY) {
+        changeLocation(id, xp, yp);
+        return;
+    };
+    var newX = Math.round((xp - 1) * screenW * 0.14 + screenW * 0.02);
+    var newY = Math.round((yp - 1) * screenW * 0.14 + screenW * 0.02 + boardTop);
+    var oldX = curX;
+    var oldY = curY;
+    var stepCounter = 1;
+    var movement = setInterval(function() {
+        if (curX == newX && curY == newY) {
+            if (receivedTeleportMove) {
+                performReceivedTeleportMove(receivedTeleportMove);
+                receivedTeleportMove = null;
+            };
+            clearInterval(movement);
+            return;
+        };
+        curX = Math.round(oldX + 0.1 * stepCounter * (newX - oldX));
+        curY = Math.round(oldY + 0.1 * stepCounter * (newY - oldY));
+        stepCounter = stepCounter + 1;
+        document.getElementById(id).style.left = curX + "px";
+        document.getElementById(id).style.top = curY + "px";
+    }, 5);
 };
 
 function changeLocation(id, xp, yp) {
@@ -125,13 +150,13 @@ function playAgain() {
 };
 
 function launchTimer() {
-    timerTime = 30;
+    timerTime = 3;
     moveTimer = setInterval(function() {
         document.getElementById("timerTime").innerHTML = timerTime;
         if (timerTime == 0) {
             clearArrows();
-            deactivatePlayer();
             chooseRandomMoveWithoutTeleport();
+            deactivatePlayer();
             performMoveLocally(selected, currentMove);
             deliverMove();
             forbiddenMove = null;
@@ -145,14 +170,6 @@ function killTimer() {
 };
 
 function chooseRandomMoveWithoutTeleport() {
-    let nBusySpots = 0;
-    for (piece of allPieces) {
-        for (i = 1; i < 5; i++) {
-            if (board[piece].x == tSpots["" + i][0] && board[piece].y == tSpots["" + i][1]) {
-                nBusySpots = nBusySpots + 1;
-            };
-        };
-    };
     let possibleRandomMoves = [];
     for (piece of selfPieces) {
         for (move of moves[piece]) {
@@ -183,8 +200,8 @@ function chooseRandomMoveWithoutTeleport() {
                 };
             } else if (move == "r") {
                 for (i = 1; i < 5; i++) {
-                    if (board[piece].x == tSpots["" + i][1] && 
-                            (board[piece].y == tSpots["" + i][0] + 1 || board[piece].x == tSpots["" + i][0] + 2)) {
+                    if (board[piece].y == tSpots["" + i][1] && 
+                            (board[piece].x == tSpots["" + i][0] + 1 || board[piece].x == tSpots["" + i][0] + 2)) {
                         add = false;
                         break;
                     };

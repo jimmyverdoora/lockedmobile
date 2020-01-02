@@ -1,13 +1,6 @@
 09 - istruzioni
-OK: 01 - teleport
 06 - grafica
-OK: 02 - log server (loggare anche ogni post con IP) (implementare i due metodi e inserire il logging negli except)
-05 - mettere timeout con mossa automatica (DA TESTARE)
-OK: 04 - query di cancellazione game su db
-OK: 03 - sistema di svuotamento numeri della lobby
 10 - ads
-07 - animazioni movimento pezzi
-08 - animazione locked
 12 - credits
 11 - musica
 

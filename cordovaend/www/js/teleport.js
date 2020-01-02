@@ -66,7 +66,25 @@ function performReceivedTeleportMove(move) {
 function teleportPieceLocally(id, tpId) {
     board[id].x = tSpots["" + tpId][0];
     board[id].y = tSpots["" + tpId][1];
-    changeLocation(id, board[id].x, board[id].y);
+    var opacity = 1;
+    var teleportDisappear = setInterval(function() {
+        if (opacity < 0.01) {
+            changeLocation(id, board[id].x, board[id].y);
+            var teleportAppear = setInterval(function() {
+                if (opacity > 0.99) {
+                    clearInterval(teleportAppear);
+                    return;
+                };
+                opacity = opacity + 0.05;
+                document.getElementById(id).style.opacity = opacity;
+            }, 5);
+            clearInterval(teleportDisappear);
+            return;
+        };
+        opacity = opacity - 0.05;
+        document.getElementById(id).style.opacity = opacity;
+        console.log(document.getElementById(id).style.opacity);
+    }, 5);
 };
 
 function checkTeleport(piece, move) {
