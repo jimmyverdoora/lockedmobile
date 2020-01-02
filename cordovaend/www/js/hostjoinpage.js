@@ -51,6 +51,7 @@ function apiAskForJoin(n) {
             initBoard();
             askForNextMove();
         }
+        modifyHeaders();
         openPage("gamepage");
         resetHostPage();
     }
@@ -82,6 +83,7 @@ function apiJoinNumber(n) {
             initBoard();
             askForNextMove();
         }
+        modifyHeaders()
         openPage("gamepage");
         resetJoinPage();
     }
@@ -104,4 +106,13 @@ function resetJoinPage() {
     };
     document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
     document.getElementById("joinheader").setAttribute('style', 'display:none;');
+};
+
+function modifyHeaders() {
+    let color = "RED";
+    if (side == 1) {
+        color = "BLUE";
+    };
+    document.getElementById("gameactiveheader").innerHTML = '<h1>YOUR COLOR: ' + color + '</h1><h1>ITS YOUR TURN PLAY!!!</h1><h1 id="timerTime"></h1>'
+    document.getElementById("gamewaitingheader").innerHTML = '<h1>YOUR COLOR: ' + color + '</h1><h1>ITS NOT YOUR TURN WAIT</h1>'
 };

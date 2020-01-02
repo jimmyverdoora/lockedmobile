@@ -38,6 +38,9 @@ var currentMove = null;
 
 var forbiddenMove = null;
 
+var moveTimer = null;
+var timerTime = 0;
+
 // --- moves for each piece ---
 var moves = {
     "p1": [],

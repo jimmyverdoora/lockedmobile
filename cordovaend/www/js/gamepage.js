@@ -3,9 +3,11 @@ function activatePlayer() {
     canMove = true;
     document.getElementById("gamewaitingheader").setAttribute('style', 'display: none;');
     document.getElementById("gameactiveheader").setAttribute('style', 'display: block;');
+    launchTimer();
 };
 
 function deactivatePlayer() {
+    killTimer();
     canMove = false;
     cleanMoves();
     document.getElementById("gameactiveheader").setAttribute('style', 'display: none;');
@@ -120,4 +122,80 @@ function playAgain() {
     openPage("homepage");
     document.getElementById("gamewinheader").style.display = 'none';
     document.getElementById("gamewaitingheader").style.display = 'block';
+};
+
+function launchTimer() {
+    timerTime = 30;
+    moveTimer = setInterval(function() {
+        document.getElementById("timerTime").innerHTML = timerTime;
+        if (timerTime == 0) {
+            clearArrows();
+            deactivatePlayer();
+            chooseRandomMoveWithoutTeleport();
+            performMoveLocally(selected, currentMove);
+            deliverMove();
+            forbiddenMove = null;
+        };
+        timerTime = timerTime - 1;
+    }, 1000);
+};
+
+function killTimer() {
+    clearInterval(moveTimer);
+};
+
+function chooseRandomMoveWithoutTeleport() {
+    let nBusySpots = 0;
+    for (piece of allPieces) {
+        for (i = 1; i < 5; i++) {
+            if (board[piece].x == tSpots["" + i][0] && board[piece].y == tSpots["" + i][1]) {
+                nBusySpots = nBusySpots + 1;
+            };
+        };
+    };
+    let possibleRandomMoves = [];
+    for (piece of selfPieces) {
+        for (move of moves[piece]) {
+            let add = true;
+            if (move == "t") {
+                for (i = 1; i < 5; i++) {
+                    if (board[piece].x == tSpots["" + i][0] && 
+                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                        add = false;
+                        break;
+                    };
+                };
+            } else if (move == "b") {
+                for (i = 1; i < 5; i++) {
+                    if (board[piece].x == tSpots["" + i][0] && 
+                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                        add = false;
+                        break;
+                    };
+                };
+            } else if (move == "l") {
+                for (i = 1; i < 5; i++) {
+                    if (board[piece].x == tSpots["" + i][0] && 
+                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                        add = false;
+                        break;
+                    };
+                };
+            } else if (move == "r") {
+                for (i = 1; i < 5; i++) {
+                    if (board[piece].x == tSpots["" + i][0] && 
+                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].x == tSpots["" + i][1] - 2)) {
+                        add = false;
+                        break;
+                    };
+                };
+            };
+            if (add) {
+                possibleRandomMoves.push(piece + move);
+            };
+        };
+    };
+    let rand = possibleRandomMoves[Math.floor(Math.random() * possibleRandomMoves.length)];
+    selected = rand.substring(0, 2);
+    currentMove = rand.substring(2, 3);
 };
