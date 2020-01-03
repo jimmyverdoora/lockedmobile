@@ -77,7 +77,7 @@ p {
 }
 
 .hostjoinheader {
-    height: 30%;
+    height: 46%;
 }
 
 .titleimage {
@@ -134,7 +134,29 @@ p {
     50% { width: 28%; left: 67%;}
     to { width: 25%; left: 68%;}
 }
+
+@keyframes loading {
+    from { background-image: url(../img/loading1.png); }
+    25% { background-image: url(../img/loading2.png); }
+    50% { background-image: url(../img/loading3.png); }
+    75% { background-image: url(../img/loading.png); }
+    to { background-image: url(../img/loading1.png); }
+}
  
+@-webkit-keyframes loading {
+    from { background-image: url(../img/loading1.png); }
+    25% { background-image: url(../img/loading2.png); }
+    50% { background-image: url(../img/loading3.png); }
+    75% { background-image: url(../img/loading.png); }
+    to { background-image: url(../img/loading1.png); }
+}
+
+.loadingimage {
+    height: 100%;
+    animation: loading 1000ms infinite;
+    background-repeat: no-repeat;
+}
+
 .blink {
     z-index: 2;
     animation:fade 1000ms infinite;

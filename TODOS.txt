@@ -1,5 +1,5 @@
 09 - istruzioni
-06 - grafica
+06 - grafica (trovare un modo di fare il loading)
 10 - ads
 12 - credits
 11 - musica
