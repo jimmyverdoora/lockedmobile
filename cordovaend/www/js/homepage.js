@@ -1,6 +1,6 @@
-document.getElementById("settingsimg").addEventListener('touchend', function() {
-    if (checkInside("settingsimg")) {
-        openPage("settingspage");
+document.getElementById("creditsimg").addEventListener('touchend', function() {
+    if (checkInside("creditsimg")) {
+        openPage("creditspage");
     };
 }, false);
 
