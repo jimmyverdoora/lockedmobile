@@ -22,7 +22,7 @@ function cleanMoves() {
 
 function initBoard() {
     for (i = 1; i < 7; i++) {
-        document.getElementById("p" + i).setAttribute('width', Math.round(screenW * 0.12));
+        document.getElementById("p" + i).setAttribute('width', Math.round(screenW * 0.12) + 2);
     };
     for (i = 1; i < 5; i++) {
         document.getElementById("tp" + i).setAttribute('width', Math.round(screenW * 0.12));
@@ -64,8 +64,8 @@ function moveToPos(id, xp, yp) {
         changeLocation(id, xp, yp);
         return;
     };
-    var newX = Math.round((xp - 1) * screenW * 0.14 + screenW * 0.02);
-    var newY = Math.round((yp - 1) * screenW * 0.14 + screenW * 0.02 + boardTop);
+    var newX = Math.round((xp - 1) * screenW * 0.14 + screenW * 0.02) - 1;
+    var newY = Math.round((yp - 1) * screenW * 0.14 + screenW * 0.02 + boardTop) - 1;
     var oldX = curX;
     var oldY = curY;
     var stepCounter = 1;
@@ -88,9 +88,9 @@ function moveToPos(id, xp, yp) {
 
 function changeLocation(id, xp, yp) {
     yPixels = Math.round((yp - 1) * screenW * 0.14 + screenW * 0.02);
-    document.getElementById(id).style.top = (boardTop + yPixels).toString() + "px";
+    document.getElementById(id).style.top = (boardTop + yPixels - 1).toString() + "px";
     xPixels = Math.round((xp - 1) * screenW * 0.14 + screenW * 0.02);
-    document.getElementById(id).style.left = xPixels.toString() + "px";
+    document.getElementById(id).style.left = (xPixels - 1).toString() + "px";
 };
 
 function createWinScreen(player) {
@@ -150,19 +150,32 @@ function playAgain() {
 };
 
 function launchTimer() {
-    timerTime = 3;
+    timerTime = 30;
     moveTimer = setInterval(function() {
         document.getElementById("timerTime").innerHTML = timerTime;
         if (timerTime == 0) {
             clearArrows();
-            chooseRandomMoveWithoutTeleport();
-            deactivatePlayer();
-            performMoveLocally(selected, currentMove);
-            deliverMove();
-            forbiddenMove = null;
+            canMove = false;
+            setTimeout(() => {
+                performRandomMove();
+            }, 1000);
+            killTimer();
+            return;
         };
         timerTime = timerTime - 1;
     }, 1000);
+};
+
+function performRandomMove() {
+    if (teleportActive) {
+        performRandomTeleportMove();
+    } else {
+        chooseRandomMoveWithoutTeleport();
+        deactivatePlayer();
+        performMoveLocally(selected, currentMove);
+        deliverMove();
+        forbiddenMove = null;
+    };
 };
 
 function killTimer() {

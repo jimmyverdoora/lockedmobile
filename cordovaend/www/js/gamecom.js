@@ -2,6 +2,9 @@ var MOVE_DICT = {"t": "U", "b": "D", "l": "L", "r": "R"};
 var MOVE_DICT_R = {"U": "t", "D": "b", "L": "l", "R": "r"};
 
 function deliverMove() {
+    if (moveSent) {
+        return;
+    };
     let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
@@ -21,6 +24,7 @@ function deliverMove() {
     xsub.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     let pieceNum = selected.substring(1, 2);
     xsub.send("requestType=PUT&gameId=" + gameId + "&moveId=" + moveId + "&move=" + pieceNum + MOVE_DICT[currentMove] + teleport);
+    moveSent = true;
     teleportActive = false;
     teleport = "";
     teleportedPiece = null;
@@ -51,6 +55,7 @@ function askForNextMove() {
             forbiddenMove = {piece : "p" + parsedJson.forbiddenMove.substring(0, 1), move: MOVE_DICT_R[parsedJson.forbiddenMove.substring(1, 2)]};
         };
         activatePlayer();
+        moveSent = false;
         moveId += 1;
     };
     };

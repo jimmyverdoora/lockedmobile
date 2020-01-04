@@ -10,6 +10,7 @@ function performTeleport() {
         };
     };
     if (busySpots.length == 4) {
+        deactivatePlayer();
         deliverMove();
         return;
     };
@@ -20,9 +21,12 @@ function performTeleport() {
         document.getElementById("tp" + i).style.display = 'block';
         document.getElementById("tp" + i).setAttribute('ontouchstart', 'teleportPiece("' + teleportedPiece + '", ' + i +')');
     };
+    // needed since the timer cannot see the updated teleportedPiece variable
+    document.getElementById("teleportedPieceHtml").value = teleportedPiece;
 };
 
 function teleportPiece(id, tpId) {
+    deactivatePlayer();
     for (i = 1; i < 5; i++) {
         document.getElementById("tp" + i).removeAttribute('ontouchstart');
         document.getElementById("tp" + i).style.display = 'none';
@@ -83,7 +87,6 @@ function teleportPieceLocally(id, tpId) {
         };
         opacity = opacity - 0.05;
         document.getElementById(id).style.opacity = opacity;
-        console.log(document.getElementById(id).style.opacity);
     }, 5);
 };
 
@@ -121,4 +124,30 @@ function checkTeleport(piece, move) {
             };
         };
     };
+};
+
+function performRandomTeleportMove() {
+    let busySpots = [];
+    for (piece of allPieces) {
+        for (i = 1; i < 5; i++) {
+            if (tSpots["" + i][0] == board[piece].x && tSpots["" + i][1] == board[piece].y) {
+                busySpots.push(i);
+                break;
+            };
+        };
+    };
+    if (busySpots.length == 4) {
+        deactivatePlayer();
+        deliverMove();
+        return;
+    };
+    let possibleTargets = []
+    for (i = 1; i < 5; i++) {
+        if (!busySpots.includes(i)) {
+            possibleTargets.push(i);
+        };
+    };
+    let chosenTarget = possibleTargets[Math.floor(Math.random() * possibleTargets.length)];
+    let teleportedPieceHtml = document.getElementById("teleportedPieceHtml").value;
+    teleportPiece(teleportedPieceHtml, chosenTarget);    
 };

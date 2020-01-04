@@ -17,6 +17,9 @@ var board = {
     "p6": {x: 0, y: 0},
 };
 
+// indicates if the request for posting the move has already been sent
+var moveSent = false;
+
 // for the calculator
 var selfPieces = [];
 var opponentPieces = [];

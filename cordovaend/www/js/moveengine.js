@@ -62,10 +62,12 @@ function endTouch() {
     if (currentMove && !teleportActive) {
         clearArrows();
         performMoveLocally(selected, currentMove);
-        deactivatePlayer();
         if (teleport) {
+            canMove = false;
+            cleanMoves();
             performTeleport();
         } else {
+            deactivatePlayer();
             deliverMove();
         };
         teleport = "";

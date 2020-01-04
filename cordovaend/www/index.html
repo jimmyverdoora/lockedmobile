@@ -11,7 +11,7 @@
     <body>
 
         <div class="app" id="loadingpage" style="display: block;">
-            <div class="gameheader" style="text-align: center; padding-top: 5%;">
+            <div class="gameheader" style="text-align: center;">
                 <div class='loadingimage'></div>
             </div>    
             <div class="boardcontainer" id="loadingcontainer" style="background-image: none;">
@@ -78,6 +78,7 @@
             <div class="gameheader" id="gamewinheader" style="display: none;">
             </div>
             <div class="boardcontainer" id="boardcontainer">
+
                 <img class="arrow blink" id="tp1" src="img/tp.png" height="auto" style="display: none;">
                 <img class="arrow blink" id="tp2" src="img/tp.png" height="auto" style="display: none;">
                 <img class="arrow blink" id="tp3" src="img/tp.png" height="auto" style="display: none;">
@@ -98,6 +99,7 @@
                 <img class="arrow blink" id="arb" src="img/arb.png" height="auto" style="display: none;">
 
             </div>
+            <input type="hidden" id="teleportedPieceHtml">
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
