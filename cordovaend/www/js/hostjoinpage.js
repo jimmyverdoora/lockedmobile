@@ -103,6 +103,7 @@ function resetJoinPage() {
     for (i = 1; i < 6; i++) {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
+        document.getElementById("num" + i).setAttribute('ontouchstart', 'clearNumbersFrom(' + i + ')');
     };
     document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
     document.getElementById("joinheader").setAttribute('style', 'display:none;');
@@ -113,6 +114,12 @@ function modifyHeaders() {
     if (side == 1) {
         color = "BLUE";
     };
-    document.getElementById("gameactiveheader").innerHTML = '<h1>YOUR COLOR: ' + color + '</h1><h1>ITS YOUR TURN PLAY!!!</h1><h1 id="timerTime"></h1>'
-    document.getElementById("gamewaitingheader").innerHTML = '<h1>YOUR COLOR: ' + color + '</h1><h1>ITS NOT YOUR TURN WAIT</h1>'
+    document.getElementById("gameactiveheader").innerHTML = '<p>YOUR COLOR: ' + color + '</p><p>ITS YOUR TURN PLAY!!!</p><p id="timerTime"></p>'
+    document.getElementById("gamewaitingheader").innerHTML = '<p>YOUR COLOR: ' + color + '</p><p>ITS NOT YOUR TURN WAIT</p>'
+};
+
+function clearNumbersFrom(n) {
+    for (i = n; i < 7; i++) {
+        document.getElementById("num" + i).value = "";
+    };
 };

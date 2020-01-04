@@ -11,9 +11,9 @@
     <body>
 
         <div class="app" id="loadingpage" style="display: block;">
-            <div class="gameheader" style="text-align: center;">
+            <div class="gameheader">
                 <div class='loadingimage'></div>
-            </div>    
+            </div>
             <div class="boardcontainer" id="loadingcontainer" style="background-image: none;">
             </div>
         </div>
@@ -60,12 +60,12 @@
             <div class="hostjoinheader" id="joinheader" style="display: none;">
                 <p>Insert your friend's lobby code:</p>
                 <div class="numbercontainer">
-                    <input placeholder="-" type="number" id="num1" onkeyup="focusTo('num2');">
-                    <input placeholder="-" type="number" id="num2" onkeyup="focusTo('num3');">
-                    <input placeholder="-" type="number" id="num3" onkeyup="focusTo('num4');">
-                    <input placeholder="-" type="number" id="num4" onkeyup="focusTo('num5');">
-                    <input placeholder="-" type="number" id="num5" onkeyup="focusTo('num6');">
-                    <input placeholder="-" type="number" id="num6" onkeyup="submitNumbers();">
+                    <input placeholder="-" type="number" id="num1" ontouchstart="clearNumbersFrom(1)" onkeyup="focusTo('num2');">
+                    <input placeholder="-" type="number" id="num2" ontouchstart="clearNumbersFrom(2)" onkeyup="focusTo('num3');">
+                    <input placeholder="-" type="number" id="num3" ontouchstart="clearNumbersFrom(3)" onkeyup="focusTo('num4');">
+                    <input placeholder="-" type="number" id="num4" ontouchstart="clearNumbersFrom(4)" onkeyup="focusTo('num5');">
+                    <input placeholder="-" type="number" id="num5" ontouchstart="clearNumbersFrom(5)" onkeyup="focusTo('num6');">
+                    <input placeholder="-" type="number" id="num6" ontouchstart="clearNumbersFrom(6)" onkeyup="submitNumbers();">
                 </div>
             </div>
         </div>

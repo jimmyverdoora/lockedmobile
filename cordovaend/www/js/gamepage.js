@@ -25,7 +25,7 @@ function initBoard() {
         document.getElementById("p" + i).setAttribute('width', Math.round(screenW * 0.12) + 2);
     };
     for (i = 1; i < 5; i++) {
-        document.getElementById("tp" + i).setAttribute('width', Math.round(screenW * 0.12));
+        document.getElementById("tp" + i).setAttribute('width', Math.round(screenW * 0.12) + 2);
     };
     document.getElementById("at").setAttribute('width', Math.round(screenW * 0.4));
     document.getElementById("atb").setAttribute('width', Math.round(screenW * 0.4));
@@ -190,7 +190,7 @@ function chooseRandomMoveWithoutTeleport() {
             if (move == "t") {
                 for (i = 1; i < 5; i++) {
                     if (board[piece].x == tSpots["" + i][0] && 
-                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].y == tSpots["" + i][1] - 2)) {
+                            (board[piece].y == tSpots["" + i][1] + 1 || board[piece].y == tSpots["" + i][1] + 2)) {
                         add = false;
                         break;
                     };
@@ -198,7 +198,7 @@ function chooseRandomMoveWithoutTeleport() {
             } else if (move == "b") {
                 for (i = 1; i < 5; i++) {
                     if (board[piece].x == tSpots["" + i][0] && 
-                            (board[piece].y == tSpots["" + i][1] + 1 || board[piece].y == tSpots["" + i][1] + 2)) {
+                            (board[piece].y == tSpots["" + i][1] - 1 || board[piece].y == tSpots["" + i][1] - 2)) {
                         add = false;
                         break;
                     };
@@ -206,7 +206,7 @@ function chooseRandomMoveWithoutTeleport() {
             } else if (move == "l") {
                 for (i = 1; i < 5; i++) {
                     if (board[piece].y == tSpots["" + i][1] && 
-                            (board[piece].x == tSpots["" + i][0] - 1 || board[piece].x == tSpots["" + i][0] - 2)) {
+                            (board[piece].x == tSpots["" + i][0] + 1 || board[piece].x == tSpots["" + i][0] + 2)) {
                         add = false;
                         break;
                     };
@@ -214,7 +214,7 @@ function chooseRandomMoveWithoutTeleport() {
             } else if (move == "r") {
                 for (i = 1; i < 5; i++) {
                     if (board[piece].y == tSpots["" + i][1] && 
-                            (board[piece].x == tSpots["" + i][0] + 1 || board[piece].x == tSpots["" + i][0] + 2)) {
+                            (board[piece].x == tSpots["" + i][0] - 1 || board[piece].x == tSpots["" + i][0] - 2)) {
                         add = false;
                         break;
                     };

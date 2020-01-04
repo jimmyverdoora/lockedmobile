@@ -1,7 +1,5 @@
 09 - istruzioni
-06 - grafica (trovare un modo di fare il loading)
-- fixare ombra
-
+06 - grafica
 10 - ads
 12 - credits
 13 - notifiche push
