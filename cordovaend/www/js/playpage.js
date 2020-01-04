@@ -18,6 +18,8 @@ document.getElementById("joinimg").addEventListener('touchend', function() {
     if (checkInside("joinimg")) {
         loadJoinContent();
         openPage("hostjoinpage");
-        document.getElementById("num1").focus();
+        setTimeout(function() {
+            document.getElementById("num1").focus();
+        }, 500);
     };
 }, false);

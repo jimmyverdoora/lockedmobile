@@ -20,13 +20,18 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+@font-face {
+    font-family: 'PixelStyle';
+    src: url(../css/fonts.ttf);
+}
+
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
     background-color:#E4E4E4;
     background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-family: 'PixelStyle', -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
     font-size:12px;
     height:100vh;
     margin:0px;
@@ -43,6 +48,36 @@ h1 {
 
 p {
     margin-top: 0px;
+    font-size: 10vw;
+    color: #ff6000;
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+    background-color: #01cfff;
+    border-color: #07738d;
+    border-width: 3px 0 3px 0;
+    border-style: solid;
+}
+
+input {
+    width: 12%;   
+    height: 20%;
+    font-size: 18vw;
+    color: #ff6000;
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+    background-color: #01cfff;
+    border-width: 0 0 0 0;
+    text-align: center;
+    font-family: 'PixelStyle';
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
 }
 
 /* Portrait layout (default) */
@@ -73,11 +108,11 @@ p {
     top: 62%;
     position: absolute;
     animation:bigger 1000ms infinite;
-    -webkit-animation:bigger 1000ms infinite;
 }
 
 .hostjoinheader {
     height: 46%;
+    text-align: center;
 }
 
 .titleimage {
@@ -87,6 +122,13 @@ p {
 
 .textimage {
     width: 55%;
+}
+
+.numbercontainer {
+    background-color: #01cfff;
+    border-color: #07738d;
+    border-width: 3px 0 3px 0;
+    border-style: solid;  
 }
 
 /* GAME SCREEN SECTION */
@@ -117,48 +159,31 @@ p {
     to { opacity: 0.5; }
 }
  
-@-webkit-keyframes fade {
-    from { opacity: 0.5; }
-    50% { opacity: 1.0; }
-    to { opacity: 0.5; }
-}
-
 @keyframes bigger {
-    from { width: 25%; left: 68%;}
-    50% { width: 28%; left: 67%;}
-    to { width: 25%; left: 68%;}
-}
- 
-@-webkit-keyframes bigger {
     from { width: 25%; left: 68%;}
     50% { width: 28%; left: 67%;}
     to { width: 25%; left: 68%;}
 }
 
 @keyframes loading {
-    from { background-image: url(../img/loading1.png); }
-    25% { background-image: url(../img/loading2.png); }
-    50% { background-image: url(../img/loading3.png); }
-    75% { background-image: url(../img/loading.png); }
-    to { background-image: url(../img/loading1.png); }
+    from { width: 75%; }
+    25% { width: 80%; }
+    50% { width: 85%; }
+    75% { width: 80%; }
+    to { width: 75%; }
 }
- 
-@-webkit-keyframes loading {
-    from { background-image: url(../img/loading1.png); }
-    25% { background-image: url(../img/loading2.png); }
-    50% { background-image: url(../img/loading3.png); }
-    75% { background-image: url(../img/loading.png); }
-    to { background-image: url(../img/loading1.png); }
-}
+
 
 .loadingimage {
     height: 100%;
-    animation: loading 1000ms infinite;
+    animation: loading 1400ms steps(50) infinite;
+    display: inline-block;
     background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-image: url(../img/loading.png);
 }
 
 .blink {
     z-index: 2;
     animation:fade 1000ms infinite;
-    -webkit-animation:fade 1000ms infinite;
 }

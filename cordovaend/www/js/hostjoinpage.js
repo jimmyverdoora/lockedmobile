@@ -21,7 +21,7 @@ function apiCreateNumber() {
         }
         var num = JSON.parse(this.responseText).number;
         document.getElementById("hostheader").innerHTML =
-            "<p>Tell your friend the following code:</p><p>.   " + num + "</p>";
+            "<p>Tell your friend the following code:</p><p style='font-size: 20vw'>" + num + "</p>";
         apiAskForJoin(num);
     }
     };
@@ -99,7 +99,7 @@ function resetHostPage() {
 };
 
 function resetJoinPage() {
-    document.getElementById("joinheader").innerHTML = '<input type="number" id="num1"><input type="number" id="num2"><input type="number" id="num3"><input type="number" id="num4"><input type="number" id="num5"><input type="number" id="num6"></input>';
+    document.getElementById("joinheader").innerHTML = "<p>Insert your friend's lobby code:</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
     for (i = 1; i < 6; i++) {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
