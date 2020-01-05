@@ -113,7 +113,7 @@ input[type=number] {
 }
 
 .hostjoinheader {
-    height: 46%;
+    height: 30%;
     text-align: center;
 }
 
@@ -129,8 +129,63 @@ input[type=number] {
 .numbercontainer {
     background-color: #01cfff;
     border-color: #07738d;
-    border-width: 3px 0 3px 0;
+    border-width: 0 0 3px 0;
     border-style: solid;  
+}
+
+.mergedbottom {
+    margin-bottom: 0;
+    border-width: 3px 0 0 0;
+}
+
+.instructioncontainer {
+    height: 65;
+}
+
+.instructioncontent {
+    text-align: center;
+}
+
+.instrimg {
+    border-style: solid;
+    border-width: 3px;
+    border-color: #07738d;
+    border-radius: 5px;
+    width: 60%;
+    margin-bottom: 6vw;
+}
+
+.instr {
+    font-size: 6vw;
+}
+
+.instrproceedp {
+    background-color: transparent;
+    border-style: none;
+}
+
+.instrproceed {
+    border-width: 3px;
+    border-radius: 5px;
+    margin-bottom: 0;
+    background-color: #01cfff;
+    border-color: #07738d;
+    border-width: 3px;
+    border-style: solid;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.credits {
+    font-size: 3vh;
+    margin-bottom: 1vh;
+}
+
+.creditsel {
+    font-size: 2.5vh;
+    margin-bottom: 1.5vh;
+    background-color: transparent;    
+    border-style: none;
 }
 
 /* GAME SCREEN SECTION */
@@ -154,6 +209,15 @@ input[type=number] {
 .arrow {
     position: absolute;
     z-index: 1;
+}
+
+.playagain {
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 @keyframes fade {

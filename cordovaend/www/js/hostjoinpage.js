@@ -21,7 +21,7 @@ function apiCreateNumber() {
         }
         var num = JSON.parse(this.responseText).number;
         document.getElementById("hostheader").innerHTML =
-            "<p>Tell your friend the following code:</p><p style='font-size: 20vw'>" + num + "</p>";
+            "<p class='mergedbottom'>Tell your friend the following code:</p><p style='font-size: 20vw; border-width: 0 0 3px 0;'>" + num + "</p>";
         apiAskForJoin(num);
     }
     };
@@ -99,7 +99,7 @@ function resetHostPage() {
 };
 
 function resetJoinPage() {
-    document.getElementById("joinheader").innerHTML = "<p>Insert your friend's lobby code:</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
+    document.getElementById("joinheader").innerHTML = "<p class='mergedbottom'>Insert your friend's lobby code:</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
     for (i = 1; i < 6; i++) {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
@@ -111,11 +111,21 @@ function resetJoinPage() {
 
 function modifyHeaders() {
     let color = "RED";
+    let hex = "#910000";
     if (side == 1) {
         color = "BLUE";
+        hex = "#003591";
     };
-    document.getElementById("gameactiveheader").innerHTML = '<p>YOUR COLOR: ' + color + '</p><p>ITS YOUR TURN PLAY!!!</p><p id="timerTime"></p>'
-    document.getElementById("gamewaitingheader").innerHTML = '<p>YOUR COLOR: ' + color + '</p><p>ITS NOT YOUR TURN WAIT</p>'
+    document.getElementById("gameactiveheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>C'mon, move!</p><p id='timerTime'>30</p>"
+    document.getElementById("gamewaitingheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>It's not your turn!</p><p id='waitTimer'>WAIT...</p>"
+    var waitTimerState = 0;
+    var waitTimer = setInterval(() => {
+        if (waitTimerState > 3) {
+            waitTimerState = 0;
+        };
+        document.getElementById("waitTimer").innerHTML = ".".repeat(waitTimerState) +  "WAIT" + ".".repeat(3 - waitTimerState);
+        waitTimerState = waitTimerState + 1;
+    }, 1000);
 };
 
 function clearNumbersFrom(n) {

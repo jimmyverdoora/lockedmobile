@@ -7,6 +7,7 @@ var app = {
     onDeviceReady: function() {
         screen.orientation.lock('portrait');
         loadBoardSize();
+        storage = window.localStorage;
         openPage("homepage");
     },
 };

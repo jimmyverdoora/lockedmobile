@@ -1,3 +1,5 @@
+var storage = null;
+
 var gameId = null;
 var moveId = 1;
 var canMove = false;

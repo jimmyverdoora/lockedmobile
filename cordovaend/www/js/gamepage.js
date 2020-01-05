@@ -27,14 +27,14 @@ function initBoard() {
     for (i = 1; i < 5; i++) {
         document.getElementById("tp" + i).setAttribute('width', Math.round(screenW * 0.12) + 2);
     };
-    document.getElementById("at").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("atb").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("ab").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("abb").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("al").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("alb").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("ar").setAttribute('width', Math.round(screenW * 0.4));
-    document.getElementById("arb").setAttribute('width', Math.round(screenW * 0.4));
+    document.getElementById("at").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("atb").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("ab").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("abb").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("al").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("alb").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("ar").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("arb").setAttribute('width', Math.round(screenW * 0.4 + 2));
     moveToPos("p1", 3, 5);
     moveToPos("p2", 4, 3);
     moveToPos("p3", 5, 5);
@@ -94,14 +94,17 @@ function changeLocation(id, xp, yp) {
 };
 
 function createWinScreen(player) {
-    // TODO
-    let target = "YOU LOST BRO";
+    let target = "YOU LOST DUDE!";
+    let quote = loseQuotes[Math.floor(Math.random() * loseQuotes.length)];
     if (player == side) {
-        target = "YOU WIN BRO!";
+        target = "YOU WIN DUDE!";
+        quote = winQuotes[Math.floor(Math.random() * winQuotes.length)];
     };
     document.getElementById("gamewaitingheader").style.display = 'none';
-    document.getElementById("gamewinheader").innerHTML = '<h1>' + target + '</h1><h1 ontouchstart="playAgain()">PLAY AGAIN</h1>';
+    document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p>' + quote + '</p>';
     document.getElementById("gamewinheader").style.display = 'block';
+    document.getElementById("playagain").setAttribute('ontouchstart', 'playAgain()');
+    document.getElementById("playagain").style.display = 'block';
 };
 
 function performMoveLocally(piece, move) {
@@ -132,6 +135,7 @@ function playAgain() {
     gameId = null;
     moveId = 1;
     side = 0;
+    moveSent = false;
 
     board = {
         "p1": {x: 0, y: 0},
@@ -145,6 +149,7 @@ function playAgain() {
     selfPieces = [];
     opponentPieces = [];
     openPage("homepage");
+    document.getElementById("playagain").style.display = 'none';
     document.getElementById("gamewinheader").style.display = 'none';
     document.getElementById("gamewaitingheader").style.display = 'block';
 };
@@ -152,7 +157,11 @@ function playAgain() {
 function launchTimer() {
     timerTime = 30;
     moveTimer = setInterval(function() {
-        document.getElementById("timerTime").innerHTML = timerTime;
+        let timeStamp = "" + timerTime;
+        if (timerTime < 10) {
+            timeStamp = "0" + timeStamp;
+        };
+        document.getElementById("timerTime").innerHTML = timeStamp;
         if (timerTime == 0) {
             clearArrows();
             canMove = false;
