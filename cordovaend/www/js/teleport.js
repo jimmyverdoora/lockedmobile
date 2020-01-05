@@ -48,19 +48,19 @@ function performReceivedTeleportMove(move) {
     };
     let tmpDirect = MOVE_DICT_R[move.substring(1, 2)];
     for (piece of selfPieces) {
-        if (tmpDirect == "l" && board[piece].y == board[movedPiece].y && board[piece].x == board[movedPiece] - 1) {
+        if (tmpDirect == "l" && board[piece].y == board[movedPiece].y && board[piece].x == board[movedPiece].x - 1) {
             teleportPieceLocally(piece, move.substring(2, 3));
             return;
         };
-        if (tmpDirect == "r" && board[piece].y == board[movedPiece].y && board[piece].x == board[movedPiece] + 1) {
+        if (tmpDirect == "r" && board[piece].y == board[movedPiece].y && board[piece].x == board[movedPiece].x + 1) {
             teleportPieceLocally(piece, move.substring(2, 3));
             return;
         };
-        if (tmpDirect == "t" && board[piece].y == board[movedPiece].y - 1 && board[piece].x == board[movedPiece]) {
+        if (tmpDirect == "t" && board[piece].y == board[movedPiece].y - 1 && board[piece].x == board[movedPiece].x) {
             teleportPieceLocally(piece, move.substring(2, 3));
             return;
         };
-        if (tmpDirect == "b" && board[piece].y == board[movedPiece].y + 1 && board[piece].x == board[movedPiece]) {
+        if (tmpDirect == "b" && board[piece].y == board[movedPiece].y + 1 && board[piece].x == board[movedPiece].x) {
             teleportPieceLocally(piece, move.substring(2, 3));
             return;
         };
