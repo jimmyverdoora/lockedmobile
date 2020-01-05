@@ -117,7 +117,7 @@ function checkTeleport(piece, move) {
     for (oppPiece of opponentPieces) {
         for (i = 1; i < 5; i++) {
             if (board[oppPiece].x == tSpots["" + i][0] && board[oppPiece].y == tSpots["" + i][1] &&
-                    board[oppPiece].x == board[piece] + xAdd && board[oppPiece].y == board[piece].y + yAdd) {
+                    board[oppPiece].x == board[piece].x + xAdd && board[oppPiece].y == board[piece].y + yAdd) {
                 teleport = i;
                 teleportedPiece = oppPiece;
                 return;
