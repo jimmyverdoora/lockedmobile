@@ -1,4 +1,4 @@
-var apiurl = "http://46.141.101.76:8080";
+var apiurl = "http://localhost:8080";
 
 var currentVersion = "1.0.0"; // aggiornare sempre anche server e config.xml
 
