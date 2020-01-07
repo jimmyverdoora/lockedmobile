@@ -11,6 +11,10 @@ function checkInside(id) {
     let pos = $("#" + id).position();
     let w = $("#" + id).width();
     let h = $("#" + id).height();
-    return (t.pageX > pos.left && t.pageX < pos.left + w && t.pageY > pos.top && t.pageY < pos.top + h);
+    let result = (t.pageX > pos.left && t.pageX < pos.left + w && t.pageY > pos.top && t.pageY < pos.top + h);
+    if (result) {
+        playSound("click");
+    };
+    return result
 }
 // -----------------------------------------------------------

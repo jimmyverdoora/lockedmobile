@@ -11,6 +11,7 @@ document.getElementById("hostimg").addEventListener('touchend', function() {
     if (checkInside("hostimg")) {
         loadHostContent();
         openPage("hostjoinpage");
+        showBannerFunc();
     };
 }, false);
 
@@ -18,6 +19,7 @@ document.getElementById("joinimg").addEventListener('touchend', function() {
     if (checkInside("joinimg")) {
         loadJoinContent();
         openPage("hostjoinpage");
+        showBannerFunc();
         setTimeout(function() {
             document.getElementById("num1").focus();
         }, 500);
@@ -32,6 +34,7 @@ document.getElementById("backimgp").addEventListener('touchend', function() {
 
 document.getElementById("backimghj").addEventListener('touchend', function() {
     if (checkInside("backimghj")) {
+        destroyBanner();
         openPage("playpage");
         resetHostPage();
         resetJoinPage();

@@ -56,3 +56,7 @@ var moves = {
     "p5": [],
     "p6": [],
 };
+
+// sounds
+var volumeMusic = 1.0;
+var volumeSounds = 1.0;

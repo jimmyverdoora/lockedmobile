@@ -9,7 +9,7 @@ function deliverMove() {
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
-            document.getElementById("gamewaitingheader").innerHTML = "ERROR"; // TODO
+            document.getElementById("gamewaitingheader").innerHTML = errorMsg;
             return;
         };
         if (JSON.parse(this.responseText).win != 0) {
@@ -39,7 +39,7 @@ function askForNextMove() {
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
-            document.getElementById("gamewaitingheader").innerHTML = "ERROR"; // TODO
+            document.getElementById("gamewaitingheader").innerHTML = errorMsg;
             return;
         };
         let parsedJson = JSON.parse(this.responseText);

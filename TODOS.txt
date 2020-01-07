@@ -1,10 +1,13 @@
-10 - ads
-13 - notifiche push
-11 - musica
+10 - ads (da testare)
+13 - version handling (da testare: un test con versione giusta uno con versione sbagliata)
+testare error handling
+11 - musica (da testare)
 
 prod stuff:
+- mettere ads testing false, debug sia in django che tornado
 - mettere il clearIps schedulato
 - mettere il daily di django schedulato
+- schedulare la copy dei log alle 00.00 di ogni giorno
 
 v2:
 - httpS

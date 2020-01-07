@@ -128,6 +128,7 @@ function performMoveLocally(piece, move) {
     } else if (move == "r") {
         moveToPos(piece, board[piece].x + 1, board[piece].y);
     };
+    playSound("move");
     checkTeleport(piece, move);
 };
 
@@ -148,6 +149,9 @@ function playAgain() {
 
     selfPieces = [];
     opponentPieces = [];
+    fadeInto('menu');
+    playSound('click');
+    showInterstitialFunc();
     openPage("homepage");
     document.getElementById("playagain").style.display = 'none';
     document.getElementById("gamewinheader").style.display = 'none';

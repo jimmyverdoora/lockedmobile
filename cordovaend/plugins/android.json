@@ -12,10 +12,25 @@
     },
     "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-plugin-admob-simple": {
+      "PACKAGE_NAME": "com.advena.locked"
     }
   },
   "dependent_plugins": {
     "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-admob-sdklibs": {
       "PACKAGE_NAME": "com.advena.locked"
     }
   }
