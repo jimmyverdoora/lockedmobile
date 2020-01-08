@@ -59,8 +59,5 @@ docs/_build/
 # PyBuilder
 target/
 
-# Cordova builds
-cordovaend/platforms/
-
 # vscode
 .vscode/

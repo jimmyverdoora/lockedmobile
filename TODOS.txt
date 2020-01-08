@@ -1,5 +1,5 @@
 10 - ads
-fixare join page
+fix max una cifra a input
 11 - mettere icone per cambiare suono
 
 prod stuff:
