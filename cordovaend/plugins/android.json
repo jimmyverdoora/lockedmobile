@@ -7,6 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-admob-free": {
+      "ADMOB_APP_ID": "ca-app-pub-1760533820203815~2871938059",
+      "PACKAGE_NAME": "com.advena.locked"
+    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.advena.locked"
     },
@@ -21,6 +25,13 @@
     }
   },
   "dependent_plugins": {
+    "cordova-admob-sdk": {
+      "PLAY_SERVICES_VERSION": "11.0.4",
+      "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-promise-polyfill": {
+      "PACKAGE_NAME": "com.advena.locked"
+    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.advena.locked"
     },

@@ -10,6 +10,7 @@ var app = {
         storage = window.localStorage;
         loadSounds();
         openPageDependingOnVersion();
+        loadAds();
     },
 };
 

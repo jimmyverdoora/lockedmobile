@@ -1,4 +1,5 @@
-10 - ads
+fixare bug musica: quando riapri l'app riparte anche se su off
+mettere softpan nel manifest
 
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado

@@ -44,6 +44,7 @@ function loadSounds() {
     moveSound.setVolume(volumeSounds);
     menuMusic.setVolume(volumeMusic);
     gameMusic.setVolume(volumeMusic);
+    console.log(volumeMusic);
     menuMusic.play();
 };
 

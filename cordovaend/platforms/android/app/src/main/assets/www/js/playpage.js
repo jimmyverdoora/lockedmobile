@@ -63,5 +63,5 @@ function instr(page) {
         document.getElementById("instrp" + page).style.display = 'none';
         document.getElementById("instrp" + (page+1)).style.display = 'block';
     };
-
-}
+    playSound("click");
+};

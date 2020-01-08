@@ -19,6 +19,9 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="AdMob">
+        <param name="ios-package" value="CDVAdMob" />
+    </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
@@ -36,7 +39,7 @@
     <description>
         Super Simple, Super Fun!
     </description>
-    <author email="advenagames@gmail.com" href="http://advenagames.com">
+    <author email="advenagames@gmail.com" href="http://www.advenagames.com">
         Advena Games
     </author>
     <icon src="www/img/logo.png" />
@@ -46,6 +49,9 @@
     <allow-intent href="https://*/*" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
+    <config-file parent="GADApplicationIdentifier" target="*-Info.plist">
+        <string>ca-app-pub-1760533820203815~3801876348</string>
+    </config-file>
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
