@@ -6,20 +6,23 @@ var gameMusic = null;
 // for loop
 var currentMusic = "menu";
 var menuLoop = function(status) {
-    if (status === Media.MEDIA_STOPPED && currentMusic == "menu") { 
+    if (status === Media.MEDIA_STOPPED && currentMusic == "menu" && volumeMusic > 0.5) { 
         menuMusic.play();
     }; 
 };
 var gameLoop = function(status) {
-    if (status === Media.MEDIA_STOPPED && currentMusic == "game") { 
+    if (status === Media.MEDIA_STOPPED && currentMusic == "game" && volumeMusic > 0.5) { 
         gameMusic.play();
     }; 
 };
 
 function playSound(sound) {
+    if (volumeSounds < 0.5) {
+        return;
+    };
     if (sound == 'click') {
         let clickSound = new Media(clickSoundUrl, null, null);
-        clickSound.setVolume(volumeSounds);
+        clickSound.setVolume(1.0);
         clickSound.play();
     } else if (sound == 'move') {
         moveSound.play();
@@ -36,42 +39,42 @@ function loadSounds() {
     menuMusic = new Media(url3, null, null, menuLoop);
     gameMusic = new Media(url4, null, null, gameLoop);
     if (storage.getItem("soundVol")) {
-        volumeSounds = parseFloat(storage.getItem("soundVol"));
+        volumeSounds = parseInt(storage.getItem("soundVol"));
     };
     if (storage.getItem("musicVol")) {
-        volumeMusic = parseFloat(storage.getItem("musicVol"));
+        volumeMusic = parseInt(storage.getItem("musicVol"));
     };
-    moveSound.setVolume(volumeSounds);
-    menuMusic.setVolume(volumeMusic);
-    gameMusic.setVolume(volumeMusic);
-    console.log(volumeMusic);
-    menuMusic.play();
+    moveSound.setVolume(1.0);
+    menuMusic.setVolume(1.0);
+    gameMusic.setVolume(1.0);
+    if (volumeMusic > 0.5) {
+        menuMusic.play();
+    };
 };
 
 function changeSoundVol() {
     if (volumeSounds > 0.5) {
         volumeSounds = 0.0;
-        storage.setItem("soundVol", "0.0");
+        storage.setItem("soundVol", "0");
     } else {
         volumeSounds = 1.0;
-        storage.setItem("soundVol", "1.0");
+        storage.setItem("soundVol", "1");
     };
     loadSettings();
-    moveSound.setVolume(volumeSounds);
     playSound("click");
 };
 
 function changeMusicVol() {
     if (volumeMusic > 0.5) {
         volumeMusic = 0.0;
-        storage.setItem("musicVol", "0.0");
+        storage.setItem("musicVol", "0");
+        menuMusic.stop();
     } else {
         volumeMusic = 1.0;
-        storage.setItem("musicVol", "1.0");
+        storage.setItem("musicVol", "1");
+        menuMusic.play();
     };
     loadSettings();
-    menuMusic.setVolume(volumeMusic);
-    gameMusic.setVolume(volumeMusic);
     playSound("click");
 };
 
