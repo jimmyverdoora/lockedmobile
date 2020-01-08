@@ -108,15 +108,20 @@ function createWinScreen(player) {
 };
 
 function performMoveLocally(piece, move) {
+    let opponentPieceMoved = false;
     allPieces.forEach(element => {
         if (move == "t" && board[piece].x == board[element].x && board[piece].y == board[element].y + 1) {
             moveToPos(element, board[element].x, board[element].y - 1);
+            opponentPieceMoved = true;
         } else if (move == "b" && board[piece].x == board[element].x && board[piece].y == board[element].y - 1) {
             moveToPos(element, board[element].x, board[element].y + 1);
+            opponentPieceMoved = true;
         } else if (move == "l" && board[piece].x == board[element].x + 1 && board[piece].y == board[element].y) {
             moveToPos(element, board[element].x - 1, board[element].y);
+            opponentPieceMoved = true;
         } else if (move == "r" && board[piece].x == board[element].x - 1 && board[piece].y == board[element].y) {
             moveToPos(element, board[element].x + 1, board[element].y);
+            opponentPieceMoved = true;
         };
     });
     if (move == "t") {
@@ -129,7 +134,7 @@ function performMoveLocally(piece, move) {
         moveToPos(piece, board[piece].x + 1, board[piece].y);
     };
     playSound("move");
-    checkTeleport(piece, move);
+    checkTeleport(piece, move, opponentPieceMoved);
 };
 
 function playAgain() {

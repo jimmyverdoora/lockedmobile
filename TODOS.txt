@@ -1,5 +1,6 @@
-fixare bug musica: quando riapri l'app riparte anche se su off
-mettere softpan nel manifest
+wait movimenti strani
+aspettare un sec play again
+numeri doppi nel join
 
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado

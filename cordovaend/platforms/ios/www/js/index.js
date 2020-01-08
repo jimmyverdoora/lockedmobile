@@ -7,6 +7,7 @@ var app = {
     onDeviceReady: function() {
         screen.orientation.lock('portrait');
         loadBoardSize();
+        loadExitEvents();
         storage = window.localStorage;
         loadSounds();
         openPageDependingOnVersion();
@@ -16,6 +17,36 @@ var app = {
 
 function loadBoardSize() {
     boardTop = Math.round($("#loadingcontainer").position().top + $("#loadingcontainer").height() - screenW * 1.14);
+};
+
+function loadExitEvents() {
+    document.addEventListener('resume', ( ) => {
+        if (volumeMusic > 0.5) {
+            if (currentMusic == "game") {
+                gameMusic.play();
+            } else if (currentMusic == "menu") {
+                menuMusic.play();
+            };
+        };
+    });
+    document.addEventListener('pause', ( ) => {
+        if (volumeMusic > 0.5) {
+            if (currentMusic == "game") {
+                gameMusic.pause();
+            } else if (currentMusic == "menu") {
+                menuMusic.pause();
+            };
+        };
+    });
+    window.addEventListener('beforeunload', function(event) {
+        if (volumeMusic > 0.5) {
+            if (currentMusic == "game") {
+                gameMusic.stop();
+            } else if (currentMusic == "menu") {
+                menuMusic.stop();
+            };
+        };
+    });
 };
 
 var pagemanager = {

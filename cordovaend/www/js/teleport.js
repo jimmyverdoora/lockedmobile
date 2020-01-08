@@ -90,7 +90,7 @@ function teleportPieceLocally(id, tpId) {
     }, 5);
 };
 
-function checkTeleport(piece, move) {
+function checkTeleport(piece, move, opponentPieceIsMoved) {
     let xp = board[piece].x;
     let yp = board[piece].y;
     if (teleport || !canMove) {
@@ -102,6 +102,9 @@ function checkTeleport(piece, move) {
             teleportedPiece = piece;
             return;
         };
+    };
+    if (!opponentPieceIsMoved) {
+        return;
     };
     let yAdd = 0;
     let xAdd = 0;
