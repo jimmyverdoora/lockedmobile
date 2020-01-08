@@ -20,6 +20,7 @@
         <allow-intent href="market:*" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
+            <activity android:configChanges="orientation|keyboardHidden" android:windowSoftInputMode="adjustPan" />
         </edit-config>
     </platform>
     <platform name="ios">

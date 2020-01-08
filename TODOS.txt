@@ -1,7 +1,6 @@
-10 - ads (da testare)
-13 - version handling (da testare: un test con versione giusta uno con versione sbagliata)
-testare error handling
-11 - musica (da testare)
+10 - ads
+fixare join page
+11 - mettere icone per cambiare suono
 
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado
@@ -10,7 +9,10 @@ prod stuff:
 - schedulare la copy dei log alle 00.00 di ogni giorno
 
 v2:
-- httpS
+- news: app chiama news su tornado che chiama la new piu recente su django. se la risposta non è vuota l'app
+    mostra la new e salva la vista sullo storage (nota se il player non ha ancora letto le istruzioni, non
+    viene mostrata la new comunque)
+- httpS (togliere <application android:usesCleartextTraffic="true" />)
 - manage disconnections
 - comprare la pro version
 - competitive mode

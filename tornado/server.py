@@ -164,6 +164,9 @@ class VersionHandler(tornado.web.RequestHandler):
 
     def get(self):
         self.write(json.dumps({"version": VERSION}))
+    
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
 
 
 def main():

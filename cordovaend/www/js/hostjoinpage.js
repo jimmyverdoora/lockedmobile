@@ -3,7 +3,7 @@ function submitNumbers() {
     for (i = 1; i < 7; i++) {
         n += Math.pow(10, 6-i)*document.getElementById("num" + i).value;
     }
-    document.getElementById("joinheader").innerHTML = "<img class='textimage' src='img/loading.png'>";
+    document.getElementById("joinheader").innerHTML = "<div class='loadingimage' style='background-position: center;'></div>";
     apiJoinNumber(n);
 };
 
@@ -98,7 +98,7 @@ function apiJoinNumber(n) {
 };
 
 function resetHostPage() {
-    document.getElementById("hostheader").innerHTML = "<img class='textimage' src='img/loading.png'>";
+    document.getElementById("hostheader").innerHTML = "<div class='loadingimage' style='background-position: center;'></div>";
     document.getElementById("hostheader").setAttribute('style', 'display:none;');
 };
 
