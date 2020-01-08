@@ -1,6 +1,4 @@
 10 - ads
-fix max una cifra a input
-11 - mettere icone per cambiare suono
 
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado

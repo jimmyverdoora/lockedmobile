@@ -12,7 +12,6 @@ var menuLoop = function(status) {
 };
 var gameLoop = function(status) {
     if (status === Media.MEDIA_STOPPED && currentMusic == "game") { 
-        gameMusic.seekTo(150); // catching up the lag
         gameMusic.play();
     }; 
 };
@@ -56,6 +55,9 @@ function changeSoundVol() {
         volumeSounds = 1.0;
         storage.setItem("soundVol", "1.0");
     };
+    loadSettings();
+    moveSound.setVolume(volumeSounds);
+    playSound("click");
 };
 
 function changeMusicVol() {
@@ -66,6 +68,10 @@ function changeMusicVol() {
         volumeMusic = 1.0;
         storage.setItem("musicVol", "1.0");
     };
+    loadSettings();
+    menuMusic.setVolume(volumeMusic);
+    gameMusic.setVolume(volumeMusic);
+    playSound("click");
 };
 
 function fadeInto(what) {

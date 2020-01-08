@@ -4,6 +4,13 @@ document.getElementById("creditsimg").addEventListener('touchend', function() {
     };
 }, false);
 
+document.getElementById("settingsimg").addEventListener('touchend', function() {
+    if (checkInside("settingsimg")) {
+        loadSettings();
+        openPage("settingspage");
+    };
+}, false);
+
 document.getElementById("playimg").addEventListener('touchend', function() {
     if (checkInside("playimg")) {
         if (!storage.getItem("alreadyPlayed")) {

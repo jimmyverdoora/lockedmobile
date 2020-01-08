@@ -41,7 +41,8 @@
                 <img class="coming" src="img/coming.png">
             </div>
             <div class="imagecontainer" id="credits" style="height: 15%;">
-                <img class="textimage" src="img/credits.png" id="creditsimg">
+                <img class="creditssettingsimg" src="img/credits.png" id="creditsimg">
+                <img class="creditssettingsimg" src="img/settings.png" id="settingsimg">
             </div>
         </div>
 
@@ -94,6 +95,20 @@
             </div>
         </div>
 
+        <div class="app" id="settingspage" style="display: none;">
+            <div class="title">
+                <img class="titleimage" src="img/title.png">
+            </div>
+            <div style="text-align: center; height: 50%">
+                <p class="credits">Audio</p>
+                <p class="creditsel" id="settingsmusic" ontouchstart="changeMusicVol()">Music</p>
+                <p class="creditsel" id="settingssounds" ontouchstart="changeSoundVol()">Sounds</p>
+            </div>
+            <div class="imagecontainer" style="height: 15%;">
+                <img class="textimage" src="img/back.png" id="backimgs">
+            </div>
+        </div>
+
         <div class="app" id="playpage" style="display: none;">
             <div class="title" id="playpagetitle">
                 <img class="titleimage" src="img/title.png" id="titleimg">
@@ -119,12 +134,12 @@
             <div class="hostjoinheader" id="joinheader" style="display: none;">
                 <p class="mergedbottom">Insert your friend's lobby code:</p>
                 <div class="numbercontainer">
-                    <input placeholder="-" type="number" id="num1" ontouchstart="clearNumbersFrom(1)" onkeyup="focusTo('num2');">
-                    <input placeholder="-" type="number" id="num2" ontouchstart="clearNumbersFrom(2)" onkeyup="focusTo('num3');">
-                    <input placeholder="-" type="number" id="num3" ontouchstart="clearNumbersFrom(3)" onkeyup="focusTo('num4');">
-                    <input placeholder="-" type="number" id="num4" ontouchstart="clearNumbersFrom(4)" onkeyup="focusTo('num5');">
-                    <input placeholder="-" type="number" id="num5" ontouchstart="clearNumbersFrom(5)" onkeyup="focusTo('num6');">
-                    <input placeholder="-" type="number" id="num6" ontouchstart="clearNumbersFrom(6)" onkeyup="submitNumbers();">
+                    <input placeholder="-" min=0 max=9 type="number" id="num1" ontouchstart="clearNumbersFrom(1)" onkeyup="focusTo('num2');">
+                    <input placeholder="-" min=0 max=9 type="number" id="num2" ontouchstart="clearNumbersFrom(2)" onkeyup="focusTo('num3');">
+                    <input placeholder="-" min=0 max=9 type="number" id="num3" ontouchstart="clearNumbersFrom(3)" onkeyup="focusTo('num4');">
+                    <input placeholder="-" min=0 max=9 type="number" id="num4" ontouchstart="clearNumbersFrom(4)" onkeyup="focusTo('num5');">
+                    <input placeholder="-" min=0 max=9 type="number" id="num5" ontouchstart="clearNumbersFrom(5)" onkeyup="focusTo('num6');">
+                    <input placeholder="-" min=0 max=9 type="number" id="num6" ontouchstart="clearNumbersFrom(6)" onkeyup="submitNumbers();">
                 </div>
             </div>
             <div class="imagecontainer" style="height: 15%;">
@@ -166,6 +181,7 @@
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/appsettings.js"></script>
         <script type="text/javascript" src="js/settings.js"></script>
         <script type="text/javascript" src="js/states.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

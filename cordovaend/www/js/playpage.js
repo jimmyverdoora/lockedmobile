@@ -48,6 +48,12 @@ document.getElementById("backimgc").addEventListener('touchend', function() {
     };
 }, false);
 
+document.getElementById("backimgs").addEventListener('touchend', function() {
+    if (checkInside("backimgs")) {
+        openPage("homepage");
+    };
+}, false);
+
 function instr(page) {
     if (page == 4) {
         openPage("playpage");

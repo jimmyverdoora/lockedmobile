@@ -77,7 +77,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
 input[type=number] {
   -moz-appearance:textfield;
 }
@@ -104,6 +103,11 @@ input[type=number] {
     text-align: center;
 }
 
+.creditssettingsimg {
+    display: inline-block;
+    width: 27%;
+}
+
 .coming {
     width: 25%;
     left: 68%;
@@ -123,7 +127,7 @@ input[type=number] {
 }
 
 .textimage {
-    width: 55%;
+    width: 54%;
 }
 
 .numbercontainer {

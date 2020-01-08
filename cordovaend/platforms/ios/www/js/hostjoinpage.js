@@ -112,9 +112,13 @@ function resetJoinPage() {
     document.getElementById("joinheader").innerHTML = "<p class='mergedbottom'>Insert your friend's lobby code:</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
     for (i = 1; i < 6; i++) {
         let n = i+1;
+        document.getElementById("num" + i).setAttribute('min', '0');
+        document.getElementById("num" + i).setAttribute('max', '9');
         document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
         document.getElementById("num" + i).setAttribute('ontouchstart', 'clearNumbersFrom(' + i + ')');
     };
+    document.getElementById("num6").setAttribute('min', '0');
+    document.getElementById("num6").setAttribute('max', '9');
     document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
     document.getElementById("joinheader").setAttribute('style', 'display:none;');
 };
