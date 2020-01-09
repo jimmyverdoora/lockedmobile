@@ -1,4 +1,6 @@
-var clickSoundUrl = null;
+// to manage fast clicking
+var clickSound = [];
+var currentSoundClick = 0;
 var moveSound = null;
 var menuMusic = null;
 var gameMusic = null;
@@ -21,9 +23,11 @@ function playSound(sound) {
         return;
     };
     if (sound == 'click') {
-        let clickSound = new Media(clickSoundUrl, null, null);
-        clickSound.setVolume(1.0);
-        clickSound.play();
+        clickSound[currentSoundClick].play();
+        currentSoundClick += 1;
+        if (currentSoundClick == 8) {
+            currentSoundClick = 0;
+        };
     } else if (sound == 'move') {
         moveSound.play();
     };
@@ -31,22 +35,26 @@ function playSound(sound) {
 
 function loadSounds() {
     // click has to be recreated since it can be overplayed
-    clickSoundUrl = getMediaURL("sounds/click.wav");
+    let url1 = getMediaURL("sounds/click.wav");
     let url2 = getMediaURL("sounds/move.wav");
     let url3 = getMediaURL("sounds/menu.mp3");
     let url4 = getMediaURL("sounds/game.mp3");
+    for (i = 0; i < 8; i++) {
+        clickSound.push(new Media(url1, null, null));
+        clickSound[i].setVolume(1.0); 
+    };
     moveSound = new Media(url2, null, null);
     menuMusic = new Media(url3, null, null, menuLoop);
     gameMusic = new Media(url4, null, null, gameLoop);
+    moveSound.setVolume(1.0);
+    menuMusic.setVolume(1.0);
+    gameMusic.setVolume(1.0);
     if (storage.getItem("soundVol")) {
         volumeSounds = parseInt(storage.getItem("soundVol"));
     };
     if (storage.getItem("musicVol")) {
         volumeMusic = parseInt(storage.getItem("musicVol"));
     };
-    moveSound.setVolume(1.0);
-    menuMusic.setVolume(1.0);
-    gameMusic.setVolume(1.0);
     if (volumeMusic > 0.5) {
         menuMusic.play();
     };

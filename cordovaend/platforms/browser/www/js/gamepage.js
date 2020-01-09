@@ -170,7 +170,8 @@ function playAgain() {
 };
 
 function launchTimer() {
-    timerTime = 30;
+    document.getElementById("timerTime").innerHTML = "30";
+    timerTime = 29;
     moveTimer = setInterval(function() {
         let timeStamp = "" + timerTime;
         if (timerTime < 10) {
@@ -191,7 +192,8 @@ function launchTimer() {
 };
 
 function launchWaitTimer() {
-    waitTimerState = 0;
+    document.getElementById("waitTimer").innerHTML = "Wait";
+    waitTimerState = 1;
     waitTimer = setInterval(() => {
         if (waitTimerState > 3) {
             waitTimerState = 0;
