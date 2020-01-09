@@ -97,6 +97,10 @@ function apiJoinNumber(n) {
             document.getElementById("joinheader").innerHTML = errorMsg;
             return;
         };
+        if (!JSON.parse(this.responseText).numberFound) {
+            document.getElementById("joinheader").innerHTML = "<p class='errormsg'>Oops!<br/>We cannot find that number...<br/>Maybe you misspelled it?</p>";
+            return;
+        };
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;

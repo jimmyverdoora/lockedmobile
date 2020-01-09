@@ -73,7 +73,7 @@ class JoinHandler(tornado.web.RequestHandler):
             n = int(self.get_argument("number"))
             gameId = globalLobbyManager.numbers.get(n)
             if gameId is None:
-                self.write(json.dumps({"outcome": "KO"}))
+                self.write(json.dumps({"outcome": "OK", "numberFound": False}))
                 Logger.logResponse(self, guid)
                 return
             jsonResult = await globalGameManager.createNew(gameId)
@@ -81,6 +81,7 @@ class JoinHandler(tornado.web.RequestHandler):
             globalLobbyManager.firstPlayerHost[n] = not goFirst
             globalLobbyManager.conds.get(n).notify_all()
             jsonResult["goFirst"] = goFirst
+            jsonResult["numberFound"] = True
             self.write(json.dumps(jsonResult))
             Logger.logResponse(self, guid)
         except Exception:

@@ -1,5 +1,5 @@
 // L: local, T: testing, S: staging, P: prod
-var appScope = "T"; 
+var appScope = "L"; 
 
 var currentVersion = "1.0.0"; // aggiornare sempre anche server e config.xml
 

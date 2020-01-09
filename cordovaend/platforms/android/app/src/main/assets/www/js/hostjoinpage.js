@@ -69,7 +69,7 @@ function apiAskForJoin(n) {
             selfPieces = ["p4", "p5", "p6"];
             initBoard();
             askForNextMove();
-        }
+        };
         modifyHeaders();
         if (side == 1) {
             launchWaitTimer();
@@ -96,7 +96,11 @@ function apiJoinNumber(n) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
             document.getElementById("joinheader").innerHTML = errorMsg;
             return;
-        }
+        };
+        if (!JSON.parse(this.responseText).numberFound) {
+            document.getElementById("joinheader").innerHTML = "<p class='errormsg'>Oops!<br/>We cannot find that number...<br/>Maybe you misspelled it?</p>";
+            return;
+        };
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
@@ -109,7 +113,7 @@ function apiJoinNumber(n) {
             selfPieces = ["p4", "p5", "p6"];
             initBoard();
             askForNextMove();
-        }
+        };
         modifyHeaders();
         if (side == 1) {
             launchWaitTimer();
@@ -138,12 +142,12 @@ function resetJoinPage() {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('min', '0');
         document.getElementById("num" + i).setAttribute('max', '9');
-        document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
+        document.getElementById("num" + i).setAttribute('onkeydown', 'focusTo("num' + n + '");');
         document.getElementById("num" + i).setAttribute('ontouchstart', 'clearNumbersFrom(' + i + ')');
     };
     document.getElementById("num6").setAttribute('min', '0');
     document.getElementById("num6").setAttribute('max', '9');
-    document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
+    document.getElementById("num6").setAttribute('onkeydown', 'submitNumbers();');
     document.getElementById("joinheader").setAttribute('style', 'display:none;');
 };
 
