@@ -119,8 +119,8 @@ class GameHandler(tornado.web.RequestHandler):
                 try:
                     await waitFuture
                 except asyncio.CancelledError:
-                    globalGameManager.clear(n)
-                    self.write(json.dumps({"outcome": "KO"}))
+                    globalGameManager.clear(gameId)
+                    self.write(json.dumps({"outcome": "KO", "reason": "Canceled"}))
                     Logger.logResponse(self, guid)
                     return
                 moveDict = await globalGameManager.getMove(gameId, moveId)
@@ -160,6 +160,23 @@ class StatsHandler(tornado.web.RequestHandler):
             self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
 
 
+class GameKillHandler(tornado.web.RequestHandler):
+    
+    def post(self):
+        try:
+            key = str(self.get_argument("key"))
+            if key != TORNADO_KEY:
+                self.write(json.dumps({"outcome": "KO", "reason": "WRONG KEY"}))
+                return
+            games = self.get_argument("gameIds")
+            for gameId in games
+                globalGameManager.clear(gameId)
+            self.write(json.dumps({"outcome": "OK",
+                                   "killed": len(games)}))
+        except Exception as e:
+            self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
+
+
 class VersionHandler(tornado.web.RequestHandler):
 
     def get(self):
@@ -179,6 +196,7 @@ def main():
                 (r"/game", GameHandler),
                 (r"/stats", StatsHandler),
                 (r"/clearlobbies", ClearLobbyHandler),
+                (r"/killinactive", GameKillHandler),
                 (r"/version", VersionHandler),
             ],
             debug=True,
@@ -193,6 +211,7 @@ def main():
                 (r"/game", GameHandler),
                 (r"/stats", StatsHandler),
                 (r"/clearlobbies", ClearLobbyHandler),
+                (r"/killinactive", GameKillHandler),
                 (r"/version", VersionHandler),
             ],
             debug=False,

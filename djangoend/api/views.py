@@ -69,12 +69,15 @@ def dailyStoricizationAndReport(request):
     totGames = len(games)
     completedGames = len(games.filter(state=-1)) + len(games.filter(state=1))
     DailyReport.objects.create(totGames=totGames, completedGames=completedGames)
+    gameIds = []
     for game in games:
         if (game.state == -1 or game.state == 1 or
                 timezone.now() > game.modifiedAt + timedelta(seconds=GAME_MAX_INACTIVE_TIME_SECONDS)):
+            gameIds.append(game.guid)
             game.storicize()
             game.delete()
-    return JsonResponse({"outcome": "OK", "total": totGames, "cleared": totGames - len(Game.objects.all())})
+    return JsonResponse({"outcome": "OK", "total": totGames, "cleared": totGames - len(Game.objects.all()),
+                         "gameIds": gameIds})
 
 
 @csrf_exempt
