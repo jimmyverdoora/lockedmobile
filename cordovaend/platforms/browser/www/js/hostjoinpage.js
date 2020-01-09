@@ -131,13 +131,13 @@ function modifyHeaders() {
         hex = "#003591";
     };
     document.getElementById("gameactiveheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>C'mon, move!</p><p id='timerTime'>30</p>"
-    document.getElementById("gamewaitingheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>It's not your turn!</p><p id='waitTimer'>WAIT...</p>"
+    document.getElementById("gamewaitingheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>It's not your turn!</p><p id='waitTimer'>Wait</p>"
     var waitTimerState = 0;
-    var waitTimer = setInterval(() => {
+    waitTimer = setInterval(() => {
         if (waitTimerState > 3) {
             waitTimerState = 0;
         };
-        document.getElementById("waitTimer").innerHTML = ".".repeat(waitTimerState) +  "WAIT" + ".".repeat(3 - waitTimerState);
+        document.getElementById("waitTimer").innerHTML = "Wait" + ".".repeat(waitTimerState);
         waitTimerState = waitTimerState + 1;
     }, 1000);
 };

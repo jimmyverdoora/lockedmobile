@@ -94,6 +94,8 @@ function changeLocation(id, xp, yp) {
 };
 
 function createWinScreen(player) {
+    clearInterval(waitTimer);
+    waitTimer = null;
     let target = "YOU LOST DUDE!";
     let quote = loseQuotes[Math.floor(Math.random() * loseQuotes.length)];
     if (player == side) {
@@ -101,22 +103,27 @@ function createWinScreen(player) {
         quote = winQuotes[Math.floor(Math.random() * winQuotes.length)];
     };
     document.getElementById("gamewaitingheader").style.display = 'none';
-    document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p>' + quote + '</p>';
+    document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p style="font-size: 7vw;">' + quote + '</p>';
     document.getElementById("gamewinheader").style.display = 'block';
     document.getElementById("playagain").setAttribute('ontouchstart', 'playAgain()');
     document.getElementById("playagain").style.display = 'block';
 };
 
 function performMoveLocally(piece, move) {
+    let opponentPieceMoved = false;
     allPieces.forEach(element => {
         if (move == "t" && board[piece].x == board[element].x && board[piece].y == board[element].y + 1) {
             moveToPos(element, board[element].x, board[element].y - 1);
+            opponentPieceMoved = true;
         } else if (move == "b" && board[piece].x == board[element].x && board[piece].y == board[element].y - 1) {
             moveToPos(element, board[element].x, board[element].y + 1);
+            opponentPieceMoved = true;
         } else if (move == "l" && board[piece].x == board[element].x + 1 && board[piece].y == board[element].y) {
             moveToPos(element, board[element].x - 1, board[element].y);
+            opponentPieceMoved = true;
         } else if (move == "r" && board[piece].x == board[element].x - 1 && board[piece].y == board[element].y) {
             moveToPos(element, board[element].x + 1, board[element].y);
+            opponentPieceMoved = true;
         };
     });
     if (move == "t") {
@@ -129,7 +136,7 @@ function performMoveLocally(piece, move) {
         moveToPos(piece, board[piece].x + 1, board[piece].y);
     };
     playSound("move");
-    checkTeleport(piece, move);
+    checkTeleport(piece, move, opponentPieceMoved);
 };
 
 function playAgain() {

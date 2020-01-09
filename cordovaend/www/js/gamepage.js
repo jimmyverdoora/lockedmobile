@@ -94,6 +94,8 @@ function changeLocation(id, xp, yp) {
 };
 
 function createWinScreen(player) {
+    clearInterval(waitTimer);
+    waitTimer = null;
     let target = "YOU LOST DUDE!";
     let quote = loseQuotes[Math.floor(Math.random() * loseQuotes.length)];
     if (player == side) {
@@ -101,7 +103,7 @@ function createWinScreen(player) {
         quote = winQuotes[Math.floor(Math.random() * winQuotes.length)];
     };
     document.getElementById("gamewaitingheader").style.display = 'none';
-    document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p>' + quote + '</p>';
+    document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p style="font-size: 7vw;">' + quote + '</p>';
     document.getElementById("gamewinheader").style.display = 'block';
     document.getElementById("playagain").setAttribute('ontouchstart', 'playAgain()');
     document.getElementById("playagain").style.display = 'block';

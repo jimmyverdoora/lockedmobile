@@ -50,6 +50,8 @@ var forbiddenMove = null;
 var moveTimer = null;
 var timerTime = 0;
 
+var waitTimer = null;
+
 // --- moves for each piece ---
 var moves = {
     "p1": [],
