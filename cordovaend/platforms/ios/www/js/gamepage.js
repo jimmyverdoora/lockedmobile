@@ -3,11 +3,13 @@ function activatePlayer() {
     canMove = true;
     document.getElementById("gamewaitingheader").setAttribute('style', 'display: none;');
     document.getElementById("gameactiveheader").setAttribute('style', 'display: block;');
+    killWaitTimer();
     launchTimer();
 };
 
 function deactivatePlayer() {
     killTimer();
+    launchWaitTimer();
     canMove = false;
     cleanMoves();
     document.getElementById("gameactiveheader").setAttribute('style', 'display: none;');
@@ -94,8 +96,6 @@ function changeLocation(id, xp, yp) {
 };
 
 function createWinScreen(player) {
-    clearInterval(waitTimer);
-    waitTimer = null;
     let target = "YOU LOST DUDE!";
     let quote = loseQuotes[Math.floor(Math.random() * loseQuotes.length)];
     if (player == side) {
@@ -105,8 +105,12 @@ function createWinScreen(player) {
     document.getElementById("gamewaitingheader").style.display = 'none';
     document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p style="font-size: 7vw;">' + quote + '</p>';
     document.getElementById("gamewinheader").style.display = 'block';
-    document.getElementById("playagain").setAttribute('ontouchstart', 'playAgain()');
-    document.getElementById("playagain").style.display = 'block';
+    killWaitTimer();
+    var playAgainTimer = setInterval(() => {
+        document.getElementById("playagain").setAttribute('ontouchstart', 'playAgain()');
+        document.getElementById("playagain").style.display = 'block';
+        clearInterval(playAgainTimer);
+    }, 2500);
 };
 
 function performMoveLocally(piece, move) {
@@ -186,6 +190,17 @@ function launchTimer() {
     }, 1000);
 };
 
+function launchWaitTimer() {
+    waitTimerState = 0;
+    waitTimer = setInterval(() => {
+        if (waitTimerState > 3) {
+            waitTimerState = 0;
+        };
+        document.getElementById("waitTimer").innerHTML = "Wait" + ".".repeat(waitTimerState);
+        waitTimerState = waitTimerState + 1;
+    }, 1000);
+};
+
 function performRandomMove() {
     if (teleportActive) {
         performRandomTeleportMove();
@@ -200,6 +215,10 @@ function performRandomMove() {
 
 function killTimer() {
     clearInterval(moveTimer);
+};
+
+function killWaitTimer() {
+    clearInterval(waitTimer);
 };
 
 function chooseRandomMoveWithoutTeleport() {

@@ -51,6 +51,9 @@ var moveTimer = null;
 var timerTime = 0;
 
 var waitTimer = null;
+var waitTimerState = 0;
+
+var playAgainTimer = null;
 
 // --- moves for each piece ---
 var moves = {

@@ -1,13 +1,23 @@
 function submitNumbers() {
-    var n = 0;
+    var n = "";
     for (i = 1; i < 7; i++) {
-        n += Math.pow(10, 6-i)*document.getElementById("num" + i).value;
-    }
+        n = n + document.getElementById("num" + i).value.toString();
+    };
     document.getElementById("joinheader").innerHTML = "<div class='loadingimage' style='background-position: center;'></div>";
-    apiJoinNumber(n);
+    apiJoinNumber(parseInt(n));
 };
 
 function focusTo(id) {
+    if (event.keyCode == 8) {
+        if (id == 'num1') {
+            return;
+        };
+        let numBefore = parseInt(id.substring(3, 4));
+        document.getElementById(id).value = "";
+        document.getElementById('num' + numBefore).value = "";
+        document.getElementById('num' + numBefore).focus();
+        return;
+    };
     document.getElementById(id).focus();
 };
 
@@ -53,6 +63,7 @@ function apiAskForJoin(n) {
             opponentPieces = ["p1", "p2", "p3"];
             selfPieces = ["p4", "p5", "p6"];
             initBoard();
+            launchWaitTimer();
             askForNextMove();
         }
         modifyHeaders();
@@ -89,6 +100,7 @@ function apiJoinNumber(n) {
             opponentPieces = ["p1", "p2", "p3"];
             selfPieces = ["p4", "p5", "p6"];
             initBoard();
+            launchWaitTimer();
             askForNextMove();
         }
         modifyHeaders()
@@ -132,14 +144,6 @@ function modifyHeaders() {
     };
     document.getElementById("gameactiveheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>C'mon, move!</p><p id='timerTime'>30</p>"
     document.getElementById("gamewaitingheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>It's not your turn!</p><p id='waitTimer'>Wait</p>"
-    var waitTimerState = 0;
-    waitTimer = setInterval(() => {
-        if (waitTimerState > 3) {
-            waitTimerState = 0;
-        };
-        document.getElementById("waitTimer").innerHTML = "Wait" + ".".repeat(waitTimerState);
-        waitTimerState = waitTimerState + 1;
-    }, 1000);
 };
 
 function clearNumbersFrom(n) {

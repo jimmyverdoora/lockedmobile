@@ -1,7 +1,7 @@
 function submitNumbers() {
     var n = "";
     for (i = 1; i < 7; i++) {
-        n = n + document.getElementById("num" + i).toString();
+        n = n + document.getElementById("num" + i).value.toString();
     };
     document.getElementById("joinheader").innerHTML = "<div class='loadingimage' style='background-position: center;'></div>";
     apiJoinNumber(parseInt(n));

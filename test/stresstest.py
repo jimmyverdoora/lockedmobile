@@ -13,17 +13,17 @@ def launchASingleInfiniteGame(i):
     r = requests.get(BASEURL + '/host')
     d = r.json()
     number = d['number']
-    t1 = Thread(target=hostPlayer(i/2, number), args=(i,))
-    t2 = Thread(target=joinPlayer(number), args=(i+1,))
+    t1 = Thread(target=hostPlayer, args=(i,number))
+    t2 = Thread(target=joinPlayer, args=(number,))
     t1.start()
-    time.sleep(3000)
+    time.sleep(3)
     t2.start()
 
 
 def hostPlayer(i, number):
     r = requests.post(BASEURL + '/host', data={'number': number})
     d = r.json()
-    print("GAME " + str(i) + " HAS STARTED")
+    print("GAME " + str(i) + " HAS STARTED", flush=True)
     g = d['gameId']
     mid = 1
     if d['goFirst']:
@@ -33,7 +33,6 @@ def hostPlayer(i, number):
 
 
 def joinPlayer(number):
-    number = int(sys.argv[1])
     r = requests.post(BASEURL + '/join', data={'number': number})
     d = r.json()
     g = d['gameId']
@@ -98,4 +97,6 @@ def playSecondPlayer(g):
 
         
 
-launchASingleInfiniteGame(1)
+for num in range(50):
+    launchASingleInfiniteGame(num)
+    time.sleep(1)
