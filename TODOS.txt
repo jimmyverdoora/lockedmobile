@@ -1,5 +1,4 @@
-wait partenza corretta (da testare, almeno 2 game)
-numeri doppi nel join fixare il backslash
+
 
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado

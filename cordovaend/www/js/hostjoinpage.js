@@ -1,4 +1,10 @@
 function submitNumbers() {
+    if (event.keyCode == 8) {
+        document.getElementById('num6').value = "";
+        document.getElementById('num5').value = "";
+        document.getElementById('num5').focus();
+        return;
+    };
     var n = "";
     for (i = 1; i < 7; i++) {
         n = n + document.getElementById("num" + i).value.toString();
@@ -9,11 +15,11 @@ function submitNumbers() {
 
 function focusTo(id) {
     if (event.keyCode == 8) {
-        if (id == 'num1') {
+        if (id == 'num2') {
             return;
         };
-        let numBefore = parseInt(id.substring(3, 4));
-        document.getElementById(id).value = "";
+        let numBefore = parseInt(id.substring(3, 4)) - 2;
+        document.getElementById('num' + (numBefore+1)).value = "";
         document.getElementById('num' + numBefore).value = "";
         document.getElementById('num' + numBefore).focus();
         return;
@@ -57,16 +63,19 @@ function apiAskForJoin(n) {
             selfPieces = ["p1", "p2", "p3"];
             opponentPieces = ["p4", "p5", "p6"];
             initBoard();
-            activatePlayer();
         } else {
             side = 1;
             opponentPieces = ["p1", "p2", "p3"];
             selfPieces = ["p4", "p5", "p6"];
             initBoard();
-            launchWaitTimer();
             askForNextMove();
-        }
+        };
         modifyHeaders();
+        if (side == 1) {
+            launchWaitTimer();
+        } else {
+            activatePlayer();
+        };
         destroyBanner();
         fadeInto('game');
         openPage("gamepage");
@@ -87,23 +96,26 @@ function apiJoinNumber(n) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
             document.getElementById("joinheader").innerHTML = errorMsg;
             return;
-        }
+        };
         gameId = JSON.parse(this.responseText).gameId;
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
             selfPieces = ["p1", "p2", "p3"];
             opponentPieces = ["p4", "p5", "p6"];
             initBoard();
-            activatePlayer();
         } else {
             side = 1;
             opponentPieces = ["p1", "p2", "p3"];
             selfPieces = ["p4", "p5", "p6"];
             initBoard();
-            launchWaitTimer();
             askForNextMove();
-        }
-        modifyHeaders()
+        };
+        modifyHeaders();
+        if (side == 1) {
+            launchWaitTimer();
+        } else {
+            activatePlayer();
+        };
         destroyBanner();
         fadeInto('game');
         openPage("gamepage");
