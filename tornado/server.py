@@ -200,7 +200,7 @@ def main():
         server = tornado.httpserver.HTTPServer(app)
         server.bind(DEPLOY_PORT)
         server.start(0)  # forks one process per cpu
-        IOLoop.current().start()
+        tornado.ioloop.IOLoop.current().start()
 
 
 if __name__ == "__main__":
