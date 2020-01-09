@@ -1,6 +1,6 @@
-wait movimenti strani
-aspettare un sec play again
-numeri doppi nel join
+wait movimenti strani (da testare, almeno 2 game)
+aspettare un sec play again (da testare, almeno 2 game)
+numeri doppi nel join (da testare, sia il backspace che con numeri doppi, anche sul device)
 
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado
