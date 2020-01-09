@@ -168,11 +168,13 @@ class GameKillHandler(tornado.web.RequestHandler):
             if key != TORNADO_KEY:
                 self.write(json.dumps({"outcome": "KO", "reason": "WRONG KEY"}))
                 return
-            games = self.get_argument("gameIds")
+            games = self.get_argument("gameIds").split('|')
+            killed = 0
             for gameId in games:
-                globalGameManager.clear(gameId)
+                if globalGameManager.clear(gameId):
+                    killed += 1
             self.write(json.dumps({"outcome": "OK",
-                                   "killed": len(games)}))
+                                   "killed": killed}))
         except Exception as e:
             self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
 

@@ -103,8 +103,9 @@ class GameManager(object):
         logging.info("CLEARING GAME: " + str(gameId) + ", ACTIVE GAMES: " + str(len(self.conds)))
         try:
             del self.conds[gameId]
+            return True
         except Exception:
-            pass
+            return False
 
     @gen.coroutine
     def getMove(self, gameId, moveId):

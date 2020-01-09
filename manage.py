@@ -13,7 +13,8 @@ def storicizeGames():
     r = requests.post(BASEURL + '8000/storicize', data={'key': TORNADO_KEY})
     res = r.json()
     print({'outcome': res['outcome'], 'total': res['total'], 'cleared': res['cleared']})
-    r = requests.post(BASEURL + '8080/killinactive', data={'key': TORNADO_KEY, 'gameIds': res['gameIds']})
+    gameIds = '|'.join(res['gameIds'])
+    r = requests.post(BASEURL + '8080/killinactive', data={'key': TORNADO_KEY, 'gameIds': gameIds})
     print(r.json())
 
 def statistics():
