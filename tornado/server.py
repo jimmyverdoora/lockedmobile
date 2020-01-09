@@ -169,7 +169,7 @@ class GameKillHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({"outcome": "KO", "reason": "WRONG KEY"}))
                 return
             games = self.get_argument("gameIds")
-            for gameId in games
+            for gameId in games:
                 globalGameManager.clear(gameId)
             self.write(json.dumps({"outcome": "OK",
                                    "killed": len(games)}))
