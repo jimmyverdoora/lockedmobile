@@ -67,7 +67,7 @@ class Valore(models.Model):
 
     chiave = models.CharField(max_length=16, unique=True)
     valore = models.CharField(max_length=255)
-    createdAt = Models.DateTimeField(auto_now_add=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField()
     class Meta:
         indexes = [models.Index(fields=['chiave'])]
