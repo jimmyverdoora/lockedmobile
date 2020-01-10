@@ -1,4 +1,8 @@
+sito con link di download
+app per le statistiche (mia)
+
 v2:
+- inserire try catch in tutte le funzioni js con invio dati di log al server
 - httpS (togliere <application android:usesCleartextTraffic="true" />)
 - manage disconnections
 - comprare la pro version
