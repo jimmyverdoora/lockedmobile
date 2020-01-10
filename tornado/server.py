@@ -1,6 +1,5 @@
 import asyncio
 import json
-import logging
 import random
 import tornado.ioloop
 import tornado.locks
@@ -8,7 +7,7 @@ import tornado.web
 import os.path
 import uuid
 
-from logger import Logger
+from logger import LOGGERONE, Logger 
 from managers import GameManager, LobbyManager
 from settings import *
 from tornado.options import parse_command_line
@@ -16,8 +15,6 @@ from tornado.options import parse_command_line
 
 globalLobbyManager = LobbyManager()
 globalGameManager = GameManager()
-
-logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format='%(levelname)s %(asctime)s %(message)s')
 
 
 class HostHandler(tornado.web.RequestHandler):
@@ -30,7 +27,7 @@ class HostHandler(tornado.web.RequestHandler):
             self.write(json.dumps({'number': n, "outcome": "OK"}))
             Logger.logResponse(self, guid)
         except Exception:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
 
     async def post(self):
@@ -56,7 +53,7 @@ class HostHandler(tornado.web.RequestHandler):
             self.write(json.dumps({"gameId": gameId, "outcome": "OK", "goFirst": goFirst}))
             Logger.logResponse(self, guid)
         except Exception:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
             Logger.logResponse(self, guid)
     
@@ -85,7 +82,7 @@ class JoinHandler(tornado.web.RequestHandler):
             self.write(json.dumps(jsonResult))
             Logger.logResponse(self, guid)
         except Exception:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
             Logger.logResponse(self, guid)
 
@@ -136,7 +133,7 @@ class GameHandler(tornado.web.RequestHandler):
                 self.write(json.dumps(jsonResult))
                 Logger.logResponse(self, guid)
         except Exception:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             globalGameManager.clear(gameId)
             self.write(json.dumps({"outcome": "KO"}))
             Logger.logResponse(self, guid)
@@ -186,13 +183,13 @@ class VersionHandler(tornado.web.RequestHandler):
         try:
             data = await globalGameManager.getVersion()
             if not data["version"] or not data["linkAndroid"] or not data["linkIos"]:
-                logging.error("Django version api returned corrupted data")
+                LOGGERONE.error("Django version api returned corrupted data")
                 self.write(json.dumps({"outcome": "KO"}))
                 return
             self.write(json.dumps({"version": data["version"], "linkAndroid": data["linkAndroid"],
                     "linkIos": data["linkIos"]}))
         except Exception:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
     
     def set_default_headers(self):
@@ -206,7 +203,7 @@ class NewsHandler(tornado.web.RequestHandler):
             data = await globalGameManager.getNews()
             self.write(json.dumps(data))
         except Exception:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             self.write(json.dumps({"outcome": "KO"}))
 
     def set_default_headers(self):

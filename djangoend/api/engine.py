@@ -1,4 +1,4 @@
-import logging
+from api.logger import LOGGERONE
 from api.models import Move
 
 OPPOSITES = {"U": "D", "D": "U", "L": "R", "R": "L"}
@@ -14,21 +14,21 @@ def makeMove(game, moves, pieces, moveId, move):
         move = move[:2]
     movables = ("1", "2", "3") if moveId % 2 == 1 else ("4", "5", "6")
     if move[0] not in movables or move[1] not in ("U", "D", "L", "R"):
-        logging.error("Move not coherent")
+        LOGGERONE.error("Move not coherent")
         return "KO"
     possible, piecesToMove = isMovePossible(move, pieces, movables)
     if not possible:
-        logging.error("Move is not possible")
+        LOGGERONE.error("Move is not possible")
         return "KO"
     success, forbiddenMove, toBeTeleported = completeMove(move[1], piecesToMove)
     if not success:
-        logging.error("Move cannot be completed")
+        LOGGERONE.error("Move cannot be completed")
         return "KO"
     if (toBeTeleported is not None and not teleport) or (toBeTeleported is None) and (teleport):
-        logging.error("Teleport data is not coherent with engine calculus")
+        LOGGERONE.error("Teleport data is not coherent with engine calculus")
         return "KO"
     if teleport and not performTeleport(toBeTeleported, teleport, pieces):
-        logging.error("Error during teleport performance")
+        LOGGERONE.error("Error during teleport performance")
         return "KO"
     Move.objects.create(value=move+teleport,
                         number=moveId,
@@ -97,7 +97,7 @@ def completeMove(direction, pieces):
             piece.save()
         return True, forbiddenMove, toBeTeleported
     except Exception as e:
-        logging.error("Exception occurred", exc_info=True)
+        LOGGERONE.error("Exception occurred", exc_info=True)
         return False, None, None
 
 

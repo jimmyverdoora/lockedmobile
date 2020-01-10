@@ -1,5 +1,4 @@
 import json
-import logging
 import random
 import tornado.locks
 import uuid
@@ -8,6 +7,7 @@ from datetime import datetime, timedelta
 from settings import *
 from tornado import gen
 from tornado.httpclient import AsyncHTTPClient
+from logger import LOGGERONE
 
 
 class LobbyManager(object):
@@ -63,7 +63,7 @@ class LobbyManager(object):
             for i in self.ips[hostIp]:
                 self.clear(i, removeFromIps=False)
             self.ips[hostIp] = {n}
-            logging.warning("IP " + hostIp + " reached the lobbies threshold!")
+            LOGGERONE.warning("IP " + hostIp + " reached the lobbies threshold!")
             return
         self.ips[hostIp].add(n)
     
@@ -81,7 +81,7 @@ class LobbyManager(object):
             afkIp.append(ip)
         for ip in afkIp:
             del self.ipLastUpdate[ip]
-        logging.info("DELETED " + str(len(afkIp)) + " for a total of " + str(totLobbies) + " lobbies")
+        LOGGERONE.info("DELETED " + str(len(afkIp)) + " for a total of " + str(totLobbies) + " lobbies")
         return totLobbies
 
 
@@ -100,7 +100,7 @@ class GameManager(object):
         return json.loads(response.body)
 
     def clear(self, gameId):
-        logging.info("CLEARING GAME: " + str(gameId) + ", ACTIVE GAMES: " + str(len(self.conds)))
+        LOGGERONE.info("CLEARING GAME: " + str(gameId) + ", ACTIVE GAMES: " + str(len(self.conds)))
         try:
             del self.conds[gameId]
             return True

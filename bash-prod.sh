@@ -17,6 +17,7 @@ mkdir /LOGS/django/
 mkdir /LOGS/tornado/
 sudo supervisorctl reread add e start
 fare il .py di lancio prod
+inserire la prima versione su django col manage
 
 
 

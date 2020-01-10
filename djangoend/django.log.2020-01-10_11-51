@@ -1,0 +1,62 @@
+REQUEST to createApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/create'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "gameId": "af952cba-0ce5-425b-b0df-cac67aaa1d98"}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/1'>, POST: <QueryDict: {'move': ['2D']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/1'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "2D", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/2'>, POST: <QueryDict: {'move': ['4D']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/2'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "4D", "forbiddenMove": "1U", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/3'>, POST: <QueryDict: {'move': ['1R']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/3'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "1R", "forbiddenMove": "5L", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/4'>, POST: <QueryDict: {'move': ['6L']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/4'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "6L", "forbiddenMove": "2R", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/5'>, POST: <QueryDict: {'move': ['2D']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/5'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "2D", "forbiddenMove": "4U", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/6'>, POST: <QueryDict: {'move': ['5U']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/6'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "5U", "forbiddenMove": "3D", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/7'>, POST: <QueryDict: {'move': ['1U']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/7'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "1U", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/8'>, POST: <QueryDict: {'move': ['4U']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/8'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "4U", "forbiddenMove": "2D", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/9'>, POST: <QueryDict: {'move': ['3R']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/9'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "3R", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/10'>, POST: <QueryDict: {'move': ['5U']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/10'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "5U", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/11'>, POST: <QueryDict: {'move': ['1R']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/11'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "1R", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/12'>, POST: <QueryDict: {'move': ['6D']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/12'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "6D", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/13'>, POST: <QueryDict: {'move': ['3U']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/13'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "3U", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/14'>, POST: <QueryDict: {'move': ['6D']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/14'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "6D", "forbiddenMove": null, "win": 0}'
+REQUEST to moveApi: <WSGIRequest: POST '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/15'>, POST: <QueryDict: {'move': ['1L']}>
+RESPONSE: b'{"outcome": "OK", "win": 0}'
+REQUEST to moveApi: <WSGIRequest: GET '/game/af952cba-0ce5-425b-b0df-cac67aaa1d98/move/15'>, POST: <QueryDict: {}>
+RESPONSE: b'{"outcome": "OK", "move": "1L", "forbiddenMove": null, "win": 0}'

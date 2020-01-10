@@ -5,8 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from djangoend.settings import *
 from api.models import *
 from api.engine import checkWin, makeMove
-from api.logger import logThis
-import logging
+from api.logger import LOGGERONE, logThis
 
 
 # TODO: when making competitive games, each player will have a secret key which is checked before making a move
@@ -22,7 +21,7 @@ def createApi(request, gameId):
         Piece.objects.create(number=5, player=1, x=4, y=6, game=game)
         Piece.objects.create(number=6, player=1, x=5, y=4, game=game)
     except Exception:
-        logging.error("Exception occurred", exc_info=True)
+        LOGGERONE.error("Exception occurred", exc_info=True)
         return JsonResponse({"outcome": "KO"})
     return JsonResponse({"outcome": "OK", "gameId": gameId})
 
@@ -39,7 +38,7 @@ def moveApi(request, gameId, moveId):
                                  "forbiddenMove": game.currentForbidden,
                                  "win": game.state})
         except Exception as e:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             return JsonResponse({"outcome": "KO"})
     elif request.method == "POST":
         try:
@@ -52,7 +51,7 @@ def moveApi(request, gameId, moveId):
             return JsonResponse({"outcome": outcome,
                                  "win": win})
         except Exception as e:
-            logging.error("Exception occurred", exc_info=True)
+            LOGGERONE.error("Exception occurred", exc_info=True)
             return JsonResponse({"outcome": "KO"})
     else:
         return JsonResponse({"outcome": "KO"})
@@ -130,7 +129,7 @@ def versionApi(request):
             linkIos = Valore.objects.filter(chiave=LINK_IOS_KEY)[0].valore
             return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkAndroid, "linkIos": linkIos})
     except Exception:
-        logging.error("Exception occurred", exc_info=True)
+        LOGGERONE.error("Exception occurred", exc_info=True)
         return JsonResponse({"outcome": "KO"})
 
 
@@ -163,5 +162,5 @@ def newsApi(request):
             newContent = Valore.objects.filter(chiave=NEW_KEY_PREFIX + currentNew)[0].valore
             return JsonResponse({"outcome": "OK", "newId": int(currentNew), "currentNew": newContent})
     except Exception:
-        logging.error("Exception occurred", exc_info=True)
+        LOGGERONE.error("Exception occurred", exc_info=True)
         return JsonResponse({"outcome": "KO"})
