@@ -22,7 +22,7 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>Locked: The Game</name>
+    <name>Locked</name>
     <description>
         The Tris Revolution
     </description>
