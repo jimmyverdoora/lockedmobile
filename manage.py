@@ -1,22 +1,44 @@
 import requests
 import sys
 import os
+import logging
 
 BASEURL = 'http://localhost:'
 
 TORNADO_KEY = '*4p1lme^9dxj3(-+f+3vzo47e9(0i*=-57k=0^ho&49re!qyyh'
 
+LOG_FILE = "/LOGS/manage.log"
+
+logging.basicConfig(format='%(levelname)s %(asctime)s %(message)s', filename=LOG_FILE, level=logging.INFO)
+
 def clearIps():
-    r = requests.post(BASEURL + '8080/clearlobbies', data={'key': TORNADO_KEY})
-    print(r.json())
+    try:
+        r = requests.post(BASEURL + '8080/clearlobbies', data={'key': TORNADO_KEY})
+        res = r.json()
+        if res["outcome"] == "OK":
+            logging.info("CLEARING: " + str(res))
+        else:
+            logging.error("CLEARING: " + str(res))
+    except Exception:
+        logging.error("CLEARING: ", exc_info=True)
 
 def storicizeGames():
-    r = requests.post(BASEURL + '8000/storicize', data={'key': TORNADO_KEY})
-    res = r.json()
-    print({'outcome': res['outcome'], 'total': res['total'], 'cleared': res['cleared']})
-    gameIds = '|'.join(res['gameIds'])
-    r = requests.post(BASEURL + '8080/killinactive', data={'key': TORNADO_KEY, 'gameIds': gameIds})
-    print(r.json())
+    try:
+        r = requests.post(BASEURL + '8000/storicize', data={'key': TORNADO_KEY})
+        res = r.json()
+        if res["outcome"] != "OK":
+            logging.error("STORICIZING: " + str(res))
+            return
+        logging.info("STORICIZING: " + str({'outcome': res['outcome'], 'total': res['total'], 'cleared': res['cleared']}))
+        gameIds = '|'.join(res['gameIds'])
+        r = requests.post(BASEURL + '8080/killinactive', data={'key': TORNADO_KEY, 'gameIds': gameIds})
+        res = r.json()
+        if res["outcome"] == "OK":
+            logging.info("STORICIZING: " + str(res))
+        else:
+            logging.error("STORICIZING: " + str(res))
+    except Exception:
+        logging.error("STORICIZING: ", exc_info=True)
 
 def statistics():
     r = requests.post(BASEURL + '8080/stats', data={'key': TORNADO_KEY})

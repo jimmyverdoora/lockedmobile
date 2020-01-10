@@ -2,7 +2,6 @@ prod stuff:
 - aggiungere al prepare il cambio dei log path
 - mettere il clearIps schedulato
 - mettere il daily di django schedulato
-- schedulare la copy dei log alle 00.00 di ogni giorno
 
 v2:
 - httpS (togliere <application android:usesCleartextTraffic="true" />)
