@@ -120,6 +120,11 @@ function openNewsPageIfNeededOtherwiseHomepage() {
     xsub.send();
 };
 
+function exitNews() {
+    playSound("click");
+    openPage("homepage");
+};
+
 function openLink(link) {
     playSound("click");
     window.open(link, '_system');
