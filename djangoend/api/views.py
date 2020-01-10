@@ -96,12 +96,39 @@ def statsApi(request):
             "active": totGames - completedGames - inactiveGames, "inactive": inactiveGames})
 
 
+@csrf_exempt
 def versionApi(request):
     try:
-        version = Valore.objects.filter(chiave=VERSION_KEY)[0].valore
-        linkAndroid = Valore.objects.filter(chiave=LINK_ANDROID_KEY)[0].valore
-        linkIos = Valore.objects.filter(chiave=LINK_IOS_KEY)[0].valore
-        return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkAndroid, "linkIos": linkIos})
+        if request.method == 'POST':
+            key = request.POST.get("key", "")
+            if key != TORNADO_KEY:
+                return JsonResponse({"outcome": "KO", "reason": "WRONG KEY"})
+            version = request.POST.get("version", "")
+            linkA = request.POST.get("linkAndroid", "")
+            linkI = reuqest.POST.get("linkIos", "")
+            if not version or not linkA or not linkI:
+                return JsonResponse({"outcome": "KO", "reason": "WRONG DATA"})
+            result = Valore.objects.filter(chiave="VERSION")
+            if len(result) == 0:
+                Valore.objects.create(chiave="VERSION", valore=version, active=True)
+                Valore.objects.create(chiave="LINK_ANDROID", valore=linkA, active=True)
+                Valore.objects.create(chiave="LINK_IOS", valore=linkI, active=True)
+            else:
+                currentVersion = result[0]
+                currentVersion.valore = version
+                currentVersion.save()
+                currentLinkA = Valore.objects.filter(chiave="LINK_ANDROID")
+                currentLinkA.valore = linkA
+                currentLinkA.save()
+                currentLinkI = Valore.objects.filter(chiave="LINK_IOS")
+                currentLinkI.valore = linkI
+                currentLinkI.save()
+            return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkA, "linkIos": linkI})
+        else:
+            version = Valore.objects.filter(chiave=VERSION_KEY)[0].valore
+            linkAndroid = Valore.objects.filter(chiave=LINK_ANDROID_KEY)[0].valore
+            linkIos = Valore.objects.filter(chiave=LINK_IOS_KEY)[0].valore
+            return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkAndroid, "linkIos": linkIos})
     except Exception:
         logging.error("Exception occurred", exc_info=True)
         return JsonResponse({"outcome": "KO"})

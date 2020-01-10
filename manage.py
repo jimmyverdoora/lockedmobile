@@ -34,23 +34,9 @@ def updateVersion():
     linkA = sys.argv[3]
     linkI = sys.argv[4]
 
-    from api.models import Valore
-    result = Valore.objects.filter(chiave="VERSION")
-    if len(result) == 0:
-        Valore.objects.create(chiave="VERSION", valore=version, active=True)
-        Valore.objects.create(chiave="LINK_ANDROID", valore=linkA, active=True)
-        Valore.objects.create(chiave="LINK_IOS", valore=linkI, active=True)
-        return
-    
-    currentVersion = result[0]
-    currentVersion.valore = version
-    currentVersion.save()
-    currentLinkA = Valore.objects.filter(chiave="LINK_ANDROID")
-    currentLinkA.valore = linkA
-    currentLinkA.save()
-    currentLinkI = Valore.objects.filter(chiave="LINK_IOS")
-    currentLinkI.valore = linkI
-    currentLinkI.save()
+    r = requests.post(BASEURL + '8000/version', data={'key': TORNADO_KEY, "version": version,
+                                                      "linkAndroid": linkA, "linkIos": linkI})
+    print(r.json())
 
 
 comand = sys.argv[1]
