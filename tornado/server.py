@@ -182,8 +182,18 @@ class GameKillHandler(tornado.web.RequestHandler):
 
 class VersionHandler(tornado.web.RequestHandler):
 
-    def get(self):
-        self.write(json.dumps({"version": VERSION}))
+    async def get(self):
+        try:
+            data = await globalGameManager.getVersion()
+            if not data["version"] or not data["linkAndroid"] or not data["linkIos"]:
+                logging.error("Django version api returned corrupted data")
+                self.write(json.dumps({"outcome": "KO"}))
+                return
+            self.write(json.dumps({"version": data["version"], "linkAndroid": data["linkAndroid"],
+                    "linkIos": data["linkIos"]}))
+        except Exception:
+            logging.error("Exception occurred", exc_info=True)
+            self.write(json.dumps({"outcome": "KO"}))
     
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")

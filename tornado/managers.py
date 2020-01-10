@@ -124,3 +124,10 @@ class GameManager(object):
                method="POST",
                body=body)
         return json.loads(response.body)
+
+    @gen.coroutine
+    def getVersion(self):
+        response = yield self.cli.fetch(DJANGO_API_URL + "/version",
+               headers=HEADERS,
+               method="GET")
+        return json.loads(response.body)

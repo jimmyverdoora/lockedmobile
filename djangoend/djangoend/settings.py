@@ -27,7 +27,6 @@ TORNADO_KEY = '*4p1lme^9dxj3(-+f+3vzo47e9(0i*=-57k=0^ho&49re!qyyh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# TODO only local tornado is allowed
 ALLOWED_HOSTS = ['localhost']
 
 LOG_FILE = 'django.log'
