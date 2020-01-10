@@ -148,12 +148,13 @@ def newsApi(request):
             if len(result) == 0:
                 Valore.objects.create(chiave=CURRENT_NEW_KEY, valore="1", active=True)
                 Valore.objects.create(chiave=NEW_KEY_PREFIX + "1", valore=newContent, active=True)
+                return JsonResponse({"outcome": "OK", "newId": "1", "currentNew": newContent})
             else:
                 currentNew = result[0]
                 currentNew.valore = str(int(currentNew.valore) + 1)
                 currentNew.save()
                 Valore.objects.create(chiave=NEW_KEY_PREFIX + currentNew.valore, valore=newContent, active=True)
-            return JsonResponse({"outcome": "OK", "newId": int(currentNew.valore), "currentNew": newContent})
+                return JsonResponse({"outcome": "OK", "newId": int(currentNew.valore), "currentNew": newContent})
         else:
             result = Valore.objects.filter(chiave=CURRENT_NEW_KEY)
             if len(result) == 0:

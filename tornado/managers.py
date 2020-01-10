@@ -131,3 +131,10 @@ class GameManager(object):
                headers=HEADERS,
                method="GET")
         return json.loads(response.body)
+
+    @gen.coroutine
+    def getNews(self):
+        response = yield self.cli.fetch(DJANGO_API_URL + "/news",
+               headers=HEADERS,
+               method="GET")
+        return json.loads(response.body)

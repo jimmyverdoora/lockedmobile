@@ -199,6 +199,20 @@ class VersionHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
 
 
+class NewsHandler(tornado.web.RequestHandler):
+
+    async def get(self):
+        try:
+            data = await globalGameManager.getNews()
+            self.write(json.dumps(data))
+        except Exception:
+            logging.error("Exception occurred", exc_info=True)
+            self.write(json.dumps({"outcome": "KO"}))
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+
+
 def main():
     if DEBUG:
         parse_command_line()
@@ -211,6 +225,7 @@ def main():
                 (r"/clearlobbies", ClearLobbyHandler),
                 (r"/killinactive", GameKillHandler),
                 (r"/version", VersionHandler),
+                (r"/news", NewsHandler),
             ],
             debug=True,
         )
@@ -226,6 +241,7 @@ def main():
                 (r"/clearlobbies", ClearLobbyHandler),
                 (r"/killinactive", GameKillHandler),
                 (r"/version", VersionHandler),
+                (r"/news", NewsHandler),
             ],
             debug=False,
         )
