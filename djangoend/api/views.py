@@ -105,7 +105,7 @@ def versionApi(request):
                 return JsonResponse({"outcome": "KO", "reason": "WRONG KEY"})
             version = request.POST.get("version", "")
             linkA = request.POST.get("linkAndroid", "")
-            linkI = reuqest.POST.get("linkIos", "")
+            linkI = request.POST.get("linkIos", "")
             if not version or not linkA or not linkI:
                 return JsonResponse({"outcome": "KO", "reason": "WRONG DATA"})
             result = Valore.objects.filter(chiave="VERSION")
