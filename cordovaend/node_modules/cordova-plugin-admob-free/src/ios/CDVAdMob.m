@@ -789,7 +789,6 @@
             bf.origin.x = (pr.size.width - bf.size.width) * 0.5f;
 
             self.bannerView.frame = bf;
-            self.bannerView.bounds = bf;
 
             //NSLog(@"x,y,w,h = %d,%d,%d,%d", (int) bf.origin.x, (int) bf.origin.y, (int) bf.size.width, (int) bf.size.height );
         } else {
@@ -828,7 +827,8 @@
     if(self.bannerShow) {
         [self __showAd:YES];
     }
-    [self fireEvent:@"" event:@"admob.banner.events.LOAD" withData:nil];
+    NSString* jsonData = [NSString stringWithFormat:@"{ 'bannerHeight': '%d' }", (int)self.bannerView.frame.size.height];
+    [self fireEvent:@"" event:@"admob.banner.events.LOAD" withData:jsonData];
     [self fireEvent:@"" event:@"onReceiveAd" withData:nil];
 }
 

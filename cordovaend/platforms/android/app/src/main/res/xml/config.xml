@@ -22,9 +22,9 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>Locked</name>
+    <name>Locked: The Game</name>
     <description>
-        Super Simple, Super Fun!
+        The Tris Revolution
     </description>
     <author email="advenagames@gmail.com" href="http://www.advenagames.com">
         Advena Games
