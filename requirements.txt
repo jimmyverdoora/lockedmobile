@@ -1,2 +1,2 @@
-django
-tornado
+django==3.0.2
+tornado==6.0.3

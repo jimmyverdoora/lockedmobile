@@ -4,7 +4,6 @@ sudo apt install python3-pip
 sudo pip3 install supervisor
 sudo pip3 install django==3.0.2
 sudo pip3 install tornado==6.0.3
-pyhton3 manage.py migrate
 echo_supervisord_conf > sudo tee /etc/supervisord.conf (fare a mano, de commentare e mettere la folder)
 sudo mkdir /etc/supervisor.d
 sudo touch /lib/systemd/system/supervisord.service (inserire il contenuto vedi fondo)
@@ -15,10 +14,13 @@ copiare i file ini da staging
 mkdir /LOGS/
 mkdir /LOGS/django/
 mkdir /LOGS/tornado/
+
+____SONO ARRIVATO QUI____
 crontab -e copiare staging
 sudo supervisorctl reread add e start
 fare il .py di lancio prod
 inserire la prima versione su django col manage
+inserire le ads corrette e controllare "P" prima di buildare l app
 
 
 
