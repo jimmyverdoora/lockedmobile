@@ -73,7 +73,7 @@ function openPageDependingOnVersion() {
         let result = JSON.parse(this.responseText);
         let serverVersion = result.version;
         if (serverVersion == currentVersion) {
-            openPage("homepage");
+            openNewsPageIfNeededOtherwiseHomepage();
         } else {
             link = "http://www.advenagames.com";
             if (/(android)/i.test(navigator.userAgent)) {  // for android & amazon-fireos
@@ -91,6 +91,32 @@ function openPageDependingOnVersion() {
     }
     };
     xsub.open("GET", apiurl + "/version");
+    xsub.send();
+};
+
+function openNewsPageIfNeededOtherwiseHomepage() {
+    var xsub = new XMLHttpRequest();
+    xsub.onreadystatechange = function() {
+    if (this.readyState == 4) {
+        if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
+            document.getElementById("versionheader").innerHTML = errorMsg;
+            return;
+        }
+        let result = JSON.parse(this.responseText);
+        if (!result.currentNew) {
+            openPage("homepage");
+            return;
+        };
+        if (storage.getItem("newId") && parseInt(storage.getItem("newId")) == result.newId) {
+            openPage("homepage");
+            return;
+        };
+        document.getElementById("showingnew").innerHTML = result.currentNew;
+        openPage("newspage");
+        storage.setItem("newId", result.newId.toString());
+    };
+    };
+    xsub.open("GET", apiurl + "/news");
     xsub.send();
 };
 

@@ -108,19 +108,19 @@ def versionApi(request):
             linkI = request.POST.get("linkIos", "")
             if not version or not linkA or not linkI:
                 return JsonResponse({"outcome": "KO", "reason": "WRONG DATA"})
-            result = Valore.objects.filter(chiave="VERSION")
+            result = Valore.objects.filter(chiave=VERSION_KEY)
             if len(result) == 0:
-                Valore.objects.create(chiave="VERSION", valore=version, active=True)
-                Valore.objects.create(chiave="LINK_ANDROID", valore=linkA, active=True)
-                Valore.objects.create(chiave="LINK_IOS", valore=linkI, active=True)
+                Valore.objects.create(chiave=VERSION_KEY, valore=version, active=True)
+                Valore.objects.create(chiave=LINK_ANDROID_KEY, valore=linkA, active=True)
+                Valore.objects.create(chiave=LINK_IOS_KEY, valore=linkI, active=True)
             else:
                 currentVersion = result[0]
                 currentVersion.valore = version
                 currentVersion.save()
-                currentLinkA = Valore.objects.filter(chiave="LINK_ANDROID")[0]
+                currentLinkA = Valore.objects.filter(chiave=LINK_ANDROID_KEY)[0]
                 currentLinkA.valore = linkA
                 currentLinkA.save()
-                currentLinkI = Valore.objects.filter(chiave="LINK_IOS")[0]
+                currentLinkI = Valore.objects.filter(chiave=LINK_IOS_KEY)[0]
                 currentLinkI.valore = linkI
                 currentLinkI.save()
             return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkA, "linkIos": linkI})
@@ -129,6 +129,38 @@ def versionApi(request):
             linkAndroid = Valore.objects.filter(chiave=LINK_ANDROID_KEY)[0].valore
             linkIos = Valore.objects.filter(chiave=LINK_IOS_KEY)[0].valore
             return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkAndroid, "linkIos": linkIos})
+    except Exception:
+        logging.error("Exception occurred", exc_info=True)
+        return JsonResponse({"outcome": "KO"})
+
+
+@csrf_exempt
+def newsApi(request):
+    try:
+        if request.method == 'POST':
+            key = request.POST.get("key", "")
+            if key != TORNADO_KEY:
+                return JsonResponse({"outcome": "KO", "reason": "WRONG KEY"})
+            newContent = request.POST.get("newContent", "")
+            if not newContent:
+                return JsonResponse({"outcome": "KO", "reason": "WRONG DATA"})
+            result = Valore.objects.filter(chiave=CURRENT_NEW_KEY)
+            if len(result) == 0:
+                Valore.objects.create(chiave=CURRENT_NEW_KEY, valore="1", active=True)
+                Valore.objects.create(chiave=NEW_KEY_PREFIX + "1", valore=newContent, active=True)
+            else:
+                currentNew = result[0]
+                currentNew.valore = str(int(currentNew.valore) + 1)
+                currentNew.save()
+                Valore.objects.create(chiave=NEW_KEY_PREFIX + currentNew.valore, valore=newContent, active=True)
+            return JsonResponse({"outcome": "OK", "newId": int(currentNew.valore), "currentNew": newContent})
+        else:
+            result = Valore.objects.filter(chiave=CURRENT_NEW_KEY)
+            if len(result) == 0:
+                return JsonResponse({"outcome": "OK"})
+            currentNew = result[0].valore
+            newContent = Valore.objects.filter(chiave=NEW_KEY_PREFIX + currentNew)[0].valore
+            return JsonResponse({"outcome": "OK", "newId": int(currentNew), "currentNew": newContent})
     except Exception:
         logging.error("Exception occurred", exc_info=True)
         return JsonResponse({"outcome": "KO"})

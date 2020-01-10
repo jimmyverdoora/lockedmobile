@@ -26,16 +26,17 @@ def statistics():
     print("DJANGO:")
     print(r.json())
 
-def updateVersion():
-    sys.path.insert(0, '/lockedmobile/djangoend/')
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'djangoend.settings'
-
+def updateVersion(): 
     version = sys.argv[2]
     linkA = sys.argv[3]
     linkI = sys.argv[4]
-
     r = requests.post(BASEURL + '8000/version', data={'key': TORNADO_KEY, "version": version,
                                                       "linkAndroid": linkA, "linkIos": linkI})
+    print(r.json())
+
+def updateNew():
+    newContent = sys.argv[2]
+    r = requests.post(BASEURL + '8000/news', data={'key': TORNADO_KEY, "newContent": newContent})
     print(r.json())
 
 
@@ -48,3 +49,5 @@ if comand == "stats":
     statistics()
 if comand == "updateversion":
     updateVersion()
+if comand == "updatenew":
+    updateNew()

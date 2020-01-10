@@ -22,6 +22,7 @@ urlpatterns = [
     path('storicize', dailyStoricizationAndReport),
     path('stats', statsApi),
     path('version', versionApi),
+    path('news', newsApi),
     path('game/<uuid:gameId>/create', createApi),
     path('game/<uuid:gameId>/move/<int:moveId>', moveApi),
 ]
