@@ -1,7 +1,7 @@
 // L: local, T: testing, S: staging, P: prod
 var appScope = "T"; 
 
-var currentVersion = "1.0.0"; // aggiornare sempre anche db django e config.xml
+var currentVersion = "1.0.0"; // aggiornare sempre anche db e config.xml
 
 var musicVol = 0.7;
 

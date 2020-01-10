@@ -70,16 +70,33 @@ function openPageDependingOnVersion() {
             document.getElementById("versionheader").innerHTML = errorMsg;
             return;
         }
-        let serverVersion = JSON.parse(this.responseText).version;
+        let result = JSON.parse(this.responseText);
+        let serverVersion = result.version;
         if (serverVersion == currentVersion) {
             openPage("homepage");
         } else {
+            link = "http://www.advenagames.com";
+            if (/(android)/i.test(navigator.userAgent)) {  // for android & amazon-fireos
+                if (result.linkAndroid) {
+                    link = result.linkAndroid;
+                };
+            } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {  // for ios
+                if (result.linkIos) {
+                    link = result.linkIos;
+                };
+            };
+            document.getElementById("updateversion").setAttribute('ontouchstart', 'openLink("' + link + '");')
             openPage("versionpage");
         };
     }
     };
     xsub.open("GET", apiurl + "/version");
     xsub.send();
+};
+
+function openLink(link) {
+    playSound("click");
+    window.open(link, '_system');
 };
 
 app.initialize();
