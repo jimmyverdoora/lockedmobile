@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('storicize', dailyStoricizationAndReport),
     path('stats', statsApi),
+    path('version', versionApi),
     path('game/<uuid:gameId>/create', createApi),
     path('game/<uuid:gameId>/move/<int:moveId>', moveApi),
 ]

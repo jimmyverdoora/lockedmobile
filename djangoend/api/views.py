@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from djangoend.settings import *
-from api.models import Game, Move, Piece, DailyReport
+from api.models import *
 from api.engine import checkWin, makeMove
 from api.logger import logThis
 import logging
@@ -94,3 +94,14 @@ def statsApi(request):
     inactiveGames = len(games.filter(state=0, modifiedAt__lt=inactiveLimit))
     return JsonResponse({"outcome": "OK", "total": totGames, "completed": completedGames,
             "active": totGames - completedGames - inactiveGames, "inactive": inactiveGames})
+
+
+def versionApi(request):
+    try:
+        version = Valore.objects.filter(chiave=VERSION_KEY)[0].valore
+        linkAndroid = Valore.objects.filter(chiave=LINK_ANDROID_KEY)[0].valore
+        linkIos = Valore.objects.filter(chiave=LINK_IOS_KEY)[0].valore
+        return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkAndroid, "linkIos": linkIos})
+    except Exception:
+        logging.error("Exception occurred", exc_info=True)
+        return JsonResponse({"outcome": "KO"})

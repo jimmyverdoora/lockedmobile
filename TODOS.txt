@@ -1,5 +1,3 @@
-
-
 prod stuff:
 - mettere ads testing false, debug sia in django che tornado
 - mettere il clearIps schedulato

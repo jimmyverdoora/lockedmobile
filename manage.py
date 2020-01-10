@@ -1,5 +1,6 @@
 import requests
 import sys
+import os
 
 BASEURL = 'http://localhost:'
 
@@ -25,6 +26,33 @@ def statistics():
     print("DJANGO:")
     print(r.json())
 
+def updateVersion():
+    sys.path.insert(0, '/lockedmobile/djangoend/')
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'djangoend.settings'
+
+    version = sys.argv[2]
+    linkA = sys.argv[3]
+    linkI = sys.argv[4]
+
+    from api.models import Valore
+    result = Valore.objects.filter(chiave="VERSION")
+    if len(result) == 0:
+        Valore.objects.create(chiave="VERSION", valore=version, active=True)
+        Valore.objects.create(chiave="LINK_ANDROID", valore=linkA, active=True)
+        Valore.objects.create(chiave="LINK_IOS", valore=linkI, active=True)
+        return
+    
+    currentVersion = result[0]
+    currentVersion.valore = version
+    currentVersion.save()
+    currentLinkA = Valore.objects.filter(chiave="LINK_ANDROID")
+    currentLinkA.valore = linkA
+    currentLinkA.save()
+    currentLinkI = Valore.objects.filter(chiave="LINK_IOS")
+    currentLinkI.valore = linkI
+    currentLinkI.save()
+
+
 comand = sys.argv[1]
 if comand == "clearips":
     clearIps()
@@ -32,3 +60,5 @@ if comand == "storicize":
     storicizeGames()
 if comand == "stats":
     statistics()
+if comand == "updateversion":
+    updateVersion()
