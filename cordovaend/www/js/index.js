@@ -107,6 +107,10 @@ function openNewsPageIfNeededOtherwiseHomepage() {
             openPage("homepage");
             return;
         };
+        if (!storage.getItem("alreadyPlayed")) {
+            openPage("homepage");
+            return;
+        };
         if (storage.getItem("newId") && parseInt(storage.getItem("newId")) == result.newId) {
             openPage("homepage");
             return;
