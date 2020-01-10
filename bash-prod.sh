@@ -15,6 +15,7 @@ copiare i file ini da staging
 mkdir /LOGS/
 mkdir /LOGS/django/
 mkdir /LOGS/tornado/
+crontab -e copiare staging
 sudo supervisorctl reread add e start
 fare il .py di lancio prod
 inserire la prima versione su django col manage
