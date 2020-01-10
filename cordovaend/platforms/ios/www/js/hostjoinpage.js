@@ -142,12 +142,12 @@ function resetJoinPage() {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('min', '0');
         document.getElementById("num" + i).setAttribute('max', '9');
-        document.getElementById("num" + i).setAttribute('onkeydown', 'focusTo("num' + n + '");');
+        document.getElementById("num" + i).setAttribute('onkeyup', 'focusTo("num' + n + '");');
         document.getElementById("num" + i).setAttribute('ontouchstart', 'clearNumbersFrom(' + i + ')');
     };
     document.getElementById("num6").setAttribute('min', '0');
     document.getElementById("num6").setAttribute('max', '9');
-    document.getElementById("num6").setAttribute('onkeydown', 'submitNumbers();');
+    document.getElementById("num6").setAttribute('onkeyup', 'submitNumbers();');
     document.getElementById("joinheader").setAttribute('style', 'display:none;');
 };
 

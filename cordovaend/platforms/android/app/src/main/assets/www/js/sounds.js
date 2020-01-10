@@ -47,8 +47,8 @@ function loadSounds() {
     menuMusic = new Media(url3, null, null, menuLoop);
     gameMusic = new Media(url4, null, null, gameLoop);
     moveSound.setVolume(1.0);
-    menuMusic.setVolume(1.0);
-    gameMusic.setVolume(1.0);
+    menuMusic.setVolume(musicVol);
+    gameMusic.setVolume(musicVol);
     if (storage.getItem("soundVol")) {
         volumeSounds = parseInt(storage.getItem("soundVol"));
     };
@@ -92,7 +92,7 @@ function fadeInto(what) {
     };
     mswitch = false;
     var mchange = setInterval(() => {
-        if (volumeMusic > 0.95 && mswitch) {
+        if (volumeMusic > musicVol - 0.05 && mswitch) {
             clearInterval(mchange);
             return;
         };

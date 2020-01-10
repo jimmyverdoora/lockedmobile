@@ -1,7 +1,9 @@
 // L: local, T: testing, S: staging, P: prod
-var appScope = "L"; 
+var appScope = "T"; 
 
 var currentVersion = "1.0.0"; // aggiornare sempre anche server e config.xml
+
+var musicVol = 0.7;
 
 
 // _____________________________ AUTOMATED __________________________________
