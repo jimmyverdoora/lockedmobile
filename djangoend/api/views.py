@@ -117,10 +117,10 @@ def versionApi(request):
                 currentVersion = result[0]
                 currentVersion.valore = version
                 currentVersion.save()
-                currentLinkA = Valore.objects.filter(chiave="LINK_ANDROID")
+                currentLinkA = Valore.objects.filter(chiave="LINK_ANDROID")[0]
                 currentLinkA.valore = linkA
                 currentLinkA.save()
-                currentLinkI = Valore.objects.filter(chiave="LINK_IOS")
+                currentLinkI = Valore.objects.filter(chiave="LINK_IOS")[0]
                 currentLinkI.valore = linkI
                 currentLinkI.save()
             return JsonResponse({"outcome": "OK", "version": version, "linkAndroid": linkA, "linkIos": linkI})
