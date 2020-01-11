@@ -12,6 +12,7 @@ formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s')
 handler.setFormatter(formatter)
 LOGGERONE.addHandler(handler)
 LOGGERONE.setLevel(logging.INFO)
+LOGGERONE.propagate = False
 
 class Logger(object):
 

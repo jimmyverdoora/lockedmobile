@@ -16,6 +16,7 @@ mkdir /LOGS/django/
 mkdir /LOGS/tornado/
 
 ____SONO ARRIVATO QUI____
+settare warn nel supervisor config
 crontab -e copiare staging
 sudo supervisorctl reread add e start
 fare il .py di lancio prod
