@@ -101,6 +101,7 @@ class ClearLobbyHandler(tornado.web.RequestHandler):
             n = globalLobbyManager.clearInactiveIps()
             self.write(json.dumps({'cleared': n, "outcome": "OK"}))
         except Exception as e:
+            LOGGERONE.error("Exception raised", exc_info=True)
             self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
 
 class GameHandler(tornado.web.RequestHandler):
@@ -174,6 +175,7 @@ class GameKillHandler(tornado.web.RequestHandler):
             self.write(json.dumps({"outcome": "OK",
                                    "killed": killed}))
         except Exception as e:
+            LOGGERONE.error("Exception raised", exc_info=True)
             self.write(json.dumps({"outcome": "KO", "reason": "EXCEPTION: " + str(e)}))
 
 
