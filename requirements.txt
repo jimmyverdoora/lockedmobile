@@ -1,2 +1,9 @@
 django==3.0.2
 tornado==6.0.3
+
+# cordova plugins:
+# screen-orientation
+# device
+# media
+# admob-free
+# fullscreen

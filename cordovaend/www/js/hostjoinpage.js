@@ -58,6 +58,8 @@ function apiAskForJoin(n) {
             return;
         };
         gameId = JSON.parse(this.responseText).gameId;
+        openPage("gamepage");
+        loadBoardSize();
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
             selfPieces = ["p1", "p2", "p3"];
@@ -78,7 +80,6 @@ function apiAskForJoin(n) {
         };
         destroyBanner();
         fadeInto('game');
-        openPage("gamepage");
         stillInTheHostPage = false;
         resetHostPage();
     }
@@ -102,6 +103,8 @@ function apiJoinNumber(n) {
             return;
         };
         gameId = JSON.parse(this.responseText).gameId;
+        openPage("gamepage");
+        loadBoardSize();
         if (JSON.parse(this.responseText).goFirst) {
             side = -1;
             selfPieces = ["p1", "p2", "p3"];
@@ -122,7 +125,6 @@ function apiJoinNumber(n) {
         };
         destroyBanner();
         fadeInto('game');
-        openPage("gamepage");
         resetJoinPage();
     }
     };

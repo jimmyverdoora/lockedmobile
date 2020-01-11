@@ -1,8 +1,8 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "Locked: The Game",
-  "short_name": "Locked: The Game",
+  "name": "Locked",
+  "short_name": "Locked",
   "version": "com.advena.locked",
   "description": "The Tris Revolution",
   "author": "Advena Games",

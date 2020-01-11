@@ -21,6 +21,9 @@
     },
     "cordova-plugin-admob-free": {
       "PACKAGE_NAME": "com.advena.locked"
+    },
+    "cordova-plugin-fullscreen": {
+      "PACKAGE_NAME": "com.advena.locked"
     }
   },
   "dependent_plugins": {

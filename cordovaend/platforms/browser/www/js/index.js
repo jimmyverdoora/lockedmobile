@@ -6,7 +6,7 @@ var app = {
 
     onDeviceReady: function() {
         screen.orientation.lock('portrait');
-        loadBoardSize();
+        AndroidFullScreen.immersiveMode();
         loadExitEvents();
         storage = window.localStorage;
         loadSounds();
@@ -16,7 +16,7 @@ var app = {
 };
 
 function loadBoardSize() {
-    boardTop = Math.round($("#loadingcontainer").position().top + $("#loadingcontainer").height() - screenW * 1.14);
+    boardTop = Math.round($("#boardcontainer").position().top + $("#boardcontainer").height() - screenW * 1.14);
 };
 
 function loadExitEvents() {
@@ -104,6 +104,10 @@ function openNewsPageIfNeededOtherwiseHomepage() {
         }
         let result = JSON.parse(this.responseText);
         if (!result.currentNew) {
+            openPage("homepage");
+            return;
+        };
+        if (!storage.getItem("alreadyPlayed")) {
             openPage("homepage");
             return;
         };

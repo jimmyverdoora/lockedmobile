@@ -29,12 +29,12 @@ function initBoard() {
     for (i = 1; i < 5; i++) {
         document.getElementById("tp" + i).setAttribute('width', Math.round(screenW * 0.12) + 2);
     };
-    document.getElementById("at").setAttribute('width', Math.round(screenW * 0.4 + 2));
-    document.getElementById("atb").setAttribute('width', Math.round(screenW * 0.4 + 2));
-    document.getElementById("ab").setAttribute('width', Math.round(screenW * 0.4 + 2));
-    document.getElementById("abb").setAttribute('width', Math.round(screenW * 0.4 + 2));
-    document.getElementById("al").setAttribute('width', Math.round(screenW * 0.4 + 2));
-    document.getElementById("alb").setAttribute('width', Math.round(screenW * 0.4 + 2));
+    document.getElementById("at").setAttribute('width', Math.round(screenW * 0.25 + 1));
+    document.getElementById("atb").setAttribute('width', Math.round(screenW * 0.25 + 1));
+    document.getElementById("ab").setAttribute('width', Math.round(screenW * 0.25 + 1));
+    document.getElementById("abb").setAttribute('width', Math.round(screenW * 0.25 + 1));
+    document.getElementById("al").setAttribute('width', Math.round(screenW * 0.25 + 1));
+    document.getElementById("alb").setAttribute('width', Math.round(screenW * 0.25 + 1));
     document.getElementById("ar").setAttribute('width', Math.round(screenW * 0.4 + 2));
     document.getElementById("arb").setAttribute('width', Math.round(screenW * 0.4 + 2));
     moveToPos("p1", 3, 5);
