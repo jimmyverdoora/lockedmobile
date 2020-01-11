@@ -39,6 +39,7 @@ class LobbyManager(object):
                         self.ips[hint].remove(n)
                         if len(self.ips[hint]) == 0:
                             del self.ips[hint]
+                            del self.ipLastUpdate[hint]
                         return
                     except Exception:
                         pass
@@ -51,6 +52,7 @@ class LobbyManager(object):
                     self.ips[targetIp].remove(n)
                     if len(self.ips[targetIp]) == 0:
                         del self.ips[targetIp]
+                        del self.ipLastUpdate[targetIp]
         except Exception:
             pass
 
