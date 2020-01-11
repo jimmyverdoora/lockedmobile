@@ -4,12 +4,14 @@ import logging
 import uuid
 from logging.handlers import TimedRotatingFileHandler
 
-formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s')
+
 logging.basicConfig(level=logging.WARN, format='%(levelname)s %(asctime)s %(message)s')
 LOGGERONE = logging.getLogger("TornadoLogger")
-LOGGERONE.addHandler(TimedRotatingFileHandler(LOG_FILE, when="midnight", interval=1, backupCount=7))
+handler = TimedRotatingFileHandler(LOG_FILE, when="midnight", interval=1, backupCount=7)
+formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s')
+handler.setFormatter(formatter)
+LOGGERONE.addHandler(handler)
 LOGGERONE.setLevel(logging.INFO)
-LOGGERONE.setFormatter(formatter)
 
 class Logger(object):
 
