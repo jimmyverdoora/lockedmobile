@@ -4,10 +4,12 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 
 
-logging.basicConfig(format='%(levelname)s %(asctime)s %(message)s')
+logging.basicConfig(level=logging.WARN, format='%(levelname)s %(asctime)s %(message)s')
+formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s')
 LOGGERONE = logging.getLogger("DjangoLogger")
 LOGGERONE.addHandler(TimedRotatingFileHandler(LOG_FILE, when="midnight", interval=1, backupCount=7))
 LOGGERONE.setLevel(logging.INFO)
+LOGGERONE.setFormatter(formatter)
 
 def logThis(function):
 
