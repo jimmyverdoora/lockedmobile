@@ -99,7 +99,7 @@ function isLeftPossible(id) {
 
 function isRightPossible(id) {
     let newX = board[id].x + 1;
-    if (newX > 8) {
+    if (newX > 7) {
         return false;
     };
     for (piece of selfPieces) {
@@ -109,7 +109,7 @@ function isRightPossible(id) {
     };
     for (piece of opponentPieces) {
         if (board[piece].x == newX && board[piece].y == board[id].y) { 
-            if (newX == 8) {
+            if (newX == 7) {
                 return false;
             };
             for (piece2 of allPieces) {
