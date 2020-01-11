@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'fonterine';
+  src: local('Fonterine'),
+       url('fonts.ttf') format("truetype");
+}
+
+body {
+    background-image: url('bg.jpg');
+}
+
+a {
+    color: #5c2300;
+}
+
+a:hover {
+    color: black;
+}
+
+.title {
+    min-width: 55%;
+    max-width: 85%;
+    margin-top: 10vh;
+}
+
+.navverina {
+    border-bottom: 3px solid #5c2300;
+    background-color: #ff6406;
+}
+
+.biggo {
+    font-size: 3vh;
+    font-weight: bold;
+    font-family: fonterine;
+}
+
+.biggerino {
+    font-size: 2vh;
+    font-weight: bold;
+    font-family: fonterine;
+}
+
+.footer {
+    border-top: 3px solid #5c2300; 
+    background-color: #ff6406; 
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    text-align: center;
+}
