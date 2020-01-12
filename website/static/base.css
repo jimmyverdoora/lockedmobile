@@ -6,6 +6,11 @@
 
 body {
     background-image: url('bg.jpg');
+    font-family: fonterine;
+}
+
+p, li {
+    font-size: x-large;
 }
 
 a {
@@ -46,4 +51,12 @@ a:hover {
     bottom: 0; 
     width: 100%; 
     text-align: center;
+}
+
+.jumbo {
+    background-color: #01cfff;
+    border-color: #07738d;
+    border-width: 3px;
+    border-style: solid;
+    border-top: 0px;
 }

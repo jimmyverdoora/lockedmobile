@@ -13,3 +13,6 @@ def homePageView(request):
         context["linkAndroid"] = "#"
         context["linkIos"] = "#"
     return render(request, "homepage.html", context=context)
+
+def privacyView(request):
+    return render(request, "privacy_policy.html")
