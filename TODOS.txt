@@ -1,4 +1,9 @@
-sito con link di download
+pubblicare su play store
+aggiornare link sul django di prod
+verificare che siano ok le ads
+
+
+
 app per le statistiche (mia)
 
 v2:

@@ -4,6 +4,26 @@
 {% block content %}
 <div class="container">
     <img class="mx-auto d-block title" src="{% static 'title.png' %}">
+    <div style="text-align: center;">
+        <p class="biggo">V {{ version }}</p>
+    </div>
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-4">
+            <a href="{{ linkAndroid }}">
+            <img class="mx-auto d-block logo" src="{% static 'android.png' %}">
+            </a>
+        </div>
+
+        <div class="col-4">
+            <a href="{{ linkIos }}">
+            <img class="mx-auto d-block logo" src="{% static 'ios.png' %}">
+            </a>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
 </div>
 
 

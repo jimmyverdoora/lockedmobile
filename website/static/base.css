@@ -60,3 +60,7 @@ a:hover {
     border-style: solid;
     border-top: 0px;
 }
+
+.logo {
+    width: 10vh;
+}
