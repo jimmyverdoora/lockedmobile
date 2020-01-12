@@ -14,8 +14,6 @@ copiare i file ini da staging
 mkdir /LOGS/
 mkdir /LOGS/django/
 mkdir /LOGS/tornado/
-
-____SONO ARRIVATO QUI____
 settare warn nel supervisor config
 copiare i file ini da staging
 crontab -e copiare staging
@@ -24,7 +22,7 @@ fare il .py di lancio prod
 inserire la prima versione su django col manage
 inserire le ads corrette e controllare "P" prima di buildare l app
 
-
+cambia il link nella view del sito :)
 
 
 
