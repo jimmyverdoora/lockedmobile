@@ -22,6 +22,7 @@ def homePageView(request):
             raise Exception()
         context = r.json()
     except Exception:
+        LOGGERONE.error("Exception raised", exc_info=True)
         context["version"] = "???"
         context["linkAndroid"] = "#"
         context["linkIos"] = "#"
