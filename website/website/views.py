@@ -8,7 +8,7 @@ LOGGERONE = logging.getLogger("WebsiteLogger")
 handler = TimedRotatingFileHandler(LOG_FILE, when="midnight", interval=1, backupCount=7)
 formatter = logging.Formatter('%(levelname)s %(asctime)s %(message)s')
 handler.setFormatter(formatter)
-LOGGERONE.setHandler(handler)
+LOGGERONE.addHandler(handler)
 LOGGERONE.setLevel(logging.INFO)
 LOGGERONE.propagate = False
 
