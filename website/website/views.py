@@ -2,6 +2,7 @@ from website.settings import LOG_FILE
 from django.shortcuts import render
 from logging.handlers import TimedRotatingFileHandler
 import logging
+import requests
 
 logging.basicConfig(level=logging.WARN, format='%(levelname)s %(asctime)s %(message)s')
 LOGGERONE = logging.getLogger("WebsiteLogger")
@@ -18,7 +19,7 @@ def homePageView(request):
     try:
         r = requests.get('http://lockedapi.advenagames.com:8080/version')
         if r.status_code != 200:
-            LOGGERONE.error(r.__dict__)
+            LOGGERONE.error("Error in the response: " + str(r.__dict__))
             raise Exception()
         context = r.json()
     except Exception:
