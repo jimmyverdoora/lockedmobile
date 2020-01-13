@@ -1,3 +1,4 @@
+fare il deploy con nginx
 pubblicare su play store
 aggiornare link sul django di prod
 verificare che siano ok le ads
