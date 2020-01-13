@@ -5,20 +5,19 @@
 <div class="container">
     <img class="mx-auto d-block title" src="{% static 'title.png' %}">
     <div style="text-align: center;">
-        <p class="biggo">V {{ version }}</p>
+        <p class="my-3"><span class="version borderato py-2 px-2">V {{ version }}</span></p>
     </div>
     <div class="row">
         <div class="col-2">
         </div>
         <div class="col-4">
             <a href="{{ linkAndroid }}">
-            <img class="mx-auto d-block logo" src="{% static 'android.png' %}">
+            <img class="mx-auto d-block logo borderato px-2 py-2" src="{% static 'android.png' %}">
             </a>
         </div>
-
         <div class="col-4">
             <a href="{{ linkIos }}">
-            <img class="mx-auto d-block logo" src="{% static 'ios.png' %}">
+            <img class="mx-auto d-block logo borderato px-2 py-2" src="{% static 'ios.png' %}">
             </a>
         </div>
         <div class="col-2">
@@ -28,8 +27,6 @@
 
 
 <div class="footer">
-
-
     <!-- Copyright -->
     <div class="footer-copyright text-center py-1">
         <p class="mb-0 biggerino">© 2020 Copyright:<a class="footerLinks" href="/"> Advena Games</a> | <a class="footerLinks" href="/privacy">Privacy Policy</a></p>

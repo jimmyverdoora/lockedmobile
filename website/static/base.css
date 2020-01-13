@@ -24,7 +24,7 @@ a:hover {
 .title {
     min-width: 55%;
     max-width: 85%;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 .navverina {
@@ -53,14 +53,24 @@ a:hover {
     text-align: center;
 }
 
-.jumbo {
+.version {
+    font-size: 5vh;
+}
+
+.borderato {
     background-color: #01cfff;
     border-color: #07738d;
     border-width: 3px;
     border-style: solid;
+    border-radius: 10px;
+}
+
+.dritto {
+    border-radius: 0px;
     border-top: 0px;
+    border-bottom: 0px;
 }
 
 .logo {
-    width: 10vh;
+    width: 12vh;
 }

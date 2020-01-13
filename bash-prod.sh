@@ -22,10 +22,6 @@ fare il .py di lancio prod
 inserire la prima versione su django col manage
 inserire le ads corrette e controllare "P" prima di buildare l app
 
-cambia il link nella view del sito :)
-
-
-
 
 --------------- contenuto ---------------------
 
@@ -45,3 +41,4 @@ RestartSec=42s
 
 [Install]
 WantedBy=multi-user.target
+
