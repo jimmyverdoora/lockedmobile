@@ -6,7 +6,6 @@ import time
 from datetime import datetime, timedelta
 from settings import *
 from tornado import gen
-from tornado.httpclient import AsyncHTTPClient
 from logger import LOGGERONE
 
 
@@ -90,8 +89,12 @@ class LobbyManager(object):
 class GameManager(object):
 
     def __init__(self):
-        self.cli = AsyncHTTPClient()
+        self.cli = None
         self.conds = dict()
+
+    def init(self):
+        from tornado.httpclient import AsyncHTTPClient
+        self.cli = AsyncHTTPClient()
 
     @gen.coroutine
     def createNew(self, gameId):
