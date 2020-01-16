@@ -1,6 +1,27 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/cordova-promise-polyfill/www/Promise.js",
+        "id": "cordova-promise-polyfill.Promise",
+        "pluginId": "cordova-promise-polyfill",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-promise-polyfill/www/promise.min.js",
+        "id": "cordova-promise-polyfill.promise.min",
+        "pluginId": "cordova-promise-polyfill"
+    },
+    {
+        "file": "plugins/cordova-plugin-admob-free/www/admob.js",
+        "id": "cordova-plugin-admob-free.AdMob",
+        "pluginId": "cordova-plugin-admob-free",
+        "clobbers": [
+            "admob",
+            "AdMob",
+            "plugins.AdMob"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-device/www/device.js",
         "id": "cordova-plugin-device.device",
         "pluginId": "cordova-plugin-device",
@@ -194,6 +215,42 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-fullscreen/www/AndroidFullScreen.js",
+        "id": "cordova-plugin-fullscreen.AndroidFullScreen",
+        "pluginId": "cordova-plugin-fullscreen",
+        "clobbers": [
+            "AndroidFullScreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+        "id": "cordova-plugin-globalization.GlobalizationError",
+        "pluginId": "cordova-plugin-globalization",
+        "clobbers": [
+            "window.GlobalizationError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+        "id": "cordova-plugin-globalization.globalization",
+        "pluginId": "cordova-plugin-globalization",
+        "clobbers": [
+            "navigator.globalization"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/browser/moment.js",
+        "id": "cordova-plugin-globalization.moment",
+        "pluginId": "cordova-plugin-globalization",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/src/browser/GlobalizationProxy.js",
+        "id": "cordova-plugin-globalization.GlobalizationProxy",
+        "pluginId": "cordova-plugin-globalization",
+        "runs": true
+    },
+    {
         "file": "plugins/cordova-plugin-media/www/MediaError.js",
         "id": "cordova-plugin-media.MediaError",
         "pluginId": "cordova-plugin-media",
@@ -230,50 +287,22 @@ module.exports = [
         "id": "es6-promise-plugin.Promise",
         "pluginId": "es6-promise-plugin",
         "runs": true
-    },
-    {
-        "file": "plugins/cordova-promise-polyfill/www/Promise.js",
-        "id": "cordova-promise-polyfill.Promise",
-        "pluginId": "cordova-promise-polyfill",
-        "runs": true
-    },
-    {
-        "file": "plugins/cordova-promise-polyfill/www/promise.min.js",
-        "id": "cordova-promise-polyfill.promise.min",
-        "pluginId": "cordova-promise-polyfill"
-    },
-    {
-        "file": "plugins/cordova-plugin-admob-free/www/admob.js",
-        "id": "cordova-plugin-admob-free.AdMob",
-        "pluginId": "cordova-plugin-admob-free",
-        "clobbers": [
-            "admob",
-            "AdMob",
-            "plugins.AdMob"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-fullscreen/www/AndroidFullScreen.js",
-        "id": "cordova-plugin-fullscreen.AndroidFullScreen",
-        "pluginId": "cordova-plugin-fullscreen",
-        "clobbers": [
-            "AndroidFullScreen"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "cordova-admob-sdk": "0.24.1",
+    "cordova-promise-polyfill": "0.0.2",
+    "cordova-plugin-admob-free": "0.27.0",
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-file": "6.0.2",
+    "cordova-plugin-fullscreen": "1.1.0",
+    "cordova-plugin-globalization": "1.11.0",
     "cordova-plugin-media": "5.0.3",
     "cordova-plugin-screen-orientation": "3.0.2",
     "cordova-plugin-whitelist": "1.3.4",
-    "es6-promise-plugin": "4.2.2",
-    "cordova-promise-polyfill": "0.0.2",
-    "cordova-admob-sdk": "0.24.1",
-    "cordova-plugin-admob-free": "0.27.0",
-    "cordova-plugin-fullscreen": "1.1.0"
+    "es6-promise-plugin": "4.2.2"
 }
 // BOTTOM OF METADATA
 });

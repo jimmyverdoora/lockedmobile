@@ -1,1 +1,28 @@
-{"devDependencies":{"cordova-plugin-whitelist":"1","cordova-plugin-admob-free":"^0.27.0","cordova-admob-sdk":"../plugins/cordova-admob-sdk"},"cordova":{"plugins":{"cordova-plugin-whitelist":{},"cordova-plugin-admob-free":{"ADMOB_APP_ID":"ca-app-pub-1760533820203815~2871938059"},"cordova-admob-sdk":{"PLAY_SERVICES_VERSION":"+"}}}}
+{
+  "devDependencies": {
+    "cordova-plugin-whitelist": "1",
+    "cordova-plugin-admob-free": "^0.27.0",
+    "cordova-admob-sdk": "../plugins/cordova-admob-sdk"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-1760533820203815~2871938059"
+      },
+      "cordova-admob-sdk": {
+        "PLAY_SERVICES_VERSION": "+"
+      },
+      "cordova-plugin-globalization": {}
+    },
+    "platforms": [
+      "android",
+      "browser"
+    ]
+  },
+  "dependencies": {
+    "cordova-android": "^8.1.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-plugin-globalization": "^1.11.0"
+  }
+}

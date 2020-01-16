@@ -17,6 +17,9 @@
     "cordova-plugin-fullscreen": {
       "PACKAGE_NAME": "com.advenagames.locked"
     },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
     "cordova-plugin-media": {
       "PACKAGE_NAME": "com.advenagames.locked"
     },

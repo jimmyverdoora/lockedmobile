@@ -7,37 +7,40 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.advena.locked"
-    },
-    "cordova-plugin-media": {
-      "PACKAGE_NAME": "com.advena.locked"
-    },
-    "cordova-plugin-screen-orientation": {
-      "PACKAGE_NAME": "com.advena.locked"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.advena.locked"
-    },
     "cordova-plugin-admob-free": {
-      "PACKAGE_NAME": "com.advena.locked"
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.advenagames.locked"
     },
     "cordova-plugin-fullscreen": {
-      "PACKAGE_NAME": "com.advena.locked"
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.advenagames.locked"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.advena.locked"
-    },
-    "es6-promise-plugin": {
-      "PACKAGE_NAME": "com.advena.locked"
+    "cordova-admob-sdk": {
+      "PACKAGE_NAME": "com.advenagames.locked"
     },
     "cordova-promise-polyfill": {
-      "PACKAGE_NAME": "com.advena.locked"
+      "PACKAGE_NAME": "com.advenagames.locked"
     },
-    "cordova-admob-sdk": {
-      "PACKAGE_NAME": "com.advena.locked"
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.advenagames.locked"
     }
   }
 }

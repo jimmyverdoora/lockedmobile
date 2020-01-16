@@ -10,6 +10,7 @@ var app = {
         loadExitEvents();
         storage = window.localStorage;
         loadSounds();
+        loadLocale();
         openPageDependingOnVersion();
         loadAds();
     },

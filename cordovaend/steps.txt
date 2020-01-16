@@ -1,3 +1,4 @@
+0) platform remove/add
 1) buildare per android da CLI
 2) cambiare adjustPan nel manifest
 3) andare su android studio

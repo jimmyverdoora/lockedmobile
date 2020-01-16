@@ -7,3 +7,4 @@ tornado==6.0.3
 # media
 # admob-free
 # fullscreen
+# globalization

@@ -5,7 +5,7 @@ function submitNumbers() {
         document.getElementById('num5').focus();
         return;
     };
-    var n = "";
+    let n = "";
     for (i = 1; i < 7; i++) {
         n = n + document.getElementById("num" + i).value.toString();
     };
@@ -28,7 +28,7 @@ function focusTo(id) {
 };
 
 function apiCreateNumber() {
-    var xsub = new XMLHttpRequest();
+    let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
@@ -37,7 +37,7 @@ function apiCreateNumber() {
         }
         var num = JSON.parse(this.responseText).number;
         document.getElementById("hostheader").innerHTML =
-            "<p class='mergedbottom'>Tell your friend the following code:</p><p style='font-size: 20vw; border-width: 0 0 3px 0;'>" + num + "</p>";
+            "<p class='mergedbottom'>"+ LMESSAGES["msghost"][userLocale] +"</p><p style='font-size: 20vw; border-width: 0 0 3px 0;'>" + num + "</p>";
         apiAskForJoin(num);
     }
     };
@@ -46,7 +46,7 @@ function apiCreateNumber() {
 };
 
 function apiAskForJoin(n) {
-    var xsub = new XMLHttpRequest();
+    let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
@@ -91,7 +91,7 @@ function apiAskForJoin(n) {
 };
 
 function apiJoinNumber(n) {
-    var xsub = new XMLHttpRequest();
+    let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
@@ -99,7 +99,7 @@ function apiJoinNumber(n) {
             return;
         };
         if (!JSON.parse(this.responseText).numberFound) {
-            document.getElementById("joinheader").innerHTML = "<p class='errormsg'>Oops!<br/>We cannot find that number...<br/>Maybe you misspelled it?</p>";
+            document.getElementById("joinheader").innerHTML = "<p class='errormsg'>Oops!<br/>"+ LMESSAGES["msgcantfind"][userLocale] +"</p>";
             return;
         };
         gameId = JSON.parse(this.responseText).gameId;
@@ -139,7 +139,7 @@ function resetHostPage() {
 };
 
 function resetJoinPage() {
-    document.getElementById("joinheader").innerHTML = "<p class='mergedbottom'>Insert your friend's lobby code:</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
+    document.getElementById("joinheader").innerHTML = "<p class='mergedbottom'>" + LMESSAGES["msgjoin"][userLocale] + "</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
     for (i = 1; i < 6; i++) {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('min', '0');
@@ -154,14 +154,14 @@ function resetJoinPage() {
 };
 
 function modifyHeaders() {
-    let color = "RED";
+    let color = LMESSAGES["red"][userLocale];
     let hex = "#910000";
     if (side == 1) {
-        color = "BLUE";
+        color = LMESSAGES["blue"][userLocale];
         hex = "#003591";
     };
-    document.getElementById("gameactiveheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>C'mon, move!</p><p id='timerTime'>30</p>"
-    document.getElementById("gamewaitingheader").innerHTML = '<p>Your side: <span style="color: ' + hex + ';">' + color + "</span><br/>It's not your turn!</p><p id='waitTimer'>Wait</p>"
+    document.getElementById("gameactiveheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["wait"][userLocale] + "</p><p id='timerTime'>30</p>";
+    document.getElementById("gamewaitingheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["wait"][userLocale] + "</p><p id='waitTimer'>Wait</p>";
 };
 
 function clearNumbersFrom(n) {
