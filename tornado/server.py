@@ -229,6 +229,7 @@ def main():
             debug=True,
         )
         app.listen(DEPLOY_PORT)
+        globalGameManager.init()
         tornado.ioloop.IOLoop.current().start()
     else:
         app = tornado.web.Application(
@@ -247,9 +248,9 @@ def main():
         server = tornado.httpserver.HTTPServer(app)
         server.bind(DEPLOY_PORT)
         server.start(0)  # forks one process per cpu
+        globalGameManager.init()
         tornado.ioloop.IOLoop.current().start()
 
 
 if __name__ == "__main__":
     main()
-    globalGameManager.init()
