@@ -78,6 +78,10 @@ var LMESSAGES = {
         "en": "Tell your friend the following code:",
         "it": "Dai questo codice al tuo amico:"
     },
+    "msghost2": {
+        "en": "Tap on the number to copy it",
+        "it": "Tocca il numero per copiarlo"
+    },
     "msgjoin": {
         "en": "Insert your friend's lobby code:",
         "it": "Inserisci il numero della lobby:"
