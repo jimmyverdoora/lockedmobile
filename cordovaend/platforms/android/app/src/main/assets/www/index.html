@@ -23,9 +23,9 @@
                 <img class="titleimage" src="img/title.png">
             </div>
             <div id="versionheader" style="text-align: center;">
-                <p class="instr">Hey hey :)<br/>Your app is outdated!</p>
-                <p class="instr">Go grab the new version<br/>on the store ;)</p>
-                <p class="instrproceedp"><span class="instrproceed" id="updateversion">Update</span></p class="instrproceedp">
+                <p class="instr" id="msgupdated"></p>
+                <p class="instr" id="msgupdated2"></p>
+                <p class="instrproceedp"><span class="instrproceed" id="updateversion"></span></p class="instrproceedp">
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             <div id="newsheader" style="text-align: center;">
                 <p>News!</p>
                 <p class="instr" id="showingnew"></p>
-                <p class="instrproceedp"><span class="instrproceed" ontouchstart="exitNews()">Ok, let me play!</span></p class="instrproceedp">
+                <p class="instrproceedp"><span class="instrproceed" ontouchstart="exitNews()" id="msgexitnews"></span></p class="instrproceedp">
             </div>
         </div>
 
@@ -64,24 +64,24 @@
             </div>
             <div class="instructioncontainer">
                 <div class="instructioncontent" id="instrp1" style="display: block;">
-                    <p class="instr">To win a Locked game, you have to align your pieces, vertically or horizontally.</p>
+                    <p class="instr" id="msgistr1"></p>
                     <img class="instrimg" src="img/instr1.png">
-                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(1)">Got it!</span></p class="instrproceedp">
+                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(1)" id="msgok1"></span></p class="instrproceedp">
                 </div>
                 <div class="instructioncontent" id="instrp2" style="display: none;">
-                    <p class="instr">Swipe your pieces to move them, you can also push (at most) one of your opponent's!</p class="instr">
+                    <p class="instr" id="msgistr2"></p class="instr">
                     <img class="instrimg" src="img/instr2.png">
-                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(2)">Got it!</span></p class="instrproceedp">
+                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(2)" id="msgok2"></span></p class="instrproceedp">
                 </div>
                 <div class="instructioncontent" id="instrp3" style="display: none;">
-                    <p class="instr">If a piece lands on a blue spot, the active player must teleport it to another blue spot, if possible</p class="instr">
+                    <p class="instr" id="msginstr3"></p class="instr">
                     <img class="instrimg" src="img/instr3.png">
-                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(3)">Got it!</span></p class="instrproceedp">
+                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(3)" id="msgok3"></span></p class="instrproceedp">
                 </div>
                 <div class="instructioncontent" id="instrp4" style="display: none;">
-                    <p class="instr">If a single move would make both players win, the victory goes to the second player (blue), to asses for the starting disadvantage!</p class="instr">
-                    <p class="instr">That's all! Enjoy your Locked game!</p class="instr">
-                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(4)">Play!</span></p>
+                    <p class="instr" id="msginstr4"></p class="instr">
+                    <p class="instr" id="msginstr5"></p class="instr">
+                    <p class="instrproceedp"><span class="instrproceed" ontouchstart="instr(4)" id="msgok4"></span></p>
                 </div>
             </div>
         </div>
@@ -113,8 +113,8 @@
             </div>
             <div style="text-align: center; height: 50%">
                 <p class="credits">Audio</p>
-                <p class="creditsel" id="settingsmusic" ontouchstart="changeMusicVol()">Music</p>
-                <p class="creditsel" id="settingssounds" ontouchstart="changeSoundVol()">Sounds</p>
+                <p class="creditsel" id="settingsmusic" ontouchstart="changeMusicVol()"></p>
+                <p class="creditsel" id="settingssounds" ontouchstart="changeSoundVol()"></p>
             </div>
             <div class="imagecontainer" style="height: 15%;">
                 <img class="textimage" src="img/back.png" id="backimgs">
@@ -144,7 +144,7 @@
                 <div class='loadingimage' style='background-position: center;'></div>
             </div>
             <div class="hostjoinheader" id="joinheader" style="display: none;">
-                <p class="mergedbottom">Insert your friend's lobby code:</p>
+                <p class="mergedbottom" id="joinmessage"></p>
                 <div class="numbercontainer">
                     <input placeholder="-" min=0 max=9 type="number" id="num1" ontouchstart="clearNumbersFrom(1)" onkeyup="focusTo('num2');">
                     <input placeholder="-" min=0 max=9 type="number" id="num2" ontouchstart="clearNumbersFrom(2)" onkeyup="focusTo('num3');">
@@ -194,6 +194,7 @@
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/locale.js"></script>
+        <script type="text/javascript" src="js/messages.js"></script>
         <script type="text/javascript" src="js/appsettings.js"></script>
         <script type="text/javascript" src="js/settings.js"></script>
         <script type="text/javascript" src="js/states.js"></script>

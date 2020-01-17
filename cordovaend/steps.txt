@@ -1,6 +1,6 @@
 0) platform remove/add
-1) buildare per android da CLI
-2) cambiare adjustPan nel manifest
+1) cambiare adjustPan nel manifest
+2) buildare per android da CLI
 3) andare su android studio
 4) clean
 5) build con signed

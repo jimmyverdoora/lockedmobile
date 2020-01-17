@@ -19,5 +19,3 @@ if (appScope == "T") {
     apiurl = "http://lockedapi.advenagames.com:8080";
     isTesting = false;
 };
-
-var errorMsg = "<p class='errormsg'>Well... :(<br/>An error occurred during the comunication with our server. If you see this, the error has already been reported and we are probably working to fix it ;)</p>";

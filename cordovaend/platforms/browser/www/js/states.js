@@ -68,3 +68,6 @@ var moves = {
 // sounds
 var volumeMusic = 1.0;
 var volumeSounds = 1.0;
+
+var errorMsg = "<p class='errormsg'>Well... :(<br/>An error occurred during the comunication with our server. " +
+    "If you see this, the error has already been reported and we are probably working to fix it ;)</p>";

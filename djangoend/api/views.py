@@ -133,6 +133,7 @@ def versionApi(request):
         return JsonResponse({"outcome": "KO"})
 
 
+# NEWS CONTENT STRUCTURE: "en|eng_new|it|it_new"
 @csrf_exempt
 def newsApi(request):
     try:

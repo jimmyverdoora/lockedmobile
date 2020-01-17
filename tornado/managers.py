@@ -17,6 +17,7 @@ class LobbyManager(object):
         self.conds = dict()
         self.ips = dict()
         self.ipLastUpdate = dict()
+        self.numberCount = dict()
 
     def createNew(self, hostIp):
         number = random.randint(100000, 999999)
@@ -27,7 +28,18 @@ class LobbyManager(object):
         self.conds[number] = tornado.locks.Condition()
         return number
 
+    def incrementNumberCount(n):
+        if n not in self.numberCount.keys():
+            self.numberCount[n] = 1
+        else:
+            self.numberCount[n] = self.numberCount[n] + 1
+
     def clear(self, n, removeFromIps=True, hint=None):
+        if n in self.numberCount.keys():
+            if self.numberCount[n] > 1:
+                self.numberCount[n] = self.numberCount[n] - 1
+                return
+            del self.numberCount[n]
         try:
             del self.numbers[n]
             del self.firstPlayerHost[n]

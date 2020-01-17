@@ -139,7 +139,7 @@ function resetHostPage() {
 };
 
 function resetJoinPage() {
-    document.getElementById("joinheader").innerHTML = "<p class='mergedbottom'>" + LMESSAGES["msgjoin"][userLocale] + "</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
+    document.getElementById("joinheader").innerHTML = "<p class='mergedbottom' id='joinmessage'>" + LMESSAGES["msgjoin"][userLocale] + "</p><div class='numbercontainer'><input placeholder='-' type='number' id='num1'><input placeholder='-' type='number' id='num2'><input placeholder='-' type='number' id='num3'><input placeholder='-' type='number' id='num4'><input placeholder='-' type='number' id='num5'><input placeholder='-' type='number' id='num6'></div>";
     for (i = 1; i < 6; i++) {
         let n = i+1;
         document.getElementById("num" + i).setAttribute('min', '0');
@@ -160,7 +160,7 @@ function modifyHeaders() {
         color = LMESSAGES["blue"][userLocale];
         hex = "#003591";
     };
-    document.getElementById("gameactiveheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["wait"][userLocale] + "</p><p id='timerTime'>30</p>";
+    document.getElementById("gameactiveheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["move"][userLocale] + "</p><p id='timerTime'>30</p>";
     document.getElementById("gamewaitingheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["wait"][userLocale] + "</p><p id='waitTimer'>Wait</p>";
 };
 

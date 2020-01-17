@@ -4,6 +4,7 @@ function loadHostContent() {
 };
 
 function loadJoinContent() {
+    document.getElementById("joinmessage").innerHTML = LMESSAGES["msgjoin"][userLocale];
     document.getElementById("joinheader").setAttribute('style', 'display:block;')
 };
 

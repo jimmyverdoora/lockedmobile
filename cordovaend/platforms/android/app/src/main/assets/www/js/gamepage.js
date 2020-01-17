@@ -96,10 +96,10 @@ function changeLocation(id, xp, yp) {
 };
 
 function createWinScreen(player) {
-    let target = "YOU LOST DUDE!";
+    let target = LMESSAGES["msglose"][userLocale];
     let quote = loseQuotes[Math.floor(Math.random() * loseQuotes.length)];
     if (player == side) {
-        target = "YOU WIN DUDE!";
+        target = LMESSAGES["msgwin"][userLocale];
         quote = winQuotes[Math.floor(Math.random() * winQuotes.length)];
     };
     document.getElementById("gamewaitingheader").style.display = 'none';

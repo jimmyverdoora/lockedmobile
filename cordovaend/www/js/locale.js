@@ -11,7 +11,10 @@ function loadLocale() {
         },
         function () {}
     );
-    for (key of Object.keys(SMESSAGES)) {
-        document.getElementById(key).innerHTML = SMESSAGES[key][userLocale];
-    };
+    var tmpMsgTimer = setInterval(() => {
+        for (key of Object.keys(SMESSAGES)) {
+            document.getElementById(key).innerHTML = SMESSAGES[key][userLocale];
+        };
+        clearInterval(tmpMsgTimer);
+    }, 500);
 };
