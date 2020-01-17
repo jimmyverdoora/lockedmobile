@@ -11,6 +11,9 @@
       "ADMOB_APP_ID": "ca-app-pub-1760533820203815~2871938059",
       "PACKAGE_NAME": "com.advenagames.locked"
     },
+    "cordova-plugin-clipboard-v2": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.advenagames.locked"
     },

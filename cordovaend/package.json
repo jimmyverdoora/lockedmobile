@@ -13,16 +13,18 @@
       "cordova-admob-sdk": {
         "PLAY_SERVICES_VERSION": "+"
       },
-      "cordova-plugin-globalization": {}
+      "cordova-plugin-globalization": {},
+      "cordova-plugin-clipboard-v2": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   },
   "dependencies": {
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
+    "cordova-plugin-clipboard-v2": "0.0.4",
     "cordova-plugin-globalization": "^1.11.0"
   }
 }

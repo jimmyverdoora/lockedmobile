@@ -116,13 +116,24 @@ function openNewsPageIfNeededOtherwiseHomepage() {
             openPage("homepage");
             return;
         };
-        document.getElementById("showingnew").innerHTML = result.currentNew;
+        let currentNew = extractCurrentNew(result.currentNew);
+        document.getElementById("showingnew").innerHTML = currentNew;
         openPage("newspage");
         storage.setItem("newId", result.newId.toString());
     };
     };
     xsub.open("GET", apiurl + "/news");
     xsub.send();
+};
+
+function extractCurrentNew(newsString) {
+    let splitted = newsString.split('|');
+    for (i = 0; i < splitted.length * 0.5; i++) {
+        if (splitted[2*i] == userLocale) {
+            return splitted[2*i+1];
+        };
+    };
+    return splitted[1];
 };
 
 function exitNews() {

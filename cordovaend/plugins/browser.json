@@ -10,6 +10,9 @@
     "cordova-plugin-admob-free": {
       "PACKAGE_NAME": "com.advenagames.locked"
     },
+    "cordova-plugin-clipboard-v2": {
+      "PACKAGE_NAME": "com.advenagames.locked"
+    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.advenagames.locked"
     },

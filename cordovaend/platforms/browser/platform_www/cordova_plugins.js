@@ -22,6 +22,14 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-plugin-clipboard-v2/www/clipboard.js",
+        "id": "cordova-plugin-clipboard-v2.Clipboard",
+        "pluginId": "cordova-plugin-clipboard-v2",
+        "clobbers": [
+            "cordova.plugins.clipboard"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-device/www/device.js",
         "id": "cordova-plugin-device.device",
         "pluginId": "cordova-plugin-device",
@@ -295,6 +303,7 @@ module.exports.metadata =
     "cordova-admob-sdk": "0.24.1",
     "cordova-promise-polyfill": "0.0.2",
     "cordova-plugin-admob-free": "0.27.0",
+    "cordova-plugin-clipboard-v2": "0.0.4",
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-fullscreen": "1.1.0",

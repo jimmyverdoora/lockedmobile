@@ -22,6 +22,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
+      "id": "cordova-plugin-clipboard-v2.Clipboard",
+      "file": "plugins/cordova-plugin-clipboard-v2/www/clipboard.js",
+      "pluginId": "cordova-plugin-clipboard-v2",
+      "clobbers": [
+        "cordova.plugins.clipboard"
+      ]
+    },
+    {
       "id": "cordova-plugin-device.device",
       "file": "plugins/cordova-plugin-device/www/device.js",
       "pluginId": "cordova-plugin-device",
@@ -261,6 +269,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-admob-sdk": "0.24.1",
     "cordova-promise-polyfill": "0.0.2",
     "cordova-plugin-admob-free": "0.27.0",
+    "cordova-plugin-clipboard-v2": "0.0.4",
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-fullscreen": "1.1.0",

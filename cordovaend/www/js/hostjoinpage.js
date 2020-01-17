@@ -37,7 +37,13 @@ function apiCreateNumber() {
         }
         var num = JSON.parse(this.responseText).number;
         document.getElementById("hostheader").innerHTML =
-            "<p class='mergedbottom'>"+ LMESSAGES["msghost"][userLocale] +"</p><p style='font-size: 20vw; border-width: 0 0 3px 0;'>" + num + "</p>";
+            "<p class='mergedbottom'>"+ LMESSAGES["msghost"][userLocale] +
+            "</p><p id='hostnb' style='font-size: 20vw; border-width: 0 0 0 0;'>" + num + "</p>" +
+            "<p style='font-size: 5vw; border-width: 0 0 3px 0;'>" + LMESSAGES["msghost2"][userLocale] + "</p>";
+        var tmpNumIntv = setInterval(() => {
+            document.getElementById("hostnb").setAttribute('ontouchstart', 'copyToClip(' + num + ');');
+            clearInterval(tmpNumIntv);
+        }, 250);
         apiAskForJoin(num);
     }
     };
@@ -168,4 +174,13 @@ function clearNumbersFrom(n) {
     for (i = n; i < 7; i++) {
         document.getElementById("num" + i).value = "";
     };
+};
+
+function copyToClip(number) {
+    cordova.plugins.clipboard.copy("" + number);
+    $("#hostnb").addClass("copied");
+    var tmpCopiedInt = setInterval(() => {
+        $("#hostnb").removeClass("copied");
+        clearInterval(tmpCopiedInt);
+    }, 500);
 };

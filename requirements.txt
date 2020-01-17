@@ -8,3 +8,4 @@ tornado==6.0.3
 # admob-free
 # fullscreen
 # globalization
+# clipboard-v2

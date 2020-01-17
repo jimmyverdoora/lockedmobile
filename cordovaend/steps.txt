@@ -4,4 +4,4 @@
 2) buildare per android da CLI
 3) andare su android studio
 4) clean
-5) build con signed
+5) build (staging: normal, prod: signed)

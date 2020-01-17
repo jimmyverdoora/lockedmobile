@@ -248,6 +248,15 @@ input[type=number] {
     to { width: 75%; }
 }
 
+@keyframes copiedan {
+    from { opacity: 1.0; }
+    50% { opacity: 0.3; }
+    to { opacity: 1.0; }
+}
+
+.copied {
+    animation: copiedan 500ms;
+}
 
 .loadingimage {
     height: 100%;

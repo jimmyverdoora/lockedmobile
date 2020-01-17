@@ -1,0 +1,11 @@
+aggiornare la versione su appsettings e config 
+pushare su git
+mettere S su app settings
+eseguire gli steps di cordova
+mettere P su app settings
+(opt) se c'è da aggiornare il server, fare il prepare_staging
+aggiornare la versione su django staging
+testare
+eseguire gli steps di cordova
+(opt) se c'è da aggiornare il server, fare il prepare_prod
+quando la app va online, aggiornare la versione su django
