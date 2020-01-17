@@ -106,5 +106,6 @@
     <orderEntry type="library" name="Gradle: com.android.support:support-compat:25.2.0@aar" level="project" />
     <orderEntry type="module" module-name="CordovaLib" />
     <orderEntry type="module" module-name="CordovaLib" />
+    <orderEntry type="module" module-name="CordovaLib" />
   </component>
 </module>

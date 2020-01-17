@@ -9,7 +9,7 @@
         "parents": {
           "/manifest/application": [
             {
-              "xml": "<application android:usesCleartextTraffic=\"true\" />",
+              "xml": "<activity android:configChanges=\"orientation|keyboardHidden\" android:windowSoftInputMode=\"adjustPan\" />",
               "count": 2,
               "mode": "merge",
               "id": "config.xml",
@@ -24,7 +24,7 @@
               }
             },
             {
-              "xml": "<activity android:configChanges=\"orientation|keyboardHidden\" android:windowSoftInputMode=\"adjustPan\" />",
+              "xml": "<application android:usesCleartextTraffic=\"true\" />",
               "count": 1,
               "mode": "merge",
               "id": "config.xml",

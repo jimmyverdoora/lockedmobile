@@ -7,6 +7,10 @@ var SMESSAGES = {
         "en": "Go grab the new version<br/>on the store ;)",
         "it": "Scarica la nuova versione<br/>sullo store ;)"
     },
+    "msgupdated3": {
+        "en": "If your app is already updated, give our server a bit of time to update too :O",
+        "it": "Se la tua app e' gia' aggiornata, dai un attimo anche ai nostri server per aggiornarsi :O"
+    },
     "updateversion": {
         "en": "Update",
         "it": "Aggiorna",

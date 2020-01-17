@@ -1,5 +1,6 @@
 0) platform remove/add
 1) cambiare adjustPan nel manifest
+--- ^ solo se nuovo plugin ^ ---
 2) buildare per android da CLI
 3) andare su android studio
 4) clean

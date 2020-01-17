@@ -1,9 +1,9 @@
 // L: local, T: testing, S: staging, P: prod
 var appScope = "P"; 
 
-var currentVersion = "1.0.0"; // aggiornare sempre anche db e config.xml
+var currentVersion = "1.1.0"; // aggiornare sempre anche db e config.xml
 
-var musicVol = 0.7;
+var musicVol = 0.6;
 
 
 // _____________________________ AUTOMATED __________________________________
@@ -11,9 +11,7 @@ var musicVol = 0.7;
 var apiurl = "http://localhost:8080";
 var isTesting = true;
 
-if (appScope == "T") {
-    apiurl = "http://46.141.101.76:8080";   
-} else if (appScope == "S") {
+if (appScope == "S") {
     apiurl = "http://142.93.102.210:8080";
 } else if (appScope == "P") {
     apiurl = "http://lockedapi.advenagames.com:8080";
