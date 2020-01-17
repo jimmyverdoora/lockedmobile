@@ -41,7 +41,6 @@ class HostHandler(tornado.web.RequestHandler):
                 Logger.logResponse(self, guid)
                 return
             waitFuture = globalLobbyManager.conds.get(n).wait()
-            globalGameManager.incrementNumberCount(n)
             try:
                 await waitFuture
             except Exception:
