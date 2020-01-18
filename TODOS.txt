@@ -1,10 +1,5 @@
-app per le statistiche (mia)
-
 v2:
-- traduz
 - mettere il tasto rage quit
-- tap per copiare il codice host
-- inserire try catch in tutte le funzioni js con invio dati di log al server
 - httpS (togliere <application android:usesCleartextTraffic="true" />)
 - manage disconnections
 - comprare la pro version

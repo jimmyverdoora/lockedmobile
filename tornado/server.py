@@ -40,16 +40,11 @@ class HostHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({"outcome": "KO"}))
                 Logger.logResponse(self, guid)
                 return
-            waitFuture = globalLobbyManager.conds.get(n).wait()
-            try:
-                await waitFuture
-            except Exception:
-                globalLobbyManager.clear(n, hint=self.request.remote_ip)
-                self.write(json.dumps({"outcome": "KO"}))
-                Logger.logResponse(self, guid)
-                return
+            await globalLobbyManager.conds.get(n).wait()
             goFirst = globalLobbyManager.firstPlayerHost[n]
             globalLobbyManager.clear(n, hint=self.request.remote_ip)
+            if goFirst:
+                await globalGameManager.conds.get(gameId).wait()
             self.write(json.dumps({"gameId": gameId, "outcome": "OK", "goFirst": goFirst}))
             Logger.logResponse(self, guid)
         except Exception:
@@ -79,6 +74,8 @@ class JoinHandler(tornado.web.RequestHandler):
             globalLobbyManager.conds.get(n).notify_all()
             jsonResult["goFirst"] = goFirst
             jsonResult["numberFound"] = True
+            if goFirst:
+                await globalGameManager.conds.get(gameId).wait()
             self.write(json.dumps(jsonResult))
             Logger.logResponse(self, guid)
         except Exception:
@@ -113,24 +110,26 @@ class GameHandler(tornado.web.RequestHandler):
         try:
             requestType = str(self.get_argument("requestType"))
             moveId = int(self.get_argument("moveId"))
+            # Since 1.2.0 ASK is only for asking the first move.
             if requestType == "ASK":
-                waitFuture = globalGameManager.conds.get(gameId).wait()
-                try:
-                    await waitFuture
-                except asyncio.CancelledError:
-                    globalGameManager.clear(gameId)
-                    self.write(json.dumps({"outcome": "KO", "reason": "Canceled"}))
-                    Logger.logResponse(self, guid)
-                    return
+                globalGameManager.conds.get(gameId).notify_all()
+                await globalGameManager.conds.get(gameId).wait()
                 moveDict = await globalGameManager.getMove(gameId, moveId)
                 self.write(json.dumps(moveDict))
                 Logger.logResponse(self, guid)
+            # Since 1.2.0 PUT manages all the moves by itself.
             elif requestType == "PUT":
                 move = str(self.get_argument("move"))
                 jsonResult = await globalGameManager.putMove(gameId, moveId, move)
                 globalGameManager.conds.get(gameId).notify_all()
-                if jsonResult["win"] != 0:
+                if jsonResult["outcome"] != "OK":
                     globalGameManager.clear(gameId)
+                elif jsonResult["win"] != 0:
+                    globalGameManager.clear(gameId)
+                    jsonResult["move"] = "NM"
+                else:
+                    await globalGameManager.conds.get(gameId).wait()
+                    jsonResult = await globalGameManager.getMove(gameId, moveId + 1)
                 self.write(json.dumps(jsonResult))
                 Logger.logResponse(self, guid)
         except Exception:

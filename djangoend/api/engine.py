@@ -8,10 +8,19 @@ T_SPOTS = {"1": (6, 2), "2": (2, 2), "3": (2, 7), "4": (6, 7)}
 def makeMove(game, moves, pieces, moveId, move):
     if not move or len(moves) != moveId - 1:
         return "KO"
+    if move == "SU":
+        Move.objects.create(value=move+teleport,
+                        number=moveId,
+                        game=game)
+        game.state = 1 if moveId % 2 == 1 else -1
+        game.save()
+        return "OK"
     teleport = ""
     if len(move) == 3:
         teleport = move[2]
         move = move[:2]
+    if len(move) != 2:
+        return "KO"
     movables = ("1", "2", "3") if moveId % 2 == 1 else ("4", "5", "6")
     if move[0] not in movables or move[1] not in ("U", "D", "L", "R"):
         LOGGERONE.error("Move not coherent")
@@ -39,6 +48,8 @@ def makeMove(game, moves, pieces, moveId, move):
 
 
 def checkWin(game):
+    if game.state != 0:
+        return game.state
     pieces = game.pieces.filter(player=1)
     if checkHoriz(pieces) or checkVert(pieces):
         game.state = 1

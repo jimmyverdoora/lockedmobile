@@ -7,17 +7,29 @@ function deliverMove() {
     };
     let xsub = new XMLHttpRequest();
     xsub.onreadystatechange = function() {
+    // since 1.2.0 this receives already the opponent next moves
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
             document.getElementById("gamewaitingheader").innerHTML = errorMsg;
             return;
         };
-        if (JSON.parse(this.responseText).win != 0) {
-            createWinScreen(JSON.parse(this.responseText).win);
+        let parsedJson = JSON.parse(this.responseText);
+        if (parsedJson.move != "NM") {
+            performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
+            if (parsedJson.move.length == 3) {
+                receivedTeleportMove = parsedJson.move;
+            };
+        };
+        if (parsedJson.win != 0) {
+            createWinScreen(parsedJson.win);
             return;
         };
+        if (parsedJson.forbiddenMove) {
+            forbiddenMove = {piece : "p" + parsedJson.forbiddenMove.substring(0, 1), move: MOVE_DICT_R[parsedJson.forbiddenMove.substring(1, 2)]};
+        };
+        activatePlayer();
+        moveSent = false;
         moveId += 1;
-        askForNextMove();
     };
     };
     xsub.open("POST", apiurl + "/game");
@@ -32,6 +44,7 @@ function deliverMove() {
     currentMove = null;
     oX = 0;
     oY = 0;
+    moveId += 1;
 };
 
 function askForNextMove() {
@@ -47,15 +60,10 @@ function askForNextMove() {
         if (parsedJson.move.length == 3) {
             receivedTeleportMove = parsedJson.move;
         };
-        if (parsedJson.win != 0) {
-            createWinScreen(parsedJson.win);
-            return;
-        };
         if (parsedJson.forbiddenMove) {
             forbiddenMove = {piece : "p" + parsedJson.forbiddenMove.substring(0, 1), move: MOVE_DICT_R[parsedJson.forbiddenMove.substring(1, 2)]};
         };
         activatePlayer();
-        moveSent = false;
         moveId += 1;
     };
     };
