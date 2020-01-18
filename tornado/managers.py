@@ -91,6 +91,7 @@ class GameManager(object):
     def __init__(self):
         self.cli = None
         self.conds = dict()
+        self.alreadyNotified = dict()
 
     def init(self):
         from tornado.httpclient import AsyncHTTPClient
@@ -99,6 +100,7 @@ class GameManager(object):
     @gen.coroutine
     def createNew(self, gameId):
         self.conds[gameId] = tornado.locks.Condition()
+        self.alreadyNotified[gameId] = {-1: False, 1: False}
         response = yield self.cli.fetch(DJANGO_API_URL + "/game/" + gameId + "/create",
                        headers=HEADERS,
                        method="GET")
@@ -108,6 +110,7 @@ class GameManager(object):
         LOGGERONE.info("CLEARING GAME: " + str(gameId) + ", ACTIVE GAMES: " + str(len(self.conds)))
         try:
             del self.conds[gameId]
+            del self.alreadyNotified[gameId]
             return True
         except Exception:
             return False

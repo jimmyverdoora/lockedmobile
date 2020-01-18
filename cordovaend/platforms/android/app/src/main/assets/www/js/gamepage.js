@@ -95,15 +95,20 @@ function changeLocation(id, xp, yp) {
     document.getElementById(id).style.left = (xPixels - 1).toString() + "px";
 };
 
-function createWinScreen(player) {
-    let target = LMESSAGES["msglose"][userLocale];
+function createWinScreen(player, hasSurrended) {
+    let target = '<p>' + LMESSAGES["msglose"][userLocale] + '</p>';
     let quote = loseQuotes[Math.floor(Math.random() * loseQuotes.length)];
     if (player == side) {
         target = LMESSAGES["msgwin"][userLocale];
+        if (hasSurrended) {
+            target = '<p class="mergedbottom">' + target + "</p><p style='font-size: 7vw; border-top: 0;'>" + LMESSAGES["hassurr"]["it"] + "</p>"
+        } else {
+            target = '<p>' + target + '</p>';
+        };
         quote = winQuotes[Math.floor(Math.random() * winQuotes.length)];
     };
     document.getElementById("gamewaitingheader").style.display = 'none';
-    document.getElementById("gamewinheader").innerHTML = '<p>' + target + '</p><p style="font-size: 7vw;">' + quote + '</p>';
+    document.getElementById("gamewinheader").innerHTML = target + '<p style="font-size: 7vw;">' + quote + '</p>';
     document.getElementById("gamewinheader").style.display = 'block';
     killWaitTimer();
     var playAgainTimer = setInterval(() => {

@@ -13,15 +13,19 @@ function deliverMove() {
             document.getElementById("gamewaitingheader").innerHTML = errorMsg;
             return;
         };
+        // if game is over, do nothing
+        if (side == 0) {
+            return;
+        };
         let parsedJson = JSON.parse(this.responseText);
-        if (parsedJson.move != "NM") {
+        if (parsedJson.move != "NM" && parsedJson.move != "SUR") {
             performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
             if (parsedJson.move.length == 3) {
                 receivedTeleportMove = parsedJson.move;
             };
         };
         if (parsedJson.win != 0) {
-            createWinScreen(parsedJson.win);
+            createWinScreen(parsedJson.win, parsedJson.move == "SUR");
             return;
         };
         if (parsedJson.forbiddenMove) {
@@ -45,6 +49,7 @@ function deliverMove() {
     oX = 0;
     oY = 0;
     moveId += 1;
+    resetSurrend();
 };
 
 function askForNextMove() {
@@ -53,6 +58,10 @@ function askForNextMove() {
     if (this.readyState == 4) {
         if (this.status != 200 || JSON.parse(this.responseText).outcome == "KO") {
             document.getElementById("gamewaitingheader").innerHTML = errorMsg;
+            return;
+        };
+        // if game is over, do nothing
+        if (side == 0) {
             return;
         };
         let parsedJson = JSON.parse(this.responseText);
@@ -70,4 +79,27 @@ function askForNextMove() {
     xsub.open("POST", apiurl + "/game");
     xsub.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xsub.send("requestType=ASK&gameId=" + gameId + "&moveId=" + moveId);
+};
+
+function sendSurrend() {
+    let xsub = new XMLHttpRequest();
+    let surrId = moveId;
+    if (!canMove) {
+        surrId += 1;
+    } else {
+        deactivatePlayer();
+    };
+    killWaitTimer();
+    document.getElementById("gamewaitingheader").style.display = 'none';
+    xsub.open("POST", apiurl + "/game");
+    xsub.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xsub.send("requestType=SUR&gameId=" + gameId + "&moveId=" + surrId);
+    teleportActive = false;
+    teleport = "";
+    teleportedPiece = null;
+    selected = null;
+    currentMove = null;
+    oX = 0;
+    oY = 0;
+    playAgain();
 };

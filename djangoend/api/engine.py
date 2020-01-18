@@ -8,8 +8,8 @@ T_SPOTS = {"1": (6, 2), "2": (2, 2), "3": (2, 7), "4": (6, 7)}
 def makeMove(game, moves, pieces, moveId, move):
     if not move or len(moves) != moveId - 1:
         return "KO"
-    if move == "SU":
-        Move.objects.create(value=move+teleport,
+    if move == "SUR":
+        Move.objects.create(value=move,
                         number=moveId,
                         game=game)
         game.state = 1 if moveId % 2 == 1 else -1

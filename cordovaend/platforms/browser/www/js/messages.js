@@ -107,7 +107,27 @@ var LMESSAGES = {
         "it": "Daje, muovi!"
     },
     "wait": {
-        "en": "It's not your turn!",
-        "it": "Attendi il tuo turno"
+        "en": "Opponent turn!",
+        "it": "Turno avversario!"
+    },
+    "surrender": {
+        "en": "surrend",
+        "it": "arrenditi"
+    },
+    "sure": {
+        "en": "Are you sure?",
+        "it": "Sicuro?"
+    },
+    "y": {
+        "en": "yep",
+        "it": "si"
+    },
+    "n": {
+        "en": "nope",
+        "it": "no"
+    },
+    "hassurr": {
+        "en": "Your opponent surrended!",
+        "it": "Il tuo avversario si e' arreso!"
     }
 };

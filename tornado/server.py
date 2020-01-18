@@ -121,16 +121,40 @@ class GameHandler(tornado.web.RequestHandler):
             elif requestType == "PUT":
                 move = str(self.get_argument("move"))
                 jsonResult = await globalGameManager.putMove(gameId, moveId, move)
+                player = -1 if moveId % 2 == 1 else 1
+                globalGameManager.alreadyNotified.get(gameId)[player] = True
                 globalGameManager.conds.get(gameId).notify_all()
                 if jsonResult["outcome"] != "OK":
                     globalGameManager.clear(gameId)
                 elif jsonResult["win"] != 0:
-                    globalGameManager.clear(gameId)
                     jsonResult["move"] = "NM"
                 else:
                     await globalGameManager.conds.get(gameId).wait()
+                    globalGameManager.alreadyNotified.get(gameId)[player] = False
                     jsonResult = await globalGameManager.getMove(gameId, moveId + 1)
+                    if jsonResult["win"] != 0:
+                        globalGameManager.clear(gameId)
                 self.write(json.dumps(jsonResult))
+                Logger.logResponse(self, guid)
+            # Since 1.2.0 SUR manages surrenders which comes during INACTIVE moments
+            elif requestType == "SUR":
+                otherPlayer = 1 if moveId % 2 == 1 else -1
+                if not globalGameManager.alreadyNotified.get(gameId).get(otherPlayer):
+                    await globalGameManager.conds.get(gameId).wait()
+                # If both player surrend? I have to check the result of the previous move anyway
+                jsonResult = await globalGameManager.getMove(gameId, moveId - 1)
+                if jsonResult["outcome"] != "OK":
+                    globalGameManager.clear(gameId)
+                elif jsonResult["win"] != 0:
+                    jsonResult["move"] = "NM"
+                else:
+                    jsonResult = await globalGameManager.putMove(gameId, moveId, "SUR") 
+                    globalGameManager.conds.get(gameId).notify_all()
+                    jsonResult["move"] = "SUR"
+                self.write(json.dumps(jsonResult))
+                Logger.logResponse(self, guid)
+            else:
+                self.write(json.dumps({"outcome": "KO", "reason": "Wrong request type"}))
                 Logger.logResponse(self, guid)
         except Exception:
             LOGGERONE.error("Exception occurred", exc_info=True)

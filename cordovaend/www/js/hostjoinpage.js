@@ -81,6 +81,7 @@ function apiAskForJoin(n) {
         modifyHeaders();
         if (side == 1) {
             launchWaitTimer();
+            resetSurrend();
         } else {
             activatePlayer();
         };
@@ -126,6 +127,7 @@ function apiJoinNumber(n) {
         modifyHeaders();
         if (side == 1) {
             launchWaitTimer();
+            resetSurrend();
         } else {
             activatePlayer();
         };
@@ -166,8 +168,14 @@ function modifyHeaders() {
         color = LMESSAGES["blue"][userLocale];
         hex = "#003591";
     };
-    document.getElementById("gameactiveheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["move"][userLocale] + "</p><p id='timerTime'>30</p>";
-    document.getElementById("gamewaitingheader").innerHTML = '<p>'+ LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" + LMESSAGES["wait"][userLocale] + "</p><p id='waitTimer'>Wait</p>";
+    document.getElementById("gameactiveheader").innerHTML = '<p style="font-size: 8vw;">'+
+        LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" +
+        LMESSAGES["move"][userLocale] + " <span id='timerTime'>30</span></p>" + 
+        "<p class='instrproceedp' id='surrendactive'></p>";
+    document.getElementById("gamewaitingheader").innerHTML = '<p style="font-size: 8vw;">'+
+        LMESSAGES["side"][userLocale] +': <span style="color: ' + hex + ';">' + color + "</span><br/>" +
+        LMESSAGES["wait"][userLocale] + " <span id='waitTimer'>Wait</span></p>" +
+        "<p class='instrproceedp' id='surrendinactive'></p>";
 };
 
 function clearNumbersFrom(n) {
@@ -183,4 +191,24 @@ function copyToClip(number) {
         $("#hostnb").removeClass("copied");
         clearInterval(tmpCopiedInt);
     }, 500);
+};
+
+function surrend(active) {
+    document.getElementById("surrend" + active).innerHTML = "<span>" + LMESSAGES["sure"][userLocale] +
+        "</span><br/><span class='instrproceed' ontouchstart='sendSurrend()'>" + LMESSAGES["y"][userLocale] +
+        "</span> <span class='instrproceed' ontouchstart='clickResetSurrend()'>" + LMESSAGES["n"][userLocale] +
+        "</span>";
+    playSound('click');
+};
+
+function clickResetSurrend() {
+    playSound('click');
+    resetSurrend();
+};
+
+function resetSurrend() {
+    document.getElementById("surrendactive").innerHTML = "<span class='instrproceed' ontouchstart='surrend(" +
+        '"active"' + ")'>" + LMESSAGES["surrender"][userLocale] + "</span>";
+    document.getElementById("surrendinactive").innerHTML = "<span class='instrproceed' ontouchstart='surrend(" +
+        '"inactive"' + ")'>" + LMESSAGES["surrender"][userLocale] + "</span>";
 };
