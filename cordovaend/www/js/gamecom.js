@@ -19,10 +19,10 @@ function deliverMove() {
         };
         let parsedJson = JSON.parse(this.responseText);
         if (parsedJson.move != "NM" && parsedJson.move != "SUR") {
-            performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
             if (parsedJson.move.length == 3) {
                 receivedTeleportMove = parsedJson.move;
             };
+            performMoveLocally("p" + parsedJson.move.substring(0, 1), MOVE_DICT_R[parsedJson.move.substring(1, 2)]);
         };
         if (parsedJson.win != 0) {
             createWinScreen(parsedJson.win, parsedJson.move == "SUR");
@@ -31,7 +31,10 @@ function deliverMove() {
         if (parsedJson.forbiddenMove) {
             forbiddenMove = {piece : "p" + parsedJson.forbiddenMove.substring(0, 1), move: MOVE_DICT_R[parsedJson.forbiddenMove.substring(1, 2)]};
         };
-        activatePlayer();
+        var actvTimer = setInterval(function() {
+            activatePlayer();
+            clearInterval(actvTimer);
+        }, 1500);
         moveSent = false;
         moveId += 1;
     };

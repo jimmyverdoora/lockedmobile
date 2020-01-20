@@ -32,8 +32,6 @@ function teleportPiece(id, tpId) {
         document.getElementById("tp" + i).style.display = 'none';
     };
     teleport = tpId;
-    board[id].x = tSpots["" + tpId][0];
-    board[id].y = tSpots["" + tpId][1];
     teleportPieceLocally(id, tpId);
     deliverMove();
 };
